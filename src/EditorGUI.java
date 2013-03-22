@@ -6,7 +6,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.*;
 
 /**
@@ -51,6 +50,10 @@ public class EditorGUI extends JFrame {
 		        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		
 		JMenuItem save = new JMenuItem("Save");
+		ActionListener saveListener = new SaveListener(fileChooser, save);
+		save.addActionListener(saveListener);
+		save.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		
 		//Check boxes for menus below?
 		JMenuItem wrap = new JMenuItem("Auto-Wrap");
