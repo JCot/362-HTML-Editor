@@ -5,21 +5,26 @@ import java.io.*;
 
 public class DocumentTest extends TestCase {
 	
-	Document doc;
-
-	public void setUp() throws Exception {
-		File file = new File("Test.txt");
-		doc = new Document(file);
-	}
-	
 	public void testGetFileName(){
+		File file = new File("Test1.txt");
+		Document doc = new Document(file);
 		String name = doc.getFileName();
-		assertEquals("Test.txt", name);
+		assertEquals("Test1.txt", name);
 	}
 
 	public void testGetText() {
+		File file = new File("Test1.txt");
+		Document doc = new Document(file);
 		String text = doc.getText();
-		assertEquals("Text goes here" + "\n" + "I am a file" + "\n" + "Yay", text);
+		assertEquals("Text goes here" + "\n" + "I am a file" + "\n" + "Yay" + "\n", text);
+	}
+	
+	public void testSave() throws IOException{
+		File file = new File("Test2.txt");
+		Document doc = new Document(file);
+		doc.setText(doc.getText() + "\n" + "I can write to a file");
+		System.out.println(doc.getText());
+		doc.save();
 	}
 
 }

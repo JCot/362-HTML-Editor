@@ -29,21 +29,29 @@ public class Document {
 	}
 	
 	public String getFileName(){
-		return file.getName();
+		return fileName;
 	}
 	
-	public boolean open(){ //make private later?
+	public String readFile() throws IOException{
+		String fileContents = "";
 		BufferedReader reader;
 		String line = null;
 		
+		reader = new BufferedReader(new FileReader(file));
+		
+		while((line = reader.readLine()) != null){
+			fileContents = fileContents + line + System.getProperty("line.separator");
+		}
+		
+		reader.close();
+		
+		return fileContents;
+	}
+	
+	public boolean open(){ //make private later?
+		
 		try{
-			reader = new BufferedReader(new FileReader(file));
-			
-			while((line = reader.readLine()) != null){
-				text = text + line + "\n";
-			}
-			
-			text = text.substring(0, text.length() - 1);
+			text = readFile();
 			
 			return true;
 		}
@@ -53,18 +61,14 @@ public class Document {
 		}
 	}
 	
-	public boolean save(){
-		try{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			
-			writer.write(text);
-			
-			return true;
-		}
+	public boolean save() throws IOException{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		
-		catch(IOException e){
-			return false;
-		}
+		writer.write(text);
+		
+		writer.close();
+			
+		return true;
 	}
 	
 	public boolean saveAs(String name){
@@ -75,6 +79,8 @@ public class Document {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			
 			writer.write(text);
+			
+			writer.close();
 			
 			return true;
 		}
