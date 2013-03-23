@@ -12,6 +12,7 @@ public class Document {
 	
 	public Document(File file){
 		this.file = file;
+		this.fileName = file.getName();
 		open();
 	}
 	
@@ -39,14 +40,15 @@ public class Document {
 			reader = new BufferedReader(new FileReader(file));
 			
 			while((line = reader.readLine()) != null){
-				text = text + line;
+				text = text + line + "\n";
 			}
+			
+			text = text.substring(0, text.length() - 1);
 			
 			return true;
 		}
 		
 		catch(IOException e){
-			System.out.println("Fuck");
 			return false;
 		}
 	}
@@ -65,8 +67,9 @@ public class Document {
 		}
 	}
 	
-	public boolean saveAs(String fileName){
-		file = new File(fileName);
+	public boolean saveAs(String name){
+		file = new File(name);
+		fileName = file.getName();
 		
 		try{
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
