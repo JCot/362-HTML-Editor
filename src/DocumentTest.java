@@ -2,6 +2,10 @@ import junit.framework.TestCase;
 
 import java.io.*;
 
+/**
+ * @author Justin Cotner, jdc9622
+ *
+ */
 
 public class DocumentTest extends TestCase {
 	
@@ -16,7 +20,8 @@ public class DocumentTest extends TestCase {
 		File file = new File("Test1.txt");
 		Document doc = new Document(file);
 		String text = doc.getText();
-		assertEquals("Text goes here" + "\n" + "I am a file" + "\n" + "Yay" + "\n", text);
+		assertEquals("Text goes here" + System.getProperty("line.separator") + "I am a file" + System.getProperty("line.separator") + 
+				"Yay" + System.getProperty("line.separator"), text);
 	}
 	
 	public void testSave() throws IOException{

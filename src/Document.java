@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * @author Justin Cotner jdc9622
+ * @author Justin Cotner, jdc9622
  *
  */
 public class Document {
@@ -88,11 +88,6 @@ public class Document {
 		catch(IOException e){
 			return false;
 		}
-	}
-	
-	public boolean close(){
-		
-		return false;
 	}
 
 }
