@@ -4,6 +4,10 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
@@ -17,16 +21,19 @@ public class NewTabListener implements ActionListener {
 	/** Reference to the JTabbedPane being used. */
 	private JTabbedPane tab;
 	
-	/** Name of the tab */
-	private String filename;
+	/** Reference to the file chooser */
+	private JFileChooser fileChooser;
+	
+	private JMenuItem menu;
 	
 	/**
 	 * Constructor for a NewTabListener
 	 * @param tab - JTabbedPane - Reference to the tabbed pane used in the GUI.
 	 */
-	public NewTabListener(JTabbedPane tab, String filename){
+	public NewTabListener(JTabbedPane tab, JFileChooser fileChooser, JMenuItem menu){
 		this.tab = tab;
-		this.filename = filename;
+		this.fileChooser = fileChooser;
+		this.menu = menu;
 	}
 	
 	/* (non-Javadoc)
@@ -38,13 +45,28 @@ public class NewTabListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		int numberOfTabs = this.tab.getTabCount();
 		JTextArea text = new JTextArea();
+		
 		if (numberOfTabs == 0){
 			this.tab.setVisible(true);
 		}
 		
-		this.tab.add(this.filename, text);
+		if (arg0.getActionCommand().equals("New")){
+			//Possibly open here
+			this.tab.add("Untitled", text);
 		
-
+		} else {
+			
+			int userReturn = this.fileChooser.showOpenDialog(menu);
+			
+			if (userReturn == JFileChooser.APPROVE_OPTION) {
+				//Open here
+				File file = this.fileChooser.getSelectedFile();
+				System.out.println(file.getName() + " Opened");
+			} else {
+				System.out.println("Cancelled");
+			}
+			
+		}
 	}
 
 }

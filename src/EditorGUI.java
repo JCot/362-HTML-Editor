@@ -6,7 +6,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.*;
 
 /**
@@ -19,6 +18,7 @@ public class EditorGUI extends JFrame {
 	/** Boolean value denoting user's preference for auto-wrap */
 	private boolean auto_wrap = false;
 	
+	/** Reference to the JTabbedPane used by the GUI. */
 	private JTabbedPane tab;
 	
 	/**
@@ -27,6 +27,7 @@ public class EditorGUI extends JFrame {
 	public EditorGUI() {
 		JTabbedPane tab = new JTabbedPane();
 		this.tab = tab;
+		final JFileChooser fileChooser = new JFileChooser();
 		
 		//Menu Initialization
 		JMenuBar menuBar = new JMenuBar();
@@ -36,14 +37,23 @@ public class EditorGUI extends JFrame {
 		
 		//Menu for new file
 		JMenuItem newFile = new JMenuItem("New");
-		ActionListener newTab = new NewTabListener(tab, "Untitled");
+		newFile.setActionCommand("New");
+		ActionListener newTab = new NewTabListener(tab, fileChooser, newFile);
 		newFile.addActionListener(newTab);
 		newFile.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		
+		
 		JMenuItem open = new JMenuItem("Open");
+		open.addActionListener(newTab);
+		open.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		
 		JMenuItem save = new JMenuItem("Save");
+		ActionListener saveListener = new SaveListener(fileChooser, save);
+		save.addActionListener(saveListener);
+		save.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		
 		//Check boxes for menus below?
 		JMenuItem wrap = new JMenuItem("Auto-Wrap");
@@ -82,9 +92,7 @@ public class EditorGUI extends JFrame {
 		
 	}
 	
-	public void newTextArea() {
-		
-	}
+	
 	
 	/**
 	 * Main method. Used to test the GUI.
