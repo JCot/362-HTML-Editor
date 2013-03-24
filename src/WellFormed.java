@@ -17,8 +17,8 @@ public class WellFormed {
 	public WellFormed(){}
 	
 	public boolean wellFormedCheck(String text){
-		ArrayList<String> openTags = new ArrayList<String>();
-		ArrayList<String> closeTags = new ArrayList<String>();
+		Stack<String> openTags = new Stack<String>();
+		Stack<String> closeTags = new Stack<String>();
 		String[] lines = text.split(System.getProperty("line.separator"));
 		boolean tagsWellFormed = false;
 		
@@ -36,10 +36,20 @@ public class WellFormed {
 					else{
 						String newTemp = temp.replace("/", "");
 						closeTags.add(temp);
+
+						try{
+							if(openTags.peek().equals(newTemp)){
+								openTags.pop();
+								closeTags.pop();
+							}
+
+							else{
+								break;
+							}
+						}
 						
-						if(openTags.contains(newTemp)){
-							openTags.remove(newTemp);
-							closeTags.remove(temp);
+						catch(EmptyStackException e){
+							break;
 						}
 					}
 				}

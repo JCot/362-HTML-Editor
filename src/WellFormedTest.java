@@ -28,5 +28,9 @@ public class WellFormedTest extends TestCase{
 	public void testMultipleUnopenedTags(){
 		assertFalse(checker.wellFormedCheck("<body> </body> </head>"));
 	}
+	
+	public void testOutOfOrder(){
+		assertFalse(checker.wellFormedCheck("<head> <body> </head> </body>"));
+	}
 
 }
