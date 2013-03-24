@@ -1,3 +1,8 @@
+/**
+ * This class will represent an HTML document.  It contains the actual file object, the text from the file, and the methods
+ * required to open, save, and edit a document.  Some operations will be passed off to other classes
+ */
+
 import java.util.*;
 import java.io.*;
 
@@ -9,6 +14,8 @@ public class Document {
 	private String fileName;
 	private String text = "";
 	private File file;
+	private AutoIndent indenter = new AutoIndent();
+	private WellFormed checker = new WellFormed();
 	
 	public Document(File file){
 		this.file = file;
@@ -30,6 +37,10 @@ public class Document {
 	
 	public String getFileName(){
 		return fileName;
+	}
+	
+	public String autoIndent(String prevLine){
+		return indenter.indent(prevLine);
 	}
 	
 	public String readFile() throws IOException{
