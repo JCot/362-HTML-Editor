@@ -7,12 +7,12 @@ package HTMLConstructs;
  * @author ikeku_000
  *
  */
-public class NumberList extends HTMLConstruct{
-	String startTag = "<ol>";
-	String endTag = "</ol>";
+public class DefineList extends HTMLConstruct{
+	String startTag = "<dl>";
+	String endTag = "</dl>";
 	
 	public String insertList( int size ){
-		ListEntry li = new ListEntry();
+		DefineListEntry li = new DefineListEntry();
 		String temp = startTag;
 		while( size >= 0 ){
 			temp += "\n" + li.insert();

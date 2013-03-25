@@ -7,16 +7,16 @@ package HTMLConstructs;
  * @author ikeku_000
  *
  */
-public class NumberList extends HTMLConstruct{
-	String startTag = "<ol>";
-	String endTag = "</ol>";
+public class Table {
+	String startTag = "<table>";
+	String endTag = "</table>";
 	
-	public String insertList( int size ){
+	public String insertTable( int rows, int cols ){
 		ListEntry li = new ListEntry();
 		String temp = startTag;
-		while( size >= 0 ){
+		while( rows >= 0 ){
 			temp += "\n" + li.insert();
-			size--;
+			rows--;
 		}
 		temp += "\n" + endTag;
 		return temp;

@@ -11,9 +11,9 @@ public abstract class HTMLConstruct {
 	private String startTag;
 	private String endTag;
 	
-	public String insert( HTMLConstruct c ){
+	public String insert(){
 		String temp = "";
-		temp += c.startTag + "\n\n" + c.endTag;
+		temp += startTag + "\n\n" + endTag;
 		return temp;
 	}
 	

@@ -15,7 +15,7 @@ public class HTMLSubConstruct extends HTMLConstruct{
 		String temp = "";
 		for( int i = 0 ; i < list.size() ; i++ ){
 			HTMLConstruct c = list.get(i);
-			temp += c.insert( c );
+			temp += c.insert() + "\n";
 		}
 		return temp;
 	}

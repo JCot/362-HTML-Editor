@@ -7,9 +7,9 @@ package HTMLConstructs;
  * @author ikeku_000
  *
  */
-public class NumberList extends HTMLConstruct{
-	String startTag = "<ol>";
-	String endTag = "</ol>";
+public class BulletList extends HTMLConstruct{
+	String startTag = "<ul>";
+	String endTag = "</ul>";
 	
 	public String insertList( int size ){
 		ListEntry li = new ListEntry();
