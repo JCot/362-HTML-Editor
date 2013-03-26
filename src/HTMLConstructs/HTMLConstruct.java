@@ -17,6 +17,15 @@ public abstract class HTMLConstruct {
 		return temp;
 	}
 	
+	protected void setStart(String start){
+		this.startTag = start;
+	}
+	
+	protected void setEnd(String end){
+		this.endTag = end;
+	}
+	
+	
 	public void add( HTMLConstruct c ){}
 	
 	public void remove( HTMLConstruct c ){}
