@@ -14,11 +14,15 @@ public class TableEntryRow extends HTMLConstruct{
 		super.endTag = "</tr>";
 	}
 	
-	public String insert(){
-		DefineListDef dd = new DefineListDef();
+	public String insertTableRow( int cols ){
+		TableEntryCol td = new TableEntryCol();
 		String temp = super.startTag;
-		temp += "\n" + dd.insert();
+		while( cols > 0 ){
+			temp += "\n" + td.insert();
+			cols--;
+		}
 		temp += "\n" + super.endTag;
 		return temp;
 	}
+
 }

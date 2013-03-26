@@ -13,4 +13,5 @@ public class Title extends HTMLConstruct{
 		super.startTag = "<title>";
 		super.endTag = "</title>";
 	}
+
 }

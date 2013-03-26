@@ -13,4 +13,5 @@ public class TableEntryCol extends HTMLConstruct{
 		super.startTag = "<td>";
 		super.endTag = "</td>";
 	}
+
 }

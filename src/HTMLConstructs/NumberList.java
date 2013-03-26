@@ -8,6 +8,7 @@ package HTMLConstructs;
  *
  */
 public class NumberList extends HTMLConstruct{
+	
 	public NumberList() {
 		super.startTag = "<ol>";
 		super.endTag = "</ol>";
@@ -16,7 +17,7 @@ public class NumberList extends HTMLConstruct{
 	public String insertList( int size ){
 		ListEntry li = new ListEntry();
 		String temp = super.startTag;
-		while( size >= 0 ){
+		while( size > 0 ){
 			temp += "\n" + li.insert();
 			size--;
 		}
