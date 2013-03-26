@@ -8,6 +8,9 @@ package HTMLConstructs;
  *
  */
 public class TableEntryCol extends HTMLConstruct{
-	String startTag = "<td>";
-	String endTag = "</td>";
+	
+	public TableEntryCol() {
+		super.startTag = "<td>";
+		super.endTag = "</td>";
+	}
 }

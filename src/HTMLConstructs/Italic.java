@@ -8,6 +8,8 @@ package HTMLConstructs;
  *
  */
 public class Italic extends HTMLConstruct{
-	String startTag = "<i>";
-	String endTag = "</i>";
+	public Italic() {
+		super.startTag = "<i>";
+		super.endTag = "</i>";
+	}
 }

@@ -10,7 +10,7 @@ package HTMLConstructs;
 public class Title extends HTMLConstruct{
 	
 	public Title() {
-		super.setStart("<title>");
-		super.setEnd("</title>");
+		super.startTag = "<title>";
+		super.endTag = "</title>";
 	}
 }

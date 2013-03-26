@@ -8,6 +8,8 @@ package HTMLConstructs;
  *
  */
 public class ListEntry extends HTMLConstruct{
-	String startTag = "<li>";
-	String endTag = "</li>";
+	public ListEntry() {
+		super.startTag = "<li>";
+		super.endTag = "</li>";
+	}
 }

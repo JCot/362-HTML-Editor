@@ -8,6 +8,8 @@ package HTMLConstructs;
  *
  */
 public class Header extends HTMLConstruct{
-	String startTag = "<head>";
-	String endTag = "</head>";
+	public Header() {
+		super.startTag = "<head>";
+		super.endTag = "</head>";
+	}
 }

@@ -8,6 +8,8 @@ package HTMLConstructs;
  *
  */
 public class Paragraph extends HTMLConstruct{
-	String startTag = "<p>";
-	String endTag = "</p>";
+	public Paragraph() {
+		super.startTag = "<p>";
+		super.endTag = "</p>";
+	}
 }
