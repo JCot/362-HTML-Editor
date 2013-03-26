@@ -12,8 +12,8 @@ import javax.swing.JTextArea;
 public class HTML extends HTMLConstruct{ 
 
 	public HTML() {
-		super.setStart("<html>");
-		super.setEnd("</html>");
+		super.startTag = "<html>";
+		super.endTag = "</html>";
 	}
 	
 }

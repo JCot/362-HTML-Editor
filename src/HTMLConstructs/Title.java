@@ -8,6 +8,9 @@ package HTMLConstructs;
  *
  */
 public class Title extends HTMLConstruct{
-	String startTag = "<title>";
-	String endTag = "</title>";
+	
+	public Title() {
+		super.setStart("<title>");
+		super.setEnd("</title>");
+	}
 }
