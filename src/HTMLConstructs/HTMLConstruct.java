@@ -17,6 +17,10 @@ public abstract class HTMLConstruct {
 		return temp;
 	}
 	
+	public String insertList(int size){
+		return "";
+	}
+	
 	public void add( HTMLConstruct c ){}
 	
 	public void remove( HTMLConstruct c ){}
