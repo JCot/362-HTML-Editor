@@ -1,3 +1,4 @@
+package GUI;
 /*
  * NewTabListener.java
  */
@@ -8,6 +9,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
@@ -30,7 +32,7 @@ public class NewTabListener implements ActionListener {
 	 * Constructor for a NewTabListener
 	 * @param tab - JTabbedPane - Reference to the tabbed pane used in the GUI.
 	 */
-	public NewTabListener(JTabbedPane tab, JFileChooser fileChooser, JMenuItem menu){
+	protected NewTabListener(JTabbedPane tab, JFileChooser fileChooser, JMenuItem menu){
 		this.tab = tab;
 		this.fileChooser = fileChooser;
 		this.menu = menu;
@@ -44,7 +46,11 @@ public class NewTabListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		int numberOfTabs = this.tab.getTabCount();
+		
 		JTextArea text = new JTextArea();
+		JScrollPane scroll = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//Add Scrolling here
 		
 		if (numberOfTabs == 0){
 			this.tab.setVisible(true);
@@ -52,7 +58,7 @@ public class NewTabListener implements ActionListener {
 		
 		if (arg0.getActionCommand().equals("New")){
 			//Possibly open here
-			this.tab.add("Untitled", text);
+			this.tab.add("Untitled", scroll);
 		
 		} else {
 			

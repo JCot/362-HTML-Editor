@@ -1,3 +1,4 @@
+package GUI;
 /*
  * EditorGUI.java
  * 
@@ -7,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+import HTMLConstructs.*;
 
 /**
  * Enter description here.
@@ -29,20 +31,20 @@ public class EditorGUI extends JFrame {
 		this.tab = tab;
 		final JFileChooser fileChooser = new JFileChooser();
 		
+		
 		//Menu Initialization
 		JMenuBar menuBar = new JMenuBar();
 		JMenu file = new JMenu("File");
 		JMenu options = new JMenu("Options");
 		JMenu insert = new JMenu("Insert Tag");
 		
-		//Menu for new file
+		//Menus for File
 		JMenuItem newFile = new JMenuItem("New");
 		newFile.setActionCommand("New");
 		ActionListener newTab = new NewTabListener(tab, fileChooser, newFile);
 		newFile.addActionListener(newTab);
 		newFile.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		
 		
 		JMenuItem open = new JMenuItem("Open");
 		open.addActionListener(newTab);
@@ -55,23 +57,104 @@ public class EditorGUI extends JFrame {
 		save.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		
+		
+		
 		//Check boxes for menus below?
 		JMenuItem wrap = new JMenuItem("Auto-Wrap");
 		JMenuItem indent = new JMenuItem("Auto-Indent");
+		
+		
+		
 		//TO-DO: Insert Tag Menus Here
+		
+		//Basic Tags
+		JMenuItem body = new JMenuItem("Body");
+		HTMLConstruct bodyTag = new Body();
+		ActionListener bodyListener = new InsertListener(bodyTag, this.tab);
+		body.addActionListener(bodyListener);
+		
+		JMenuItem html = new JMenuItem("HTML");
+		HTMLConstruct htmlTag = new HTML();
+		ActionListener htmlListener = new InsertListener(htmlTag, this.tab);
+		html.addActionListener(htmlListener);
+		
+		JMenuItem div = new JMenuItem("Div");
+		HTMLConstruct divTag = new Div();
+		ActionListener divListener = new InsertListener(divTag, this.tab);
+		div.addActionListener(divListener);
+		
+		JMenuItem header = new JMenuItem("Header");
+		HTMLConstruct headerTag = new Header();
+		ActionListener headerListener = new InsertListener(headerTag, this.tab);
+		header.addActionListener(headerListener);
+		
+		JMenuItem paragraph = new JMenuItem("Paragraph");
+		HTMLConstruct paragraphTag = new Paragraph();
+		ActionListener paragraphListener = new InsertListener(paragraphTag, this.tab);
+		paragraph.addActionListener(paragraphListener);
+		
+		JMenuItem title = new JMenuItem("Title");
+		HTMLConstruct titleTag = new Title();
+		ActionListener titleListener = new InsertListener(titleTag, this.tab);
+		title.addActionListener(titleListener);
+		
+		
+		//Font Menus
+		JMenu font = new JMenu ("Font Tags");
+		
+		JMenuItem bold = new JMenuItem("Bold");
+		HTMLConstruct boldTag = new Bold();
+		ActionListener boldListener = new InsertListener(boldTag, this.tab);
+		bold.addActionListener(boldListener);
+		font.add(bold);
+		
+		JMenuItem italic = new JMenuItem("Italic");
+		HTMLConstruct italicTag = new Italic();
+		ActionListener italicListener = new InsertListener(italicTag, this.tab);
+		italic.addActionListener(italicListener);
+		font.add(italic);
+		
+		
+		//List Menus
+		JMenu list = new JMenu("List Tags");
+		
+		//Prototype
+		JMenuItem bulletList = new JMenuItem("Bulleted List Tag");
+		HTMLConstruct bulletTag = new BulletList();
+		ActionListener bulletListener = new InsertListListener(bulletTag, this.tab);
+		bulletList.addActionListener(bulletListener);
+		list.add(bulletList);
+		//Table
+		
+		
+		
 
+		
+		
+
+		//End tag menus
 		file.add(newFile);
 		file.add(open);
 		file.add(save);
 		options.add(wrap);
 		options.add(indent);
 		//TO-DO: Add Insert Tag menu items here
+		insert.add(body);
+		insert.add(div);
+		insert.add(font);
+		insert.add(header);
+		insert.add(html);
+		insert.add(list);
+		insert.add(paragraph);
+		insert.add(title);
 		
+		
+		//End add tag menus
 		menuBar.add(file);
 		menuBar.add(options);
 		menuBar.add(insert);
 		
-		JTextArea text = new JTextArea();
+		;
 		
 		//Main frame settings
 		this.setVisible(true);

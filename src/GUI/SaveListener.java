@@ -1,3 +1,5 @@
+package GUI;
+
 /*
  * SaveListener.java
  * 
@@ -28,7 +30,7 @@ public class SaveListener implements ActionListener {
 	 * @param fileChooser
 	 * @param menu
 	 */
-	public SaveListener(JFileChooser fileChooser, JMenuItem menu) {
+	protected SaveListener(JFileChooser fileChooser, JMenuItem menu) {
 		this.fileChooser = fileChooser;
 		this.menu = menu;
 	}
