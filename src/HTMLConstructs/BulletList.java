@@ -8,8 +8,11 @@ package HTMLConstructs;
  *
  */
 public class BulletList extends HTMLConstruct{
-	String startTag = "<ul>";
-	String endTag = "</ul>";
+	
+	public BulletList() {
+		super.startTag = "<ul>";
+		super.endTag = "</ul>";
+	}
 	
 	public String insertList( int size ){
 		ListEntry li = new ListEntry();

@@ -8,6 +8,9 @@ package HTMLConstructs;
  *
  */
 public class Body extends HTMLConstruct{
-	String startTag = "<body>";
-	String endTag = "</body>";
+	
+	public Body() {
+		super.startTag="<body>";
+		super.endTag="</body>";
+	}
 }

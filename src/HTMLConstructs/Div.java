@@ -8,6 +8,10 @@ package HTMLConstructs;
  *
  */
 public class Div extends HTMLConstruct{
-	String startTag = "<div>";
-	String endTag = "</div>";
+	
+	public Div() {
+		super.startTag = "<div>";
+		super.endTag = "</div>";
+	}
+	
 }

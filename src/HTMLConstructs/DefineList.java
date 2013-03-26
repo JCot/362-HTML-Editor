@@ -8,8 +8,11 @@ package HTMLConstructs;
  *
  */
 public class DefineList extends HTMLConstruct{
-	String startTag = "<dl>";
-	String endTag = "</dl>";
+	
+	public DefineList(){
+		super.startTag = "<dl>";
+		super.endTag = "</dl>";
+	}
 	
 	public String insertList( int size ){
 		DefineListEntry li = new DefineListEntry();

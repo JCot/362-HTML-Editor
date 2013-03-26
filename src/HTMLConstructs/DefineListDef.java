@@ -8,6 +8,10 @@ package HTMLConstructs;
  *
  */
 public class DefineListDef extends HTMLConstruct{
-	String startTag = "<dd>";
-	String endTag = "</dd>";
+	
+	public DefineListDef(){
+		super.startTag = "<dd>";
+		super.endTag = "</dd>";
+	}
+	
 }

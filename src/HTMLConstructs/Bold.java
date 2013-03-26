@@ -8,6 +8,9 @@ package HTMLConstructs;
  *
  */
 public class Bold extends HTMLConstruct{
-	String startTag = "<b>";
-	String endTag = "</b>";
+	
+	public Bold() {
+		super.startTag="<b>";
+		super.endTag="</b>";
+	}
 }
