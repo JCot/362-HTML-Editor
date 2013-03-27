@@ -28,12 +28,12 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class OKDialogListener implements ActionListener {
+public class OKListListener implements ActionListener {
 
 	private ObtainSizeDialog dialog;
 	private JTextField entry;
 	
-	public OKDialogListener(ObtainSizeDialog dialog, JTextField entry) {
+	public OKListListener(ObtainSizeDialog dialog, JTextField entry) {
 		this.dialog = dialog;
 		this.entry = entry;
 	}

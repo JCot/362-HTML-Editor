@@ -1,18 +1,14 @@
 package GUI;
 
 /*
- * InsertListListener.java
- * 
+ * insertTableListener.java
  */
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import HTMLConstructs.HTMLConstruct;
 
@@ -21,27 +17,25 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class InsertListListener implements ActionListener {
+public class insertTableListener implements ActionListener {
 
-	private JTabbedPane tab;
 	private HTMLConstruct tag;
-	private JDialog dialog;
+	private JTabbedPane tab;
 	
-	public InsertListListener(HTMLConstruct tag, JTabbedPane tab){
+	public insertTableListener(HTMLConstruct tag, JTabbedPane tab){
+		this.tag = tag;
 		this.tab = tab;
-		this.tag = tag;		
 	}
-	
 	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ((this.tab.getComponentCount()) != 0){
-			JDialog dialog = new ObtainSizeDialog(this.tab, this.tag);
+		if(this.tab.getComponentCount() != 0){
+			JDialog dialog = new ObtainTableDialog(this.tab, this.tag);
 		}
-		
+
 	}
 
 }

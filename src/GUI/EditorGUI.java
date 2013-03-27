@@ -63,10 +63,6 @@ public class EditorGUI extends JFrame {
 		JMenuItem wrap = new JMenuItem("Auto-Wrap");
 		JMenuItem indent = new JMenuItem("Auto-Indent");
 		
-		
-		
-		//TO-DO: Insert Tag Menus Here
-		
 		//Basic Tags
 		JMenuItem body = new JMenuItem("Body");
 		HTMLConstruct bodyTag = new Body();
@@ -118,27 +114,38 @@ public class EditorGUI extends JFrame {
 		//List Menus
 		JMenu list = new JMenu("List Tags");
 		
-		//Prototype
 		JMenuItem bulletList = new JMenuItem("Bulleted List Tag");
 		HTMLConstruct bulletTag = new BulletList();
 		ActionListener bulletListener = new InsertListListener(bulletTag, this.tab);
 		bulletList.addActionListener(bulletListener);
 		list.add(bulletList);
-		//Table
 		
+		JMenuItem defineList = new JMenuItem("Defined List Tag");
+		HTMLConstruct defineTag = new DefineList();
+		ActionListener defineListener = new InsertListListener(defineTag, this.tab);
+		defineList.addActionListener(defineListener);
+		list.add(defineList);
 		
+		JMenuItem numberList = new JMenuItem("Numbered List Tag");
+		HTMLConstruct numberTag = new NumberList();
+		ActionListener numberListener = new InsertListListener(numberTag, this.tab);
+		numberList.addActionListener(numberListener);
+		list.add(numberList);
 		
-
-		
-		
-
+		//Table Menu
+		JMenuItem table = new JMenuItem("Table Tag");
+		HTMLConstruct tableTag = new Table();
+		ActionListener tableListener = new insertTableListener(tableTag, this.tab);
+		table.addActionListener(tableListener);
 		//End tag menus
+		
+		//Add Menus
 		file.add(newFile);
 		file.add(open);
 		file.add(save);
 		options.add(wrap);
 		options.add(indent);
-		//TO-DO: Add Insert Tag menu items here
+		
 		insert.add(body);
 		insert.add(div);
 		insert.add(font);
@@ -146,6 +153,7 @@ public class EditorGUI extends JFrame {
 		insert.add(html);
 		insert.add(list);
 		insert.add(paragraph);
+		insert.add(table);
 		insert.add(title);
 		
 		
@@ -157,6 +165,7 @@ public class EditorGUI extends JFrame {
 		;
 		
 		//Main frame settings
+		//LOOK FOR .HTML Files only!
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
