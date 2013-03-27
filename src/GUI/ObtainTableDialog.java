@@ -10,6 +10,7 @@
 package GUI;
 
 import java.awt.GridLayout;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -27,19 +28,21 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class ObtainTableDialog extends JDialog {
+public class ObtainTableDialog {
 	
 	private JPanel panel;
 	private JTextField userRows;
 	private JTextField userColumns;
 	private JTabbedPane tab;
 	private HTMLConstruct construct;
+	private JDialog dialog;
 	
-	protected ObtainTableDialog(JTabbedPane tab, HTMLConstruct construct){
+	protected ObtainTableDialog(JFrame frame, JTabbedPane tab, HTMLConstruct construct){
+		
+		this.dialog = new JDialog(frame, "Enter Table Dimensions", ModalityType.APPLICATION_MODAL);
 		this.tab = tab;
 		this.construct = construct;
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		//Display for entering table dimensions
 		this.panel = new JPanel(new GridLayout(5,0));
@@ -59,7 +62,7 @@ public class ObtainTableDialog extends JDialog {
 		ok.addActionListener(okListener);
 		
 		JButton cancel = new JButton("Cancel");
-		ActionListener cancelListener = new CancelListener(this);
+		ActionListener cancelListener = new CancelListener(this.dialog);
 		cancel.addActionListener(cancelListener);
 		
 		buttons.add(ok);
@@ -68,13 +71,14 @@ public class ObtainTableDialog extends JDialog {
 		//Combine everything into JDialog frame
 		this.panel.add(buttons);
 		
-		this.add(this.panel);
-		this.pack();
-		this.setTitle("Enter a Number");
+		this.dialog.add(this.panel);
+		this.dialog.pack();
+		this.dialog.setVisible(true);
 		
-		
-		
-		
+	}
+	
+	protected JDialog getDialog(){
+		return this.dialog;
 	}
 	
 	protected HTMLConstruct getConstruct(){

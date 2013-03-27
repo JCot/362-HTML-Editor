@@ -1,3 +1,5 @@
+package Editor;
+
 /**
  * This is the class used to make sure a document is well-formed before
  * it is opened and before it is saved.

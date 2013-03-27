@@ -1,3 +1,5 @@
+package Editor;
+
 /**
  * This class will represent an HTML document.  It contains the actual file object, the text from the file, and the methods
  * required to open, save, and edit a document.  Some operations will be passed off to other classes
@@ -23,6 +25,7 @@ public class Document {
 		this.file = file;
 		this.fileName = file.getName();
 		open();
+		System.out.println("OPENED " + this.fileName );
 	}
 	
 	/*
@@ -95,8 +98,8 @@ public class Document {
 		}
 	}
 	
-	public boolean saveAs(String name, String text){
-		this.file = new File(name);
+	public boolean saveAs(File file, String text){
+		this.file = file;
 		this.fileName = file.getName();
 		this.text = text;
 		

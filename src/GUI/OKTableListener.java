@@ -12,6 +12,7 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -27,14 +28,16 @@ import HTMLConstructs.HTMLConstruct;
  */
 public class OKTableListener implements ActionListener {
 
-	private ObtainTableDialog dialog;
+	private ObtainTableDialog tableDialog;
 	private JTextField enteredRows;
 	private JTextField enteredCols;
+	private JDialog dialog;
 	
-	public OKTableListener(ObtainTableDialog dialog, JTextField rows, JTextField cols) {
-		this.dialog = dialog;
+	public OKTableListener(ObtainTableDialog tableDialog, JTextField rows, JTextField cols) {
+		this.dialog = tableDialog.getDialog();
 		this.enteredRows = rows;
 		this.enteredCols = cols;
+		this.tableDialog = tableDialog;
 	}
 	
 	
@@ -43,8 +46,8 @@ public class OKTableListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		HTMLConstruct tag = this.dialog.getConstruct();
-		JTabbedPane tab = this.dialog.getTabs();
+		HTMLConstruct tag = this.tableDialog.getConstruct();
+		JTabbedPane tab = this.tableDialog.getTabs();
 		JScrollPane scroll = (JScrollPane) tab.getSelectedComponent();
 		if (scroll != null){
 			JViewport view = (JViewport) scroll.getComponent(0);

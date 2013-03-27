@@ -41,7 +41,7 @@ public class EditorGUI extends JFrame {
 		//Menus for File
 		JMenuItem newFile = new JMenuItem("New");
 		newFile.setActionCommand("New");
-		ActionListener newTab = new NewTabListener(tab, fileChooser, newFile);
+		ActionListener newTab = new NewTabListener(this, tab, fileChooser, insert);
 		newFile.addActionListener(newTab);
 		newFile.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_N, ActionEvent.CTRL_MASK));
@@ -52,7 +52,8 @@ public class EditorGUI extends JFrame {
 		        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		
 		JMenuItem save = new JMenuItem("Save");
-		ActionListener saveListener = new SaveListener(fileChooser, save);
+		ActionListener saveListener = new SaveListener(this, fileChooser, insert,
+				this.tab);
 		save.addActionListener(saveListener);
 		save.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
@@ -60,8 +61,15 @@ public class EditorGUI extends JFrame {
 		
 		
 		//Check boxes for menus below?
-		JMenuItem wrap = new JMenuItem("Auto-Wrap");
-		JMenuItem indent = new JMenuItem("Auto-Indent");
+		JCheckBoxMenuItem wrap = new JCheckBoxMenuItem("Auto-Wrap");
+		ActionListener wrapListener = new WrapListener(this.tab, wrap);
+		wrap.addActionListener(wrapListener);
+		
+		JCheckBoxMenuItem autoIndent = new JCheckBoxMenuItem("Auto-Indent");
+		
+		
+		JMenuItem indent = new JMenuItem("Indent");
+		
 		
 		//Basic Tags
 		JMenuItem body = new JMenuItem("Body");
@@ -116,26 +124,26 @@ public class EditorGUI extends JFrame {
 		
 		JMenuItem bulletList = new JMenuItem("Bulleted List Tag");
 		HTMLConstruct bulletTag = new BulletList();
-		ActionListener bulletListener = new InsertListListener(bulletTag, this.tab);
+		ActionListener bulletListener = new InsertListListener(this, bulletTag, this.tab);
 		bulletList.addActionListener(bulletListener);
 		list.add(bulletList);
 		
 		JMenuItem defineList = new JMenuItem("Defined List Tag");
 		HTMLConstruct defineTag = new DefineList();
-		ActionListener defineListener = new InsertListListener(defineTag, this.tab);
+		ActionListener defineListener = new InsertListListener(this, defineTag, this.tab);
 		defineList.addActionListener(defineListener);
 		list.add(defineList);
 		
 		JMenuItem numberList = new JMenuItem("Numbered List Tag");
 		HTMLConstruct numberTag = new NumberList();
-		ActionListener numberListener = new InsertListListener(numberTag, this.tab);
+		ActionListener numberListener = new InsertListListener(this, numberTag, this.tab);
 		numberList.addActionListener(numberListener);
 		list.add(numberList);
 		
 		//Table Menu
 		JMenuItem table = new JMenuItem("Table Tag");
 		HTMLConstruct tableTag = new Table();
-		ActionListener tableListener = new insertTableListener(tableTag, this.tab);
+		ActionListener tableListener = new InsertTableListener(this, tableTag, this.tab);
 		table.addActionListener(tableListener);
 		//End tag menus
 		
@@ -144,6 +152,7 @@ public class EditorGUI extends JFrame {
 		file.add(open);
 		file.add(save);
 		options.add(wrap);
+		options.add(autoIndent);
 		options.add(indent);
 		
 		insert.add(body);
@@ -173,26 +182,9 @@ public class EditorGUI extends JFrame {
 		this.add(tab);
 		this.setJMenuBar(menuBar);
 		this.setSize(400,400);
+		this.setTitle("HTML Editor");
+		
 				
 	}
 	
-	/**
-	 * Toggles the auto-wrap.
-	 */
-	public void toggleAutoWrap(){
-		this.auto_wrap = !(this.auto_wrap);
-		
-	}
-	
-	
-	
-	/**
-	 * Main method. Used to test the GUI.
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args){
-		JFrame frame = new EditorGUI();
-		
-	}
 }

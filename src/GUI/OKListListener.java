@@ -30,12 +30,14 @@ import HTMLConstructs.HTMLConstruct;
  */
 public class OKListListener implements ActionListener {
 
-	private ObtainSizeDialog dialog;
+	private JDialog dialog;
 	private JTextField entry;
+	private ObtainSizeDialog sizeDialog;
 	
-	public OKListListener(ObtainSizeDialog dialog, JTextField entry) {
+	public OKListListener(ObtainSizeDialog sizeDialog, JDialog dialog, JTextField entry) {
 		this.dialog = dialog;
 		this.entry = entry;
+		this.sizeDialog = sizeDialog;
 	}
 	
 	
@@ -44,8 +46,8 @@ public class OKListListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		HTMLConstruct tag = this.dialog.getConstruct();
-		JTabbedPane tab = this.dialog.getTabs();
+		HTMLConstruct tag = this.sizeDialog.getConstruct();
+		JTabbedPane tab = this.sizeDialog.getTabs();
 		JScrollPane scroll = (JScrollPane) tab.getSelectedComponent();
 		if (scroll != null){
 			JViewport view = (JViewport) scroll.getComponent(0);

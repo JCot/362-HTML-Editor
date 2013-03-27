@@ -1,36 +1,49 @@
+package Editor;
+
 import java.util.ArrayList;
-
 import java.io.*;
-
 import GUI.EditorGUI;
 import javax.swing.*;
 
 
 public class HtmlEditor {
+	
 	private static ArrayList<Document> docs = new ArrayList<Document>();
+	
 	
 	public static String openFile(File file){
 		Document tempDoc = new Document(file);
 		tempDoc.open();
-		
-		if(!tempDoc.checker.wellFormedCheck(tempDoc.getText())){
-			//Put some sort of error message here
-		}
 		
 		docs.add(tempDoc);
 		
 		return tempDoc.getText();
 	}
 	
-	public void newFile(){
-		Document tempDoc = new Document();
-		docs.add(tempDoc);
+	public static boolean wellFormedCheck(File file){
+		Document tempDoc = new Document(file);
+		tempDoc.open();
+		
+		if(!tempDoc.checker.wellFormedCheck(tempDoc.getText())){
+			return false;
+		}
+		
+		return true;
 	}
 	
-	public String save(File file, String text){
+	public static boolean fileExists(File file){
+		for(int i = 0; i < docs.size(); i++){
+			if(docs.get(i).getFileName().equals(file.getName())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static String save(File file, String text){
 		Document tempDoc = null;
 		
-		for(int i = 0; i <= docs.size(); i++){
+		for(int i = 0; i < docs.size(); i++){
 			if(docs.get(i).getFileName().equals(file.getName())){
 				tempDoc = docs.get(i);
 				break;
@@ -48,10 +61,10 @@ public class HtmlEditor {
 		
 	}
 	
-	public boolean saveIllFormed(File file, String text){
+	public static boolean saveIllFormed(File file, String text){
 		Document tempDoc = null;
 		
-		for(int i = 0; i <= docs.size(); i++){
+		for(int i = 0; i < docs.size(); i++){
 			if(docs.get(i).getFileName().equals(file.getName())){
 				tempDoc = docs.get(i);
 				break;
@@ -68,7 +81,7 @@ public class HtmlEditor {
 		}
 	}
 	
-	public String saveAs(String fileName, String text){
+	public static String saveAs(File file, String text){
 		
 		Document tempDoc = null;
 		
@@ -80,12 +93,32 @@ public class HtmlEditor {
 		}
 		
 		if(tempDoc != null && tempDoc.checker.wellFormedCheck(text)){
-			tempDoc.saveAs(fileName, text);
+			tempDoc.saveAs(file, text);
 			return "";
 		}
 		
 		else{
 			return "Warning: This document is not well formed.";
+		}
+	}
+	
+	public static boolean saveAsIllFormed(File file, String text){
+		Document tempDoc = null;
+		
+		for(int i = 0; i < docs.size(); i++){
+			if(docs.get(i).getFileName().equals("Untitled")){
+				tempDoc = docs.get(i);
+				break;
+			}
+		}
+		
+		if(tempDoc != null){
+			tempDoc.saveAs(file, text);
+			return true;
+		}
+		
+		else{
+			return false;
 		}
 	}
 
@@ -101,12 +134,12 @@ public class HtmlEditor {
 			//If no arguments are given on the command line, then the GUI
 			//will be booted directly with no text area active
 			System.out.println("No arguments given: booting into blank GUI");
-			JFrame frame = new EditorGUI();
 			
 		} 
+		
 		else
 		{
-			/** An ArrayList of all of the valid filenames given on the command line */
+			/* An ArrayList of all of the valid filenames given on the command line */
 			ArrayList<String> validFiles = new ArrayList<String>();
 			
 			for(int i = 0; i < args.length; i++)
@@ -114,7 +147,7 @@ public class HtmlEditor {
 				String filename = args[i];
 				String[] splitFilename = filename.split("\\.");
 
-				/** 
+				/*
 				 * If the last part of the filename is txt or html, add 
 				 * it to the valid list of files
 				 */
@@ -138,6 +171,7 @@ public class HtmlEditor {
 				System.out.println(e);
 			}
 		}
+		JFrame frame = new EditorGUI();
 		
 	}
 	

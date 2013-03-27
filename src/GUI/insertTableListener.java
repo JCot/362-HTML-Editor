@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import HTMLConstructs.HTMLConstruct;
@@ -17,12 +18,13 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class insertTableListener implements ActionListener {
+public class InsertTableListener implements ActionListener {
 
 	private HTMLConstruct tag;
 	private JTabbedPane tab;
+	private JFrame frame;
 	
-	public insertTableListener(HTMLConstruct tag, JTabbedPane tab){
+	public InsertTableListener(JFrame frame, HTMLConstruct tag, JTabbedPane tab){
 		this.tag = tag;
 		this.tab = tab;
 	}
@@ -33,7 +35,7 @@ public class insertTableListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(this.tab.getComponentCount() != 0){
-			JDialog dialog = new ObtainTableDialog(this.tab, this.tag);
+			ObtainTableDialog dialog = new ObtainTableDialog(frame, this.tab, this.tag);
 		}
 
 	}

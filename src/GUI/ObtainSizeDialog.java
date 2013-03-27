@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Dialog.ModalityType;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -29,19 +30,21 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class ObtainSizeDialog extends JDialog{
+public class ObtainSizeDialog{
 
 	private JPanel panel;
 	private JTextField userNumber;
 	private JTabbedPane tab;
 	private HTMLConstruct construct;
+	private JDialog dialog;
 		
-	protected ObtainSizeDialog(JTabbedPane tab, HTMLConstruct construct){
+	protected ObtainSizeDialog(JFrame frame, JTabbedPane tab, HTMLConstruct construct){
 		//Initialize fields and dialog frame
+		this.dialog = new JDialog(frame, "Enter a size", ModalityType.APPLICATION_MODAL);
 		this.tab = tab;
 		this.construct = construct;
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 
 		//New panel to organize the dialog
 		this.panel = new JPanel(new GridLayout(3,0));
@@ -52,11 +55,11 @@ public class ObtainSizeDialog extends JDialog{
 		//Button panel for "OK" and "Cancel" Buttons
 		JPanel buttonPanel = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("Ok");
-		ActionListener okListener = new OKListListener(this, this.userNumber);
+		ActionListener okListener = new OKListListener(this, this.dialog, this.userNumber);
 		ok.addActionListener(okListener);
 		
 		JButton cancel = new JButton("Cancel");
-		ActionListener cancelListener = new CancelListener(this);
+		ActionListener cancelListener = new CancelListener(this.dialog);
 		cancel.addActionListener(cancelListener);
 		
 		buttonPanel.add(ok);
@@ -68,9 +71,14 @@ public class ObtainSizeDialog extends JDialog{
 		this.panel.add(this.userNumber);
 		this.panel.add(buttonPanel);
 
-		this.add(this.panel);
-		this.pack();
-		this.setTitle("Enter a Number");
+		
+		this.dialog.add(this.panel);
+		this.dialog.pack();
+		this.dialog.setVisible(true);
+	}
+	
+	protected JDialog getDialog(){
+		return this.dialog;
 	}
 	
 	protected HTMLConstruct getConstruct(){

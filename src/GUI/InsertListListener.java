@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -26,10 +27,12 @@ public class InsertListListener implements ActionListener {
 	private JTabbedPane tab;
 	private HTMLConstruct tag;
 	private JDialog dialog;
+	private JFrame parent;
 	
-	public InsertListListener(HTMLConstruct tag, JTabbedPane tab){
+	public InsertListListener(JFrame frame, HTMLConstruct tag, JTabbedPane tab){
 		this.tab = tab;
 		this.tag = tag;		
+		this.parent = frame;
 	}
 	
 	
@@ -39,7 +42,7 @@ public class InsertListListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ((this.tab.getComponentCount()) != 0){
-			JDialog dialog = new ObtainSizeDialog(this.tab, this.tag);
+			ObtainSizeDialog dialog = new ObtainSizeDialog(this.parent, this.tab, this.tag);
 		}
 		
 	}

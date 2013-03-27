@@ -1,3 +1,5 @@
+package Editor;
+
 /**
  * This class will handle auto-indentation.
  */
@@ -9,11 +11,7 @@
  */
 public class AutoIndent {
 
-	public AutoIndent(){
-
-	}
-
-	public String indent(String prevLine){
+	public static String indent(String prevLine){
 		String indentLen = "";
 		String temp;
 		int numWhiteSpace = 0;
