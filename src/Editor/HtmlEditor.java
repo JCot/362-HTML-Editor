@@ -24,7 +24,7 @@ public class HtmlEditor {
 		Document tempDoc = new Document(file);
 		tempDoc.open();
 		
-		if(!tempDoc.checker.wellFormedCheck(tempDoc.getText())){
+		if(!tempDoc.wellFormedCheck(tempDoc.getText())){
 			return false;
 		}
 		
@@ -50,7 +50,7 @@ public class HtmlEditor {
 			}
 		}
 		
-		if(tempDoc != null && tempDoc.checker.wellFormedCheck(text)){
+		if(tempDoc != null && tempDoc.wellFormedCheck(text)){
 			tempDoc.save(text);
 			return "";
 		}
@@ -92,7 +92,7 @@ public class HtmlEditor {
 			}
 		}
 		
-		if(tempDoc != null && tempDoc.checker.wellFormedCheck(text)){
+		if(tempDoc != null && tempDoc.wellFormedCheck(text)){
 			tempDoc.saveAs(file, text);
 			return "";
 		}

@@ -15,7 +15,7 @@ public class Document {
 	private String fileName;
 	private String text = "";
 	private File file;
-	public WellFormed checker = new WellFormed();
+	private WellFormed checker = new WellFormed();
 	
 	/*
 	 * Constructor for opening an existing HTML document.
@@ -24,7 +24,6 @@ public class Document {
 		this.file = file;
 		this.fileName = file.getName();
 		open();
-		System.out.println("OPENED " + this.fileName );
 	}
 	
 	/*
@@ -44,6 +43,10 @@ public class Document {
 	
 	public String getFileName(){
 		return fileName;
+	}
+	
+	public boolean wellFormedCheck(String text){
+		return checker.wellFormedCheck(text);
 	}
 	
 	public String readFile() throws IOException{
