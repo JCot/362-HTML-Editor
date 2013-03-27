@@ -14,6 +14,7 @@ public class Table extends HTMLConstruct{
 		super.endTag = "</table>";
 	}
 	
+	@Override
 	public String insertTable( int rows, int cols ){
 		TableEntryRow tr = new TableEntryRow();
 		String temp = super.startTag;

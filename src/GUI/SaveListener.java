@@ -21,6 +21,7 @@ public class SaveListener implements ActionListener {
 
 	/** */
 	private JFileChooser fileChooser;
+	//ADD JTExtArea for passing in to save
 	
 	/** */
 	private JMenuItem menu;
