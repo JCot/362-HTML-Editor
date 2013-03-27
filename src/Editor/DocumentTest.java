@@ -36,8 +36,9 @@ public class DocumentTest extends TestCase {
 	
 	public void testSaveAs() throws IOException{
 		Document doc = new Document();
+		File file = new File("Test3.txt");
 		doc.setText("I can write stuff");
-		doc.saveAs("Test3.txt", doc.getText());
+		doc.saveAs(file , doc.getText());
 	}
 
 }

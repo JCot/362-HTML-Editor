@@ -11,7 +11,7 @@ package Editor;
  */
 public class AutoIndent {
 
-	public static String indent(String prevLine){
+	public static String indent(String prevLine, int indentSize){
 		String indentLen = "";
 		String temp;
 		int numWhiteSpace = 0;
@@ -39,15 +39,16 @@ public class AutoIndent {
 		}
 
 		if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
-
 			if(!prevLine.contains("/")){
-				indentLen += indentLen;
+				for(int i = 1; i <= indentSize; i++){
+					indentLen += " ";
+				}
 			}
 			
 			else{
 				indentLen = "";
 				
-				for(int j = 1; j <= numWhiteSpace/2; j++){
+				for(int j = 1; j <= numWhiteSpace - indentSize; j++){
 					indentLen += " ";
 				}
 			}
