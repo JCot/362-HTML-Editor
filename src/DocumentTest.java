@@ -29,7 +29,13 @@ public class DocumentTest extends TestCase {
 		Document doc = new Document(file);
 		doc.setText(doc.getText() + "\n" + "I can write to a file");
 		System.out.println(doc.getText());
-		doc.save();
+		doc.save(doc.getText());
+	}
+	
+	public void testSaveAs() throws IOException{
+		Document doc = new Document();
+		doc.setText("I can write stuff");
+		doc.saveAs("Test3.txt", doc.getText());
 	}
 
 }
