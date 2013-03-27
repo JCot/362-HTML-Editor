@@ -10,7 +10,12 @@ public class HtmlEditor {
 	
 	private static ArrayList<Document> docs = new ArrayList<Document>();
 	
-	
+	/**
+	 * Creates a document object for the given filename and then calls
+	 * open on that document object 
+	 * @param file
+	 * @return String - returns the text found in the file to the GUI
+	 */
 	public static String openFile(File file){
 		Document tempDoc = new Document(file);
 		tempDoc.open();
@@ -20,6 +25,12 @@ public class HtmlEditor {
 		return tempDoc.getText();
 	}
 	
+	/**
+	 * Creates a temporary Document object from the specified file
+	 * and checks to see whether it is made in well-formed html
+	 * @param file
+	 * @return boolean - true if well-formed, false if not
+	 */
 	public static boolean wellFormedCheck(File file){
 		Document tempDoc = new Document(file);
 		tempDoc.open();
@@ -31,6 +42,11 @@ public class HtmlEditor {
 		return true;
 	}
 	
+	/**
+	 * Iterates through the document array to find the specified File object
+	 * @param file
+	 * @return - true if file exists, false if not
+	 */
 	public static boolean fileExists(File file){
 		for(int i = 0; i < docs.size(); i++){
 			if(docs.get(i).getFileName().equals(file.getName())){
@@ -40,6 +56,13 @@ public class HtmlEditor {
 		return false;
 	}
 	
+	/**
+	 * Takes in a file to save and the name to save as
+	 * It will return a warning message if the file is not well-formed html 
+	 * @param file
+	 * @param text - The name to save the file as
+	 * @return String - returns either an empty string or the warning message
+	 */
 	public static String save(File file, String text){
 		Document tempDoc = null;
 		
@@ -61,6 +84,13 @@ public class HtmlEditor {
 		
 	}
 	
+	/**
+	 * Takes in a file object and the name of the file to save as,
+	 * and proceeds to save the file
+	 * @param file
+	 * @param text
+	 * @return boolean - true if saved, false if not
+	 */
 	public static boolean saveIllFormed(File file, String text){
 		Document tempDoc = null;
 		
@@ -81,6 +111,13 @@ public class HtmlEditor {
 		}
 	}
 	
+	/**
+	 * Takes in a file object and the filename to save as
+	 * It will save the file if well-formed, and return a warning if not
+	 * @param file
+	 * @param text
+	 * @return String - returns either an empty string or the warning message
+	 */
 	public static String saveAs(File file, String text){
 		
 		Document tempDoc = null;
@@ -102,6 +139,12 @@ public class HtmlEditor {
 		}
 	}
 	
+	/**
+	 * Takes in a file object and the filename to save as
+	 * @param file
+	 * @param text
+	 * @return boolean - returns true if saved, and false if not
+	 */
 	public static boolean saveAsIllFormed(File file, String text){
 		Document tempDoc = null;
 		
@@ -125,8 +168,8 @@ public class HtmlEditor {
 	/**
 	 * @param args[String]
 	 * The main class will take in file names from the command line and check
-	 * to see if they have the right file extensions, and then passes them on
-	 * to the main controller
+	 * to see if they have the right file extensions and then boot the GUI
+	 * 
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0 )
