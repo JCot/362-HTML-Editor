@@ -1,5 +1,10 @@
 import java.util.ArrayList;
+
 import java.io.*;
+
+import GUI.EditorGUI;
+import javax.swing.*;
+
 
 public class HtmlEditor {
 	private ArrayList<Document> docs = new ArrayList<Document>();
@@ -30,16 +35,23 @@ public class HtmlEditor {
 			//If no arguments are given on the command line, then the GUI
 			//will be booted directly with no text area active
 			System.out.println("No arguments given: booting into blank GUI");
+			JFrame frame = new EditorGUI();
+			
 		} 
 		else
 		{
+			/** An ArrayList of all of the valid filenames given on the command line */
 			ArrayList<String> validFiles = new ArrayList<String>();
+			
 			for(int i = 0; i < args.length; i++)
 			{
 				String filename = args[i];
-				//System.out.println(filename);
 				String[] splitFilename = filename.split("\\.");
-				//System.out.println(splitFilename[splitFilename.length - 1]);
+
+				/** 
+				 * If the last part of the filename is txt or html, add 
+				 * it to the valid list of files
+				 */
 				if(splitFilename[splitFilename.length - 1].equals("html")
 					|| splitFilename[splitFilename.length - 1].equals("txt"))
 				{
