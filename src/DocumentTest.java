@@ -27,9 +27,9 @@ public class DocumentTest extends TestCase {
 	public void testSave() throws IOException{
 		File file = new File("Test2.txt");
 		Document doc = new Document(file);
-		doc.setText(doc.getText() + "\n" + "I can write to a file");
+		//doc.setText(doc.getText() + "\n" + "I can write to a file");
 		System.out.println(doc.getText());
-		doc.save();
+		doc.save(doc.getText());
 	}
 
 }

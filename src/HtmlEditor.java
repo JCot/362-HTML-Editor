@@ -1,8 +1,27 @@
 import java.util.ArrayList;
+
+import java.io.*;
+
 import GUI.EditorGUI;
 import javax.swing.*;
 
+
 public class HtmlEditor {
+	private ArrayList<Document> docs = new ArrayList<Document>();
+	
+	public String openFile(File file){
+		Document tempDoc = new Document(file);
+		
+		tempDoc.open();
+		
+		if(!tempDoc.checker.wellFormedCheck(tempDoc.getText())){
+			//Put some sort of error message here
+		}
+		
+		docs.add(tempDoc);
+		
+		return tempDoc.getText();
+	}
 
 	/**
 	 * @param args[String]
