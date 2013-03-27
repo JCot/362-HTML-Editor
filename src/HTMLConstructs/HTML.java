@@ -3,8 +3,6 @@
  */
 package HTMLConstructs;
 
-import javax.swing.JTextArea;
-
 /**
  * @author ikeku_000
  *

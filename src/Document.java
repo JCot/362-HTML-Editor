@@ -3,7 +3,6 @@
  * required to open, save, and edit a document.  Some operations will be passed off to other classes
  */
 
-import java.util.*;
 import java.io.*;
 
 /**
@@ -15,24 +14,26 @@ public class Document {
 	private String text = "";
 	private File file;
 	private AutoIndent indenter = new AutoIndent();
-	private WellFormed checker = new WellFormed();
+	public WellFormed checker = new WellFormed();
 	
+	/*
+	 * Constructor for opening an existing HTML document.
+	 */
 	public Document(File file){
 		this.file = file;
 		this.fileName = file.getName();
 		open();
 	}
 	
+	/*
+	 * Constructor for creating a new HTML document.
+	 */
 	public Document(){
 		fileName = "Untitled";
 	}
 	
 	public String getText(){
 		return text;
-	}
-	
-	public void setText(String text){
-		this.text = text;
 	}
 	
 	public String getFileName(){
@@ -59,7 +60,7 @@ public class Document {
 		return fileContents;
 	}
 	
-	public boolean open(){ //make private later?
+	public boolean open(){
 		
 		try{
 			text = readFile();
@@ -72,19 +73,28 @@ public class Document {
 		}
 	}
 	
-	public boolean save() throws IOException{
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+	public boolean save(String text){
+		this.text = text;
 		
-		writer.write(text);
+		try{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+			writer.write(text);
+
+			writer.close();
+
+			return true;
+		}
 		
-		writer.close();
-			
-		return true;
+		catch(IOException e){
+			return false;
+		}
 	}
 	
-	public boolean saveAs(String name){
-		file = new File(name);
-		fileName = file.getName();
+	public boolean saveAs(String name, String text){
+		this.file = new File(name);
+		this.fileName = file.getName();
+		this.text = text;
 		
 		try{
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
