@@ -4,10 +4,14 @@ package GUI;
  * 
  */
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Utilities;
+import Editor.AutoIndent;
 import HTMLConstructs.*;
 
 /**
@@ -18,7 +22,11 @@ import HTMLConstructs.*;
 public class EditorGUI extends JFrame {
 
 	/** Boolean value denoting user's preference for auto-wrap */
-	private boolean auto_wrap = false;
+	private boolean autoIndent = false;
+	
+	
+	private String indent = "";
+	
 	
 	/** Reference to the JTabbedPane used by the GUI. */
 	private JTabbedPane tab;
@@ -60,15 +68,20 @@ public class EditorGUI extends JFrame {
 		
 		
 		
-		//Check boxes for menus below?
+		
+		//Options Menus
 		JCheckBoxMenuItem wrap = new JCheckBoxMenuItem("Auto-Wrap");
 		ActionListener wrapListener = new WrapListener(this.tab, wrap);
 		wrap.addActionListener(wrapListener);
 		
 		JCheckBoxMenuItem autoIndent = new JCheckBoxMenuItem("Auto-Indent");
-		
+		ActionListener autoListener = new AutoIndentListener(autoIndent, this,
+				this.indent, this.autoIndent);
+		autoIndent.addActionListener(autoListener);
 		
 		JMenuItem indent = new JMenuItem("Indent");
+		ActionListener indentListener = new IndentListener(this, this.tab);
+		indent.addActionListener(indentListener);
 		
 		
 		//Basic Tags
@@ -184,7 +197,26 @@ public class EditorGUI extends JFrame {
 		this.setSize(400,400);
 		this.setTitle("HTML Editor");
 		
-				
 	}
+	
+	protected String getIndent(){
+		return this.indent;
+	}
+	
+	protected void setAutoIndent(boolean indentOn){
+		this.autoIndent = indentOn;
+		System.out.println(this.autoIndent);
+		
+	}
+	
+	protected void setIndent(String indent){
+		this.indent = indent;
+		System.out.println("|"+indent+"|");
+	}
+	
+	protected boolean getAutoIndent(){
+		return this.autoIndent;
+	}
+	
 	
 }

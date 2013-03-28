@@ -15,6 +15,7 @@ public class Document {
 	private String fileName;
 	private String text = "";
 	private File file;
+	private AutoIndent indenter = new AutoIndent();
 	public WellFormed checker = new WellFormed();
 	
 	/*
@@ -44,6 +45,10 @@ public class Document {
 	
 	public String getFileName(){
 		return fileName;
+	}
+	
+	public String autoIndent(String prevLine){
+		return indenter.indent(prevLine);
 	}
 	
 	public String readFile() throws IOException{

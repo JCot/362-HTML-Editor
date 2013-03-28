@@ -38,9 +38,11 @@ public class ObtainSizeDialog{
 	private HTMLConstruct construct;
 	private JDialog dialog;
 		
-	protected ObtainSizeDialog(JFrame frame, JTabbedPane tab, HTMLConstruct construct){
+	protected ObtainSizeDialog(EditorGUI frame, JTabbedPane tab, 
+			HTMLConstruct construct){
 		//Initialize fields and dialog frame
-		this.dialog = new JDialog(frame, "Enter a size", ModalityType.APPLICATION_MODAL);
+		this.dialog = new JDialog(frame, "Enter a size",
+				ModalityType.APPLICATION_MODAL);
 		this.tab = tab;
 		this.construct = construct;
 		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -55,7 +57,8 @@ public class ObtainSizeDialog{
 		//Button panel for "OK" and "Cancel" Buttons
 		JPanel buttonPanel = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("Ok");
-		ActionListener okListener = new OKListListener(this, this.dialog, this.userNumber);
+		ActionListener okListener = new OKListSizeListener(this, this.dialog, 
+				this.userNumber, frame);
 		ok.addActionListener(okListener);
 		
 		JButton cancel = new JButton("Cancel");

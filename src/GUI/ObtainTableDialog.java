@@ -37,7 +37,7 @@ public class ObtainTableDialog {
 	private HTMLConstruct construct;
 	private JDialog dialog;
 	
-	protected ObtainTableDialog(JFrame frame, JTabbedPane tab, HTMLConstruct construct){
+	protected ObtainTableDialog(EditorGUI frame, JTabbedPane tab, HTMLConstruct construct){
 		
 		this.dialog = new JDialog(frame, "Enter Table Dimensions", ModalityType.APPLICATION_MODAL);
 		this.tab = tab;
@@ -58,7 +58,8 @@ public class ObtainTableDialog {
 		//Buttons for display
 		JPanel buttons = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("OK");
-		ActionListener okListener = new OKTableListener(this, this.userRows, this.userColumns);
+		System.out.println(frame);
+		ActionListener okListener = new OKTableListener(this, this.userRows, frame, this.userColumns);
 		ok.addActionListener(okListener);
 		
 		JButton cancel = new JButton("Cancel");

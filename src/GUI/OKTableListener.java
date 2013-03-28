@@ -32,12 +32,15 @@ public class OKTableListener implements ActionListener {
 	private JTextField enteredRows;
 	private JTextField enteredCols;
 	private JDialog dialog;
+	private EditorGUI gui;
 	
-	public OKTableListener(ObtainTableDialog tableDialog, JTextField rows, JTextField cols) {
+	public OKTableListener(ObtainTableDialog tableDialog, JTextField rows, 
+			EditorGUI gui, JTextField cols) {
 		this.dialog = tableDialog.getDialog();
 		this.enteredRows = rows;
 		this.enteredCols = cols;
 		this.tableDialog = tableDialog;
+		this.gui = gui;
 	}
 	
 	
@@ -58,6 +61,10 @@ public class OKTableListener implements ActionListener {
 				int row = Integer.parseInt(rowString);
 				int col = Integer.parseInt(colString);
 				String insertTag = tag.insertTable(row, col);
+				if (this.gui.getAutoIndent()){
+					String indent = this.gui.getIndent();
+					insertTag = indentTableComponents(insertTag, indent);
+				}
 				int position = text.getCaretPosition();
 				text.insert(insertTag, position);
 				this.dialog.dispose();
@@ -65,5 +72,33 @@ public class OKTableListener implements ActionListener {
 		}
 
 	}
-
+	
+	private String indentTableComponents(String insert, String indent){
+		String temp = "";
+		String[] lines = insert.split(System.getProperty("line.separator"));
+		for(String line : lines){
+			if(matchTableRowTag(line)){
+				temp += (indent + line + "\n"); 
+			} else if(matchTableColTag(line)){
+				temp += (indent + indent + line + "\n");
+			} else {
+				temp += line + "\n";
+			}
+		}
+		return temp;
+	}
+	
+	private boolean matchTableColTag(String line){
+		if(line.startsWith("<td>") || line.startsWith("</td>")){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean matchTableRowTag(String line){
+		if(line.startsWith("<tr>") || line.startsWith("</tr>")){
+			return true;
+		}
+		return false;
+	}
 }

@@ -12,7 +12,7 @@ public class HtmlEditor {
 	
 	/**
 	 * Creates a document object for the given filename and then calls
-	 * open on that document object 
+	 * open on that document object
 	 * @param file
 	 * @return String - returns the text found in the file to the GUI
 	 */
@@ -25,7 +25,7 @@ public class HtmlEditor {
 		return tempDoc.getText();
 	}
 	
-	/**
+    /**
 	 * Creates a temporary Document object from the specified file
 	 * and checks to see whether it is made in well-formed html
 	 * @param file
@@ -42,7 +42,7 @@ public class HtmlEditor {
 		return true;
 	}
 	
-	/**
+    /**
 	 * Iterates through the document array to find the specified File object
 	 * @param file
 	 * @return - true if file exists, false if not
@@ -55,10 +55,10 @@ public class HtmlEditor {
 		}
 		return false;
 	}
-	
+    
 	/**
 	 * Takes in a file to save and the name to save as
-	 * It will return a warning message if the file is not well-formed html 
+	 * It will return a warning message if the file is not well-formed html
 	 * @param file
 	 * @param text - The name to save the file as
 	 * @return String - returns either an empty string or the warning message
@@ -84,7 +84,7 @@ public class HtmlEditor {
 		
 	}
 	
-	/**
+    /**
 	 * Takes in a file object and the name of the file to save as,
 	 * and proceeds to save the file
 	 * @param file
@@ -111,7 +111,7 @@ public class HtmlEditor {
 		}
 	}
 	
-	/**
+    /**
 	 * Takes in a file object and the filename to save as
 	 * It will save the file if well-formed, and return a warning if not
 	 * @param file
@@ -139,7 +139,7 @@ public class HtmlEditor {
 		}
 	}
 	
-	/**
+    /**
 	 * Takes in a file object and the filename to save as
 	 * @param file
 	 * @param text
@@ -168,8 +168,8 @@ public class HtmlEditor {
 	/**
 	 * @param args[String]
 	 * The main class will take in file names from the command line and check
-	 * to see if they have the right file extensions and then boot the GUI
-	 * 
+	 * to see if they have the right file extensions, and then passes them on
+	 * to the main controller
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0 )

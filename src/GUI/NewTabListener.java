@@ -3,14 +3,13 @@ package GUI;
  * NewTabListener.java
  */
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -32,13 +31,13 @@ public class NewTabListener implements ActionListener {
 	
 	private JMenu menu;
 	
-	private JFrame frame;
+	private EditorGUI frame;
 	
 	/**
 	 * Constructor for a NewTabListener
 	 * @param tab - JTabbedPane - Reference to the tabbed pane used in the GUI.
 	 */
-	protected NewTabListener(JFrame frame, JTabbedPane tab, 
+	protected NewTabListener(EditorGUI frame, JTabbedPane tab, 
 			JFileChooser fileChooser, JMenu menu){
 		this.tab = tab;
 		this.fileChooser = fileChooser;
@@ -47,7 +46,8 @@ public class NewTabListener implements ActionListener {
 	}
 	
 	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * @see java.awt.event.ActionListener#
+	 * actionPerformed(java.awt.event.ActionEvent)
 	 * 
 	 * Adds a new tab based on the filename that is specified in the constructor
 	 */
@@ -56,6 +56,9 @@ public class NewTabListener implements ActionListener {
 		int numberOfTabs = this.tab.getTabCount();
 		
 		JTextArea text = new JTextArea();
+		KeyListener enter = new EnterListener(this.frame, this.tab);
+		text.addKeyListener(enter);
+		
 		
 		if (numberOfTabs == 0){
 			this.tab.setVisible(true);
@@ -63,7 +66,8 @@ public class NewTabListener implements ActionListener {
 		
 		if (arg0.getActionCommand().equals("New")){
 			
-			JScrollPane scroll = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+			JScrollPane scroll = new JScrollPane(text, 
+					JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			this.tab.add("Untitled", scroll);
 			File file = new File("Untitled");
@@ -81,7 +85,8 @@ public class NewTabListener implements ActionListener {
 					if (check){
 						String openedFile = HtmlEditor.openFile(file);
 						text.setText(openedFile);
-						JScrollPane scroll = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+						JScrollPane scroll = new JScrollPane(text, 
+								JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 								JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 						this.tab.add(file.getName(), scroll);
 					} else {
@@ -89,7 +94,8 @@ public class NewTabListener implements ActionListener {
 								(this.frame, this.menu);
 						String openedFile = HtmlEditor.openFile(file);
 						text.setText(openedFile);
-						JScrollPane scroll = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+						JScrollPane scroll = new JScrollPane(text, 
+								JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 								JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 						this.tab.add(file.getName(), scroll);
 					}

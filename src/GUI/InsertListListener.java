@@ -26,10 +26,9 @@ public class InsertListListener implements ActionListener {
 
 	private JTabbedPane tab;
 	private HTMLConstruct tag;
-	private JDialog dialog;
-	private JFrame parent;
+	private EditorGUI parent;
 	
-	public InsertListListener(JFrame frame, HTMLConstruct tag, JTabbedPane tab){
+	public InsertListListener(EditorGUI frame, HTMLConstruct tag, JTabbedPane tab){
 		this.tab = tab;
 		this.tag = tag;		
 		this.parent = frame;
