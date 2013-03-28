@@ -205,13 +205,11 @@ public class EditorGUI extends JFrame {
 	
 	protected void setAutoIndent(boolean indentOn){
 		this.autoIndent = indentOn;
-		System.out.println(this.autoIndent);
 		
 	}
 	
 	protected void setIndent(String indent){
 		this.indent = indent;
-		System.out.println("|"+indent+"|");
 	}
 	
 	protected boolean getAutoIndent(){

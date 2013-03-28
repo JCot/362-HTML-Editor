@@ -86,7 +86,6 @@ public class SaveListener implements ActionListener {
 				}
 				
 				this.tab.setTitleAt(currentIndex, file.getName());
-				System.out.println(file.getName() + " Saved");
 			} else {
 				System.out.println("Cancelled");
 			}

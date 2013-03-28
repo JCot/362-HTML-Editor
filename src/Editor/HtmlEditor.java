@@ -197,7 +197,6 @@ public class HtmlEditor {
 				if(splitFilename[splitFilename.length - 1].equals("html")
 					|| splitFilename[splitFilename.length - 1].equals("txt"))
 				{
-					//System.out.println("Good Extension");
 					validFiles.add(filename);
 				} 
 				else 

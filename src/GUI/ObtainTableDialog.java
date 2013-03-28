@@ -58,7 +58,6 @@ public class ObtainTableDialog {
 		//Buttons for display
 		JPanel buttons = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("OK");
-		System.out.println(frame);
 		ActionListener okListener = new OKTableListener(this, this.userRows, frame, this.userColumns);
 		ok.addActionListener(okListener);
 		
