@@ -1,3 +1,5 @@
+package Editor;
+
 import junit.framework.TestCase;
 
 public class WellFormedTest extends TestCase{

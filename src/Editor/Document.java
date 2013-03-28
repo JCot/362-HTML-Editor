@@ -1,9 +1,10 @@
+package Editor;
+
 /**
  * This class will represent an HTML document.  It contains the actual file object, the text from the file, and the methods
  * required to open, save, and edit a document.  Some operations will be passed off to other classes
  */
 
-import java.util.*;
 import java.io.*;
 
 /**
@@ -15,14 +16,21 @@ public class Document {
 	private String text = "";
 	private File file;
 	private AutoIndent indenter = new AutoIndent();
-	private WellFormed checker = new WellFormed();
+	public WellFormed checker = new WellFormed();
 	
+	/*
+	 * Constructor for opening an existing HTML document.
+	 */
 	public Document(File file){
 		this.file = file;
 		this.fileName = file.getName();
 		open();
+		System.out.println("OPENED " + this.fileName );
 	}
 	
+	/*
+	 * Constructor for creating a new HTML document.
+	 */
 	public Document(){
 		fileName = "Untitled";
 	}
@@ -59,7 +67,7 @@ public class Document {
 		return fileContents;
 	}
 	
-	public boolean open(){ //make private later?
+	public boolean open(){
 		
 		try{
 			text = readFile();
@@ -72,19 +80,28 @@ public class Document {
 		}
 	}
 	
-	public boolean save() throws IOException{
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+	public boolean save(String text){
+		this.text = text;
 		
-		writer.write(text);
+		try{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+			writer.write(text);
+
+			writer.close();
+
+			return true;
+		}
 		
-		writer.close();
-			
-		return true;
+		catch(IOException e){
+			return false;
+		}
 	}
 	
-	public boolean saveAs(String name){
-		file = new File(name);
-		fileName = file.getName();
+	public boolean saveAs(File file, String text){
+		this.file = file;
+		this.fileName = file.getName();
+		this.text = text;
 		
 		try{
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));

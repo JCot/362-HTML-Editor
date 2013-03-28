@@ -1,43 +1,51 @@
-import java.util.regex.Pattern;
+package Editor;
 
 /**
  * This class will handle auto-indentation.
  */
 
-import java.util.*;
 
 /**
  * @author Justin Cotner, jdc9622
  *
  */
 public class AutoIndent {
-	
-	public AutoIndent(){
 
+	public static String indent(int indentLength){
+		String temp = "";
+		for(int i = 1; i <= indentLength; i++){
+			temp = temp + " ";
+		}
+		return temp;
 	}
 	
-	public String indent(String prevLine){
+	public static String indent(String prevLine){
 		String indentLen = "";
 		String temp;
 		int numWhiteSpace = 0;
 		char tempChar;
 
 		for(int i = 0; i <= prevLine.length() - 1; i++){
-			
+
 			tempChar = prevLine.charAt(i);
 			temp = Character.toString(tempChar);
-			
+
 			if(temp.matches("[\\S]")){
 				break;
 			}
-			
+
 			else{
-				indentLen += " ";
-				
+				if(temp.equals("\t")){
+					indentLen += "\t";
+				}
+				else{
+					indentLen += " ";
+				}
+
 				numWhiteSpace += 1;
 			}
 		}
-		
+
 		if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
 
 			if(!prevLine.contains("/")){
