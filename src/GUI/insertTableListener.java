@@ -22,11 +22,12 @@ public class InsertTableListener implements ActionListener {
 
 	private HTMLConstruct tag;
 	private JTabbedPane tab;
-	private JFrame frame;
+	private EditorGUI frame;
 	
-	public InsertTableListener(JFrame frame, HTMLConstruct tag, JTabbedPane tab){
+	public InsertTableListener(EditorGUI frame, HTMLConstruct tag, JTabbedPane tab){
 		this.tag = tag;
 		this.tab = tab;
+		this.frame = frame;
 	}
 	
 	/* (non-Javadoc)

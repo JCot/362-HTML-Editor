@@ -28,16 +28,19 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class OKListListener implements ActionListener {
+public class OKListSizeListener implements ActionListener {
 
 	private JDialog dialog;
 	private JTextField entry;
 	private ObtainSizeDialog sizeDialog;
+	private EditorGUI gui;
 	
-	public OKListListener(ObtainSizeDialog sizeDialog, JDialog dialog, JTextField entry) {
+	public OKListSizeListener(ObtainSizeDialog sizeDialog, JDialog dialog,
+			JTextField entry, EditorGUI gui) {
 		this.dialog = dialog;
 		this.entry = entry;
 		this.sizeDialog = sizeDialog;
+		this.gui = gui;
 	}
 	
 	
@@ -57,11 +60,41 @@ public class OKListListener implements ActionListener {
 				int size = Integer.parseInt(sizeString);
 				String insertTag = tag.insertList(size);
 				int position = text.getCaretPosition();
+				if(this.gui.getAutoIndent()){
+					String temp = "";
+					String indent = this.gui.getIndent();
+					String[] lines = insertTag.split
+							(System.getProperty("line.separator"));
+					for(String line : lines){
+						if (matchListEntry(line)) {
+							temp += (indent + line + "\n");
+						} else if (matchListEntryDef(line)){
+							temp += (indent + indent + line + "\n");
+						} else {
+							temp += line + "\n";
+						}
+					}
+					insertTag = temp;
+				}
 				text.insert(insertTag, position);
 				this.dialog.dispose();
 			}
 		}
-
+	}
+	
+	private boolean matchListEntry(String line){
+		if (line.startsWith("<li>") || line.startsWith("</li>") || 
+				line.startsWith("<dt>") || line.startsWith("</dt>")){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean matchListEntryDef(String line) {
+		if (line.startsWith("<dd>") || line.startsWith("</dd>")){
+			return true;
+		}
+		return false;
 	}
 
 }

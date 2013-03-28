@@ -18,6 +18,16 @@ public class WellFormed {
 	
 	public WellFormed(){}
 	
+	/**
+	 * Takes a String and checks to make sure it conforms to
+	 * well formed HTML standards. Right now only checks for
+	 * start tags without end tags, end tags without start tags,
+	 * and overlapping elements.
+	 * 
+	 * @param String text - the text to be checked
+	 * @return true if the text is well formed false
+	 * otherwise
+	 */
 	public boolean wellFormedCheck(String text){
 		Stack<String> openTags = new Stack<String>();
 		Stack<String> closeTags = new Stack<String>();
