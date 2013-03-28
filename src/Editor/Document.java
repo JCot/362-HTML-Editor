@@ -72,7 +72,7 @@ public class Document {
 		reader = new BufferedReader(new FileReader(file));
 		
 		while((line = reader.readLine()) != null){
-			fileContents = fileContents + line + System.getProperty("line.separator");
+			fileContents = fileContents + line + "\n";
 		}
 		
 		reader.close();

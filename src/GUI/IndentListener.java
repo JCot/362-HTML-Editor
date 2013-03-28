@@ -59,7 +59,7 @@ public class IndentListener implements ActionListener {
 	
 	private String indentSelection(String selection, String indent){
 		String temp = "";
-		String[] lines = selection.split(System.getProperty("line.separator"));
+		String[] lines = selection.split("\n");
 		for(String line : lines){
 			temp += (indent + line + "\n"); 
 		}

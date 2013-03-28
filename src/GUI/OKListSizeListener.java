@@ -63,8 +63,7 @@ public class OKListSizeListener implements ActionListener {
 				if(this.gui.getAutoIndent()){
 					String temp = "";
 					String indent = this.gui.getIndent();
-					String[] lines = insertTag.split
-							(System.getProperty("line.separator"));
+					String[] lines = insertTag.split("\n");
 					for(String line : lines){
 						if (matchListEntry(line)) {
 							temp += (indent + line + "\n");

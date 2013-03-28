@@ -58,6 +58,7 @@ public class OKTableListener implements ActionListener {
 			String rowString = this.enteredRows.getText();
 			String colString = this.enteredCols.getText();
 			if (rowString.matches("\\d+") && colString.matches("\\d+")){
+				System.out.println("Hi");
 				int row = Integer.parseInt(rowString);
 				int col = Integer.parseInt(colString);
 				String insertTag = tag.insertTable(row, col);
@@ -75,7 +76,7 @@ public class OKTableListener implements ActionListener {
 	
 	private String indentTableComponents(String insert, String indent){
 		String temp = "";
-		String[] lines = insert.split(System.getProperty("line.separator"));
+		String[] lines = insert.split("\n");
 		for(String line : lines){
 			if(matchTableRowTag(line)){
 				temp += (indent + line + "\n"); 
@@ -84,6 +85,7 @@ public class OKTableListener implements ActionListener {
 			} else {
 				temp += line + "\n";
 			}
+			System.out.println(line);
 		}
 		return temp;
 	}
