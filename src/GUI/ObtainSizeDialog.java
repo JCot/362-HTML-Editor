@@ -1,5 +1,10 @@
 package GUI;
 
+/*
+ * ObtainSizeDialog.java
+ * 
+ */
+
 import java.awt.Dialog.ModalityType;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -14,32 +19,41 @@ import javax.swing.JTextField;
 
 import HTMLConstructs.HTMLConstruct;
 
-/*
- * ObtainSizeDialog.java
- * 
- * Version:
- * $Id$
- *
- * Revisions:
- * $Log$
- */
-
-
 /**
- * Enter description here.
+ * A dialog for obtaining the user's desired amount of list entries to insert
+ * into the buffer.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class ObtainSizeDialog{
 
+	/** JPanel to hold the dialog's components */
 	private JPanel panel;
+	
+	/** JTextField that holds the user's entry */
 	private JTextField userNumber;
+	
+	/** JTabbedPane reference */
 	private JTabbedPane tab;
+	
+	/** Stores the HTMLConstruct passed in */
 	private HTMLConstruct construct;
+	
+	/** JDialog that will be created upon instantiation */
 	private JDialog dialog;
 		
+	/**
+	 * Constructor for ObtainSizeDialog, which will display the dialog
+	 * asking for the number of list entries to insert into the buffer.
+	 * Protected to ensure that only the GUI Package can construct one.
+	 * 
+	 * @param frame    EditorGUI reference
+	 * @param tab    JTabbedPane reference
+	 * @param construct    Stores the HTMLConstruct
+	 */
 	protected ObtainSizeDialog(EditorGUI frame, JTabbedPane tab, 
 			HTMLConstruct construct){
+		
 		//Initialize fields and dialog frame
 		this.dialog = new JDialog(frame, "Enter a size",
 				ModalityType.APPLICATION_MODAL);
@@ -80,14 +94,26 @@ public class ObtainSizeDialog{
 		this.dialog.setVisible(true);
 	}
 	
+	/**
+	 * Gets the dialog.
+	 * @return dialog    JDialog instance
+	 */
 	protected JDialog getDialog(){
 		return this.dialog;
 	}
 	
+	/**
+	 * Gets the HTMLConstruct
+	 * @return construct    HTMLConstruct being stored
+	 */
 	protected HTMLConstruct getConstruct(){
 		return this.construct;
 	}
 	
+	/**
+	 * Gets the JTabbedPane.
+	 * @return tab    JTabbedPane used in the GUI
+	 */
 	protected JTabbedPane getTabs(){
 		return this.tab;
 	}

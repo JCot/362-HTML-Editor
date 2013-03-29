@@ -2,7 +2,6 @@ package GUI;
 
 /*
  * InsertListListener.java
- * 
  */
 
 import java.awt.event.ActionEvent;
@@ -18,17 +17,34 @@ import javax.swing.JTextField;
 import HTMLConstructs.HTMLConstruct;
 
 /**
- * Enter description here.
+ * ActionListener for inserting any HTMLConstruct that is a list into the
+ * current buffer.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class InsertListListener implements ActionListener {
 
+	/** Reference to the JTabbedPane */
 	private JTabbedPane tab;
+	
+	/** HTMLConstruct that is a list of some form. */
 	private HTMLConstruct tag;
+	
+	/** Reference to the EditorGUI */
 	private EditorGUI parent;
 	
-	public InsertListListener(EditorGUI frame, HTMLConstruct tag, JTabbedPane tab){
+	/**
+	 * Constructor for an InsertListListener, which is responsible for displaying
+	 * a dialog that will obtain the number of list entries and will
+	 * insert the list into the buffer. Protected to ensure that only the
+	 * GUI Package can construct one.
+	 * 
+	 * @param frame    EditorGUI reference
+	 * @param tag    HTMLConstruct that is a list
+	 * @param tab    JTabbedPane reference
+	 */
+	protected InsertListListener(EditorGUI frame, HTMLConstruct tag, 
+			JTabbedPane tab){
 		this.tab = tab;
 		this.tag = tag;		
 		this.parent = frame;
@@ -36,7 +52,11 @@ public class InsertListListener implements ActionListener {
 	
 	
 	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * @see java.awt.event.ActionListener#actionPerformed
+	 * (java.awt.event.ActionEvent)
+	 * 
+	 * Specified by ActionListener.  Will display a dialog for obtaining the size
+	 * of the list and then insert the list.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

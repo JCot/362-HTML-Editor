@@ -24,17 +24,33 @@ import javax.swing.JViewport;
 import HTMLConstructs.HTMLConstruct;
 
 /**
- * Enter description here.
+ * ActionListener for getting the size of a list being inserted by the user.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class OKListSizeListener implements ActionListener {
 
+	/** Reference to the previous dialog */
 	private JDialog dialog;
+	
+	/** JTextField that holds the user's entry */
 	private JTextField entry;
+	
+	/** Reference to the ObtainSizeDialog */
 	private ObtainSizeDialog sizeDialog;
+	
+	/** Reference to the EditorGUI */
 	private EditorGUI gui;
 	
+	/**
+	 * Constructor for OKListSizeListener, which will verify the list size 
+	 * entered by the user.
+	 * 
+	 * @param sizeDialog
+	 * @param dialog
+	 * @param entry
+	 * @param gui
+	 */
 	public OKListSizeListener(ObtainSizeDialog sizeDialog, JDialog dialog,
 			JTextField entry, EditorGUI gui) {
 		this.dialog = dialog;
@@ -45,7 +61,11 @@ public class OKListSizeListener implements ActionListener {
 	
 	
 	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * @see java.awt.event.ActionListener#actionPerformed
+	 * (java.awt.event.ActionEvent)
+	 * 
+	 * Specified by ActionListener, will get the number of list entries and
+	 * insert the list into the buffer.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -63,7 +83,7 @@ public class OKListSizeListener implements ActionListener {
 				if(this.gui.getAutoIndent()){
 					String temp = "";
 					String indent = this.gui.getIndent();
-					String[] lines = insertTag.split("\n");
+					String[] lines = insertTag.split("/n");
 					for(String line : lines){
 						if (matchListEntry(line)) {
 							temp += (indent + line + "\n");
@@ -81,6 +101,9 @@ public class OKListSizeListener implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Matches a line with a list entry tag
+	 */
 	private boolean matchListEntry(String line){
 		if (line.startsWith("<li>") || line.startsWith("</li>") || 
 				line.startsWith("<dt>") || line.startsWith("</dt>")){
@@ -88,7 +111,10 @@ public class OKListSizeListener implements ActionListener {
 		}
 		return false;
 	}
-	
+
+	/*
+	 * Matches a line with the list def tag
+	 */
 	private boolean matchListEntryDef(String line) {
 		if (line.startsWith("<dd>") || line.startsWith("</dd>")){
 			return true;

@@ -1,13 +1,8 @@
+package GUI;
+
 /*
  * OKTableListener.java
- * 
- * Version:
- * $Id$
- *
- * Revisions:
- * $Log$
  */
-package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,19 +17,38 @@ import javax.swing.JViewport;
 import HTMLConstructs.HTMLConstruct;
 
 /**
- * Enter description here.
+ * ActionListener that will take the user's desired table rows and columns
+ * and then insert the proper table HTML tags into the document.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class OKTableListener implements ActionListener {
 
+	/** Reference to the ObtainTableDialog */
 	private ObtainTableDialog tableDialog;
+	
+	/** JTextField for the rows */
 	private JTextField enteredRows;
+	
+	/** JTextField for the cols */
 	private JTextField enteredCols;
+	
+	/** Reference to the previous dialog */
 	private JDialog dialog;
+	
+	/** Reference to the EditorGUI */
 	private EditorGUI gui;
 	
-	public OKTableListener(ObtainTableDialog tableDialog, JTextField rows, 
+	/**
+	 * Constructor for an OKTableListener.  It will take the user's input and
+	 * then insert the correct table HTML tag with rows and columns.
+	 * 
+	 * @param tableDialog
+	 * @param rows
+	 * @param gui
+	 * @param cols
+	 */
+	protected OKTableListener(ObtainTableDialog tableDialog, JTextField rows, 
 			EditorGUI gui, JTextField cols) {
 		this.dialog = tableDialog.getDialog();
 		this.enteredRows = rows;
@@ -45,7 +59,12 @@ public class OKTableListener implements ActionListener {
 	
 	
 	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * @see java.awt.event.ActionListener#actionPerformed
+	 * (java.awt.event.ActionEvent)
+	 * 
+	 * Specified by ActionListener, will take the user's input from the 
+	 * text fields and then create the appropriate insert string to be inserted
+	 * into the buffer.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -58,7 +77,6 @@ public class OKTableListener implements ActionListener {
 			String rowString = this.enteredRows.getText();
 			String colString = this.enteredCols.getText();
 			if (rowString.matches("\\d+") && colString.matches("\\d+")){
-				System.out.println("Hi");
 				int row = Integer.parseInt(rowString);
 				int col = Integer.parseInt(colString);
 				String insertTag = tag.insertTable(row, col);
@@ -74,6 +92,10 @@ public class OKTableListener implements ActionListener {
 
 	}
 	
+	/*
+	 * Given the insert string, will indent each line in the string to the
+	 * proper nested format. 
+	 */
 	private String indentTableComponents(String insert, String indent){
 		String temp = "";
 		String[] lines = insert.split("\n");
@@ -85,11 +107,13 @@ public class OKTableListener implements ActionListener {
 			} else {
 				temp += line + "\n";
 			}
-			System.out.println(line);
 		}
 		return temp;
 	}
 	
+	/*
+	 * Matches lines that start with a column tag.
+	 */
 	private boolean matchTableColTag(String line){
 		if(line.startsWith("<td>") || line.startsWith("</td>")){
 			return true;
@@ -97,6 +121,9 @@ public class OKTableListener implements ActionListener {
 		return false;
 	}
 	
+	/*
+	 * Matches lines that start with a row tag.
+	 */
 	private boolean matchTableRowTag(String line){
 		if(line.startsWith("<tr>") || line.startsWith("</tr>")){
 			return true;

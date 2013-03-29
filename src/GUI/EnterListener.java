@@ -2,30 +2,37 @@ package GUI;
 
 /*
  * EnterListener.java
- * 
  */
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
 /**
- * Enter description here.
+ * KeyListener that listens for when newlines characters are typed, and
+ * Auto-Indents if applicable.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class EnterListener implements KeyListener {
 
+	/** EditorGUI Reference */
 	private EditorGUI gui;
+	
+	/** Reference to the Tabbed Pane. */
 	private JTabbedPane tab;
 	
+	/**
+	 * Constructor for an EnterListener, which handles auto-indenting on 
+	 * newline characters.  Protected to ensure that only the
+	 * GUI Package can construct one.
+	 * 
+	 * @param gui    EditorGUI reference
+	 * @param tab    JTabbedPane reference
+	 */
 	protected EnterListener(EditorGUI gui, JTabbedPane tab){
 		this.gui = gui;
 		this.tab = tab;
@@ -34,6 +41,8 @@ public class EnterListener implements KeyListener {
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+	 * 
+	 * Not implemented.
 	 */
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -42,14 +51,16 @@ public class EnterListener implements KeyListener {
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 * 
+	 * Not implemented.
 	 */
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+	 * 
+	 * Auto-Indent the new line if applicable.
 	 */
 	@Override
 	public void keyTyped(KeyEvent arg0) {

@@ -1,13 +1,9 @@
+package GUI;
+
 /*
  * IndentListener.java
- * 
- * Version:
- * $Id$
- *
- * Revisions:
- * $Log$
  */
-package GUI;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,22 +15,35 @@ import javax.swing.JViewport;
 import javax.swing.text.Utilities;
 
 /**
- * Enter description here.
+ * ActionListener that handles the indentation of a selection of text.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class IndentListener implements ActionListener {
 
+	/** Reference to the JTabbedPane*/
 	private JTabbedPane tab;
+	
+	/** Reference to the EditorGUI */
 	private EditorGUI gui;
 	
-	public IndentListener (EditorGUI gui, JTabbedPane tab){
+	/**
+	 * Constructor for an IndentListener, which handles indenting selected text.
+	 * 
+	 * @param gui    EditorGUI reference
+	 * @param tab    JTabbedPane reference
+	 */
+	protected IndentListener (EditorGUI gui, JTabbedPane tab){
 		this.tab = tab;
 		this.gui = gui;
 	}
 	
 	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * @see java.awt.event.ActionListener#actionPerformed
+	 * (java.awt.event.ActionEvent)
+	 * 
+	 * Specified by ActionListener, this will display a dialog to get the
+	 * desired indent and then indent the selected text.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -57,9 +66,12 @@ public class IndentListener implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Used to indent a given selection based on the given indent.
+	 */
 	private String indentSelection(String selection, String indent){
 		String temp = "";
-		String[] lines = selection.split("\n");
+		String[] lines = selection.split("/n");
 		for(String line : lines){
 			temp += (indent + line + "\n"); 
 		}

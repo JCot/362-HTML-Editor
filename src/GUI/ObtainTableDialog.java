@@ -1,13 +1,8 @@
+package GUI;
+
 /*
  * ObtainTableDialog.java
- * 
- * Version:
- * $Id$
- *
- * Revisions:
- * $Log$
  */
-package GUI;
 
 import java.awt.GridLayout;
 import java.awt.Dialog.ModalityType;
@@ -24,22 +19,46 @@ import javax.swing.JTextField;
 import HTMLConstructs.HTMLConstruct;
 
 /**
- * Enter description here.
+ * A Dialog for obtaining the user's desired insertion of table rows and columns
+ * into the buffer.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class ObtainTableDialog {
 	
+	/** JPanel to hold the dialog's components */
 	private JPanel panel;
+	
+	/** JTextField that holds the user's row entry */
 	private JTextField userRows;
+	
+	/** JTextField that holds the user's col entry */
 	private JTextField userColumns;
+	
+	/** JTabbedPane reference */
 	private JTabbedPane tab;
+	
+	/** Stores the HTMLConstruct passed in */
 	private HTMLConstruct construct;
+	
+	/** JDialog that will be created upon instantiation */
 	private JDialog dialog;
 	
-	protected ObtainTableDialog(EditorGUI frame, JTabbedPane tab, HTMLConstruct construct){
+	/**
+	 * Constructor for ObtainTableDialog, which will display the dialog
+	 * asking for the number of table rows/columns to insert into the buffer.
+	 * Protected to ensure that only the GUI Package can construct one.
+	 * 
+	 * @param frame    EditorGUI reference
+	 * @param tab    JTabbedPane reference
+	 * @param construct    Stores the HTMLConstruct
+	 */
+	protected ObtainTableDialog(EditorGUI frame, JTabbedPane tab, 
+			HTMLConstruct construct){
 		
-		this.dialog = new JDialog(frame, "Enter Table Dimensions", ModalityType.APPLICATION_MODAL);
+		//Create the dialog
+		this.dialog = new JDialog(frame, "Enter Table Dimensions", 
+				ModalityType.APPLICATION_MODAL);
 		this.tab = tab;
 		this.construct = construct;
 		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -58,7 +77,8 @@ public class ObtainTableDialog {
 		//Buttons for display
 		JPanel buttons = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("OK");
-		ActionListener okListener = new OKTableListener(this, this.userRows, frame, this.userColumns);
+		ActionListener okListener = new OKTableListener(this, this.userRows, 
+				frame, this.userColumns);
 		ok.addActionListener(okListener);
 		
 		JButton cancel = new JButton("Cancel");
@@ -68,7 +88,7 @@ public class ObtainTableDialog {
 		buttons.add(ok);
 		buttons.add(cancel);
 		
-		//Combine everything into JDialog frame
+		//Combine components into JDialog frame
 		this.panel.add(buttons);
 		
 		this.dialog.add(this.panel);
@@ -77,14 +97,26 @@ public class ObtainTableDialog {
 		
 	}
 	
+	/**
+	 * Gets the dialog.
+	 * @return dialog    JDialog instance
+	 */
 	protected JDialog getDialog(){
 		return this.dialog;
 	}
 	
+	/**
+	 * Gets the HTMLConstruct
+	 * @return construct    HTMLConstruct being stored
+	 */
 	protected HTMLConstruct getConstruct(){
 		return this.construct;
 	}
 	
+	/**
+	 * Gets the JTabbedPane.
+	 * @return tab    JTabbedPane used in the GUI
+	 */
 	protected JTabbedPane getTabs(){
 		return this.tab;
 	}

@@ -1,4 +1,11 @@
 package GUI;
+
+/*
+ * WellFormedSaveDialog.java
+ * 
+ */
+
+
 import java.awt.Dialog.ModalityType;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -11,35 +18,40 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-
-
-/*
- * WellFormedSaveDialog.java
- * 
- * Version:
- * $Id$
- *
- * Revisions:
- * $Log$
- */
-
 /**
- * Enter description here.
+ * A Dialog for warning the user that the current file being saved is not well
+ * formed and prompts the user to continue.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class WellFormedSaveDialog {
 
+	/** Holds the dialog to be created */
 	private JDialog dialog;
+	
+	/** Holds the file being saved */
 	private File file;
+	
+	/** holds the string being saved */
 	private String save;
 	
+	/**
+	 * Constructor for the WellFormedSaveDialog.  It creates a dialog warning
+	 * the user that the current document being saved is not well formed and
+	 * prompts for the user to continue saving anyways.
+	 * 
+	 * @param frame
+	 * @param file
+	 * @param save
+	 */
 	public WellFormedSaveDialog(JFrame frame, File file, String save){
+		//Initialize instance variables
 		this.file = file;
 		this.save = save;
 		this.dialog = new JDialog(frame, "Continue with Save?", 
 				ModalityType.APPLICATION_MODAL);
 		
+		//Initialize the dialog's display
 		JPanel panel = new JPanel(new GridLayout(2,0)); 
 		JLabel label = new JLabel("<html>The document is not well formed and " +
 				"will reduce functionality.<br>Continue saving?</html>");
@@ -59,6 +71,7 @@ public class WellFormedSaveDialog {
 		buttons.add(cancel);
 		panel.add(buttons);
 		
+		//Display the dialog
 		this.dialog.add(panel);
 		this.dialog.pack();
 		this.dialog.setVisible(true);
