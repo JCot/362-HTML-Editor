@@ -31,7 +31,7 @@ public class WellFormed {
 	public boolean wellFormedCheck(String text){
 		Stack<String> openTags = new Stack<String>();
 		Stack<String> closeTags = new Stack<String>();
-		String[] lines = text.split(System.getProperty("line.separator"));
+		String[] lines = text.split("\n");
 		boolean tagsWellFormed = false;
 		
 		for(int i = 0; i <= lines.length - 1; i++){
