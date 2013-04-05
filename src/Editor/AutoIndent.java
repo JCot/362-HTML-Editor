@@ -36,12 +36,14 @@ public class AutoIndent {
 	 * @return String - a string of white spaces to insert
 	 * on a line for the proper indentation level.
 	 */
-	public static String indent(String prevLine, int indentSize){
+	public static String indent(String text, int line, int indentSize){
 		String indentLen = "";
 		String temp;
 		String oneLevel = "";
 		int numWhiteSpace = 0;
 		char tempChar;
+		String[] tempText = text.split("\n");
+		String prevLine = tempText[line];
 		
 		for(int i = 1; i <= indentSize; i++){
 			oneLevel += " ";
