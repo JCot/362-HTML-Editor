@@ -19,6 +19,8 @@ public class AutoIndent {
 		return temp;
 	}
 	
+	public static int indentSize;
+	
 	/**
 	 * Provides the indentation for the current line by
 	 * taking the previous line and counting the leading white
@@ -36,7 +38,7 @@ public class AutoIndent {
 	 * @return String - a string of white spaces to insert
 	 * on a line for the proper indentation level.
 	 */
-	public static String indent(String text, int line, int indentSize){
+	public static String indent(String text, int line){
 		String indentLen = "";
 		String temp;
 		String oneLevel = "";
