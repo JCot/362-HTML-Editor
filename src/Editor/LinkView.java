@@ -1,5 +1,6 @@
 package Editor;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This is the backend class for the Link View.
@@ -39,7 +40,13 @@ public class LinkView {
 	public String returnOrdered(){
 		String temp = "";
 		
+		Collections.sort(alphabeticalOrder);
 		
+		
+		
+		for(String s: alphabeticalOrder){
+			temp += s + "\n";
+		}
 		
 		return temp;
 	}
