@@ -51,7 +51,7 @@ public class Document {
 		return links.returnOrderofAppearance();
 	}
 	
-	public String getAlphabeticalLinks(String text){
+	public String getOrderedLinks(String text){
 		links.findLinks(text);
 		return links.returnOrdered();
 	}

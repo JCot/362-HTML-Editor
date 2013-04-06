@@ -164,6 +164,38 @@ public class HtmlEditor {
 			return false;
 		}
 	}
+	
+	public static String getOrderOfAppearanceLinks(File file, String text){
+		Document tempDoc = null;
+		String links = "";
+		
+		for(int i = 0; i < docs.size(); i++){
+			if(docs.get(i).getFileName().equals(file.getName())){
+				tempDoc = docs.get(i);
+				break;
+			}
+		}
+		
+		links = tempDoc.getOrderOfAppearanceLinks(text);
+		
+		return links;
+	}
+	
+	public static String getOrderedLinks(File file, String text){
+		Document tempDoc = null;
+		String links = "";
+		
+		for(int i = 0; i < docs.size(); i++){
+			if(docs.get(i).getFileName().equals(file.getName())){
+				tempDoc = docs.get(i);
+				break;
+			}
+		}
+		
+		links = tempDoc.getOrderedLinks(text);
+		
+		return links;
+	}
 
 	/**
 	 * @param args[String]
