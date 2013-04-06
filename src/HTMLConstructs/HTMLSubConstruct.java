@@ -5,8 +5,8 @@ package HTMLConstructs;
 import java.util.ArrayList;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * This is a general Composite class for nestin tags inside one another.
  */
 public class HTMLSubConstruct extends HTMLConstruct{
 	ArrayList<HTMLConstruct> list = new ArrayList<HTMLConstruct>();

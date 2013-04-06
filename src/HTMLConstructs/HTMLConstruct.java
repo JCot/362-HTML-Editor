@@ -4,10 +4,11 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * This is the Component abstract superclass for all HTML tags.
  */
 public abstract class HTMLConstruct {
+	protected boolean expand = true;
 	protected String startTag;
 	protected String endTag;
 	
@@ -17,7 +18,12 @@ public abstract class HTMLConstruct {
 		return temp;
 	}
 	
-	public String insertList(int size){
+	public String collapse(){
+		expand = false;
+		return startTag;
+	}
+	
+	/**public String insertList(int size){
 		return "";
 	}
 	
@@ -25,10 +31,17 @@ public abstract class HTMLConstruct {
 		return "";
 	}
 	
+	public String insertImage( String alt, int height, int width ){
+		return "";
+	}
+	
+	public String insertLink( String url ){
+		return "";
+	}
+	
 	public void add( HTMLConstruct c ){}
 	
 	public void remove( HTMLConstruct c ){}
-
-	
-	
+	*/
+		
 }

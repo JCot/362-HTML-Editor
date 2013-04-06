@@ -4,21 +4,23 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a list with entry descriptions.
  */
 public class DefineList extends HTMLConstruct{
+	private int size;
 	
-	public DefineList(){
+	public DefineList( int size ){
+		this.size = size;
 		super.startTag = "<dl>";
 		super.endTag = "</dl>";
 	}
 	
-	public String insertList( int size ){
-		DefineListEntry li = new DefineListEntry();
+	public String insert(){
+		DefineListEntry dt = new DefineListEntry();
 		String temp = startTag;
 		while( size > 0 ){
-			temp += "\n" + li.insert();
+			temp += "\n" + dt.insert();
 			size--;
 		}
 		temp += "\n" + endTag;

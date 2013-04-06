@@ -4,8 +4,8 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags for an entry in a bulleted or numbered list.
  */
 public class ListEntry extends HTMLConstruct{
 	

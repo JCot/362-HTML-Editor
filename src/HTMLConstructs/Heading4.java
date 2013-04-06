@@ -4,8 +4,8 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags for a heading of size 4.
  */
 public class Heading4 extends HTMLConstruct{
 

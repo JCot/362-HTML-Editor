@@ -4,8 +4,8 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a list entry with a description.
  */
 public class DefineListEntry extends HTMLConstruct{
 	

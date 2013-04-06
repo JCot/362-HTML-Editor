@@ -4,17 +4,19 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a bulleted list.
  */
 public class BulletList extends HTMLConstruct{
+	private int size;
 	
-	public BulletList() {
+	public BulletList( int size ) {
+		this.size = size;
 		super.startTag = "<ul>";
 		super.endTag = "</ul>";
 	}
 	
-	public String insertList( int size ){
+	public String insert(){
 		ListEntry li = new ListEntry();
 		String temp = startTag;
 		while( size > 0 ){

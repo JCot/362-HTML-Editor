@@ -4,8 +4,8 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags which indicate an html document.
  */
 public class HTML extends HTMLConstruct{ 
 

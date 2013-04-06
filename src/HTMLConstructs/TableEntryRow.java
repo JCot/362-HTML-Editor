@@ -4,17 +4,19 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a single row in a table.
  */
 public class TableEntryRow extends HTMLConstruct{
+	private int cols;
 	
-	public TableEntryRow() {
+	public TableEntryRow( int cols ) {
+		this.cols = cols;
 		super.startTag = "<tr>";
 		super.endTag = "</tr>";
 	}
 	
-	public String insertTableRow( int cols ){
+	public String insert(){
 		TableEntryCol td = new TableEntryCol();
 		String temp = super.startTag;
 		while( cols > 0 ){

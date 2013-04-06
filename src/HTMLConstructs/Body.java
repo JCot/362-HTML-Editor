@@ -4,13 +4,14 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags for the body of text.
  */
 public class Body extends HTMLConstruct{
 	
 	public Body() {
-		super.startTag="<body>";
-		super.endTag="</body>";
+		super.startTag = "<body>";
+		super.endTag = "</body>";
 	}
+
 }

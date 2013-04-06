@@ -4,17 +4,19 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a numbered list.
  */
 public class NumberList extends HTMLConstruct{
+	private int size;
 	
-	public NumberList() {
+	public NumberList( int size ) {
+		this.size = size;
 		super.startTag = "<ol>";
 		super.endTag = "</ol>";
 	}
 	
-	public String insertList( int size ){
+	public String insert(){
 		ListEntry li = new ListEntry();
 		String temp = super.startTag;
 		while( size > 0 ){

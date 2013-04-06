@@ -4,22 +4,26 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a table.
  */
 public class Table extends HTMLConstruct{
+	private int rows;
+	private int cols;
 	
-	public Table() {
+	public Table( int rows, int cols ) {
+		this.rows = rows;
+		this.cols = cols;
 		super.startTag = "<table>";
 		super.endTag = "</table>";
 	}
 	
 	@Override
-	public String insertTable( int rows, int cols ){
-		TableEntryRow tr = new TableEntryRow();
+	public String insert(){
+		TableEntryRow tr = new TableEntryRow( cols );
 		String temp = super.startTag;
 		while( rows > 0 ){
-			temp += "\n" + tr.insertTableRow( cols );
+			temp += "\n" + tr.insert();
 			rows--;
 		}
 		temp += "\n" + super.endTag;

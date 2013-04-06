@@ -4,8 +4,8 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags and structure for a single cell in a table.
  */
 public class TableEntryCol extends HTMLConstruct{
 	

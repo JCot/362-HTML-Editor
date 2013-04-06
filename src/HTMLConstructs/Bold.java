@@ -4,13 +4,14 @@
 package HTMLConstructs;
 
 /**
- * @author ikeku_000
- *
+ * @author Isaac Kunkel
+ * Holds the tags for bold text.
  */
 public class Bold extends HTMLConstruct{
 	
 	public Bold() {
-		super.startTag="<b>";
-		super.endTag="</b>";
+		super.startTag = "<b>";
+		super.endTag = "</b>";
 	}
+
 }
