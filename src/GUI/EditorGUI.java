@@ -70,14 +70,11 @@ public class EditorGUI extends JFrame {
 		wrap.addActionListener(wrapListener);
 		
 		JCheckBoxMenuItem autoIndent = new JCheckBoxMenuItem("Auto-Indent");
-		ActionListener autoListener = new IndentListener(this, this.tab,
-				autoIndent);
-		autoIndent.setActionCommand("auto");
+		ActionListener autoListener = new AutoIndentListener(autoIndent, this);
 		autoIndent.addActionListener(autoListener);
 		
 		JMenuItem indent = new JMenuItem("Indent");
-		ActionListener indentListener = new IndentListener(this, this.tab,
-				autoIndent);
+		ActionListener indentListener = new IndentListener(this, this.tab);
 		indent.addActionListener(indentListener);
 		
 		
@@ -136,8 +133,9 @@ public class EditorGUI extends JFrame {
 		italic.addActionListener(italicListener);
 		font.add(italic);
 		
-		/*
+		
 		//List Menus
+		/*
 		JMenu list = new JMenu("List Tags");
 		
 		JMenuItem bulletList = new JMenuItem("Bulleted List Tag");
@@ -210,9 +208,8 @@ public class EditorGUI extends JFrame {
 		
 	}
 	
-	
 	/**
-	 * Gets the JTabbedPane.  Used to open tabs with files passed
+	 * Gets the New Tab ActionListener.  Used to open tabs with files passed
 	 * in as command line arguments.
 	 * @return tab    JTabbedPane tracking different text buffers
 	 */

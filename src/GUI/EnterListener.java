@@ -72,15 +72,16 @@ public class EnterListener implements KeyListener {
 				if (scroll != null){
 					JViewport view = (JViewport) scroll.getComponent(0);
 					JTextArea text = (JTextArea) view.getComponent(0);
+					String buffer = text.getText();
 					int position = text.getCaretPosition();
-					int lineNum = 0;
+					int line = 0;
 					try {
-						lineNum = text.getLineOfOffset(position);
+						line = text.getLineOfOffset(position);
 					} catch (BadLocationException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					String indent = AutoIndent.indent(text.getText(), lineNum);
+					String indent = AutoIndent.indent(buffer, line);
 					text.insert(indent, position);
 				}
 			}

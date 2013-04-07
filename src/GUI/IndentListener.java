@@ -8,14 +8,12 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.text.Utilities;
 
-import Command.AutoIndentCommand;
 import Command.Command;
 import Command.IndentCommand;
 
@@ -32,20 +30,15 @@ public class IndentListener implements ActionListener {
 	/** Reference to the EditorGUI */
 	private EditorGUI gui;
 	
-	/** Auto-Indent menu reference to get its current state */
-	private JCheckBoxMenuItem menu;
-	
 	/**
 	 * Constructor for an IndentListener, which handles indenting selected text.
 	 * 
 	 * @param gui    EditorGUI reference
 	 * @param tab    JTabbedPane reference
 	 */
-	protected IndentListener (EditorGUI gui, JTabbedPane tab,
-			JCheckBoxMenuItem menu){
+	protected IndentListener (EditorGUI gui, JTabbedPane tab){
 		this.tab = tab;
 		this.gui = gui;
-		this.menu = menu;
 	}
 	
 	/* (non-Javadoc)
@@ -57,18 +50,13 @@ public class IndentListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getActionCommand().equals("auto")){
-			Command indent = new AutoIndentCommand(this.menu, this.gui);
-			indent.execute();
-		} else {
 		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-			if (scroll != null){
-				
-				JViewport view = (JViewport) scroll.getComponent(0);
-				JTextArea text = (JTextArea) view.getComponent(0);
-				Command indent = new IndentCommand(this.gui, text);
-				indent.execute();
-			}
+		if (scroll != null){
+			
+			JViewport view = (JViewport) scroll.getComponent(0);
+			JTextArea text = (JTextArea) view.getComponent(0);
+			Command indent = new IndentCommand(this.gui, text);
+			indent.execute();
 		}
 	}
 }
