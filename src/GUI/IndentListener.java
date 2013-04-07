@@ -8,11 +8,16 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.text.Utilities;
+
+import Command.AutoIndentCommand;
+import Command.Command;
+import Command.IndentCommand;
 
 /**
  * ActionListener that handles the indentation of a selection of text.
@@ -27,15 +32,20 @@ public class IndentListener implements ActionListener {
 	/** Reference to the EditorGUI */
 	private EditorGUI gui;
 	
+	/** Auto-Indent menu reference to get its current state */
+	private JCheckBoxMenuItem menu;
+	
 	/**
 	 * Constructor for an IndentListener, which handles indenting selected text.
 	 * 
 	 * @param gui    EditorGUI reference
 	 * @param tab    JTabbedPane reference
 	 */
-	protected IndentListener (EditorGUI gui, JTabbedPane tab){
+	protected IndentListener (EditorGUI gui, JTabbedPane tab,
+			JCheckBoxMenuItem menu){
 		this.tab = tab;
 		this.gui = gui;
+		this.menu = menu;
 	}
 	
 	/* (non-Javadoc)
@@ -47,35 +57,18 @@ public class IndentListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getActionCommand().equals("auto")){
+			Command indent = new AutoIndentCommand(this.menu, this.gui);
+			indent.execute();
+		} else {
 		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			ObtainIndentDialog dialog = new ObtainIndentDialog(gui);
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			String selection = text.getSelectedText();
-			int position = text.getCaretPosition();
-			text.cut();
-			String indent = this.gui.getIndent();
-			if (selection != null){
-				String indented = indentSelection(selection, indent);
-				text.insert(indented, position);
-			} else {
-				text.insert(indent, position);
+			if (scroll != null){
+				
+				JViewport view = (JViewport) scroll.getComponent(0);
+				JTextArea text = (JTextArea) view.getComponent(0);
+				Command indent = new IndentCommand(this.gui, text);
+				indent.execute();
 			}
-
 		}
 	}
-	
-	/*
-	 * Used to indent a given selection based on the given indent.
-	 */
-	private String indentSelection(String selection, String indent){
-		String temp = "";
-		String[] lines = selection.split("/n");
-		for(String line : lines){
-			temp += (indent + line + "\n"); 
-		}
-		return temp;
-	}
-
 }

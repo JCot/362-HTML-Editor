@@ -8,6 +8,7 @@ package GUI;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
@@ -17,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Editor.HtmlEditor;
+
 
 /**
  * A Dialog for warning the user that the current file being saved is not well
@@ -24,7 +27,7 @@ import javax.swing.JPanel;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class WellFormedSaveDialog {
+public class WellFormedSaveDialog implements ActionListener {
 
 	/** Holds the dialog to be created */
 	private JDialog dialog;
@@ -59,9 +62,7 @@ public class WellFormedSaveDialog {
 		
 		JPanel buttons = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("OK");
-		ActionListener okListener = new OKSaveListener(this.dialog, this.file,
-				this.save);
-		ok.addActionListener(okListener);
+		ok.addActionListener(this);
 		buttons.add(ok);
 		
 		
@@ -75,6 +76,21 @@ public class WellFormedSaveDialog {
 		this.dialog.add(panel);
 		this.dialog.pack();
 		this.dialog.setVisible(true);
+		
+	}
+
+	/**
+	 * @param e
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		boolean fileExists = HtmlEditor.fileExists(this.file);
+		if(!fileExists){
+			HtmlEditor.saveAsIllFormed(this.file, this.save);
+		} else {
+			HtmlEditor.saveIllFormed(this.file, this.save);
+		}
+		this.dialog.dispose();
 		
 	}
 }

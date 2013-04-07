@@ -19,20 +19,12 @@ import HTMLConstructs.*;
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class EditorGUI extends JFrame {
-
-	/** Boolean value denoting user's preference for auto-wrap */
-	private boolean autoIndent = false;
-	
-	/** String representing the current indentation to insert for Auto-Indent */
-	private String indent = "";
-	
-	/** Reference to the newTab ActionListener. Used for displaying files
-	 * passed in through the command line.
-	 */
-	private ActionListener newTab;
 	
 	/** Reference to the JTabbedPane used by the GUI. */
 	private JTabbedPane tab;
+	
+	/** Reference to the insert menu which may be disabled */
+	private JMenu insert;
 	
 	/**
 	 * Constructor for an EditorGUI object.  Creates the main GUI. 
@@ -55,7 +47,6 @@ public class EditorGUI extends JFrame {
 		JMenuItem newFile = new JMenuItem("New");
 		newFile.setActionCommand("New");
 		ActionListener newTab = new NewTabListener(this, tab, fileChooser, insert);
-		this.newTab = newTab;
 		newFile.addActionListener(newTab);
 		newFile.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_N, ActionEvent.CTRL_MASK));
@@ -79,43 +70,52 @@ public class EditorGUI extends JFrame {
 		wrap.addActionListener(wrapListener);
 		
 		JCheckBoxMenuItem autoIndent = new JCheckBoxMenuItem("Auto-Indent");
-		ActionListener autoListener = new AutoIndentListener(autoIndent, this);
+		ActionListener autoListener = new IndentListener(this, this.tab,
+				autoIndent);
+		autoIndent.setActionCommand("auto");
 		autoIndent.addActionListener(autoListener);
 		
 		JMenuItem indent = new JMenuItem("Indent");
-		ActionListener indentListener = new IndentListener(this, this.tab);
+		ActionListener indentListener = new IndentListener(this, this.tab,
+				autoIndent);
 		indent.addActionListener(indentListener);
 		
 		
 		//Basic Tags
 		JMenuItem body = new JMenuItem("Body");
 		HTMLConstruct bodyTag = new Body();
-		ActionListener bodyListener = new InsertListener(bodyTag, this.tab);
+		ActionListener bodyListener = new InsertListener(bodyTag, this.tab, 
+				this);
 		body.addActionListener(bodyListener);
 		
 		JMenuItem html = new JMenuItem("HTML");
 		HTMLConstruct htmlTag = new HTML();
-		ActionListener htmlListener = new InsertListener(htmlTag, this.tab);
+		ActionListener htmlListener = new InsertListener(htmlTag, this.tab, 
+				this);
 		html.addActionListener(htmlListener);
 		
 		JMenuItem div = new JMenuItem("Div");
 		HTMLConstruct divTag = new Div();
-		ActionListener divListener = new InsertListener(divTag, this.tab);
+		ActionListener divListener = new InsertListener(divTag, this.tab, 
+				this);
 		div.addActionListener(divListener);
 		
 		JMenuItem header = new JMenuItem("Header");
 		HTMLConstruct headerTag = new Header();
-		ActionListener headerListener = new InsertListener(headerTag, this.tab);
+		ActionListener headerListener = new InsertListener(headerTag, this.tab, 
+				this);
 		header.addActionListener(headerListener);
 		
 		JMenuItem paragraph = new JMenuItem("Paragraph");
 		HTMLConstruct paragraphTag = new Paragraph();
-		ActionListener paragraphListener = new InsertListener(paragraphTag, this.tab);
+		ActionListener paragraphListener = new InsertListener(paragraphTag, this.tab,
+				this);
 		paragraph.addActionListener(paragraphListener);
 		
 		JMenuItem title = new JMenuItem("Title");
 		HTMLConstruct titleTag = new Title();
-		ActionListener titleListener = new InsertListener(titleTag, this.tab);
+		ActionListener titleListener = new InsertListener(titleTag, this.tab, 
+				this);
 		title.addActionListener(titleListener);
 		
 		
@@ -124,36 +124,44 @@ public class EditorGUI extends JFrame {
 		
 		JMenuItem bold = new JMenuItem("Bold");
 		HTMLConstruct boldTag = new Bold();
-		ActionListener boldListener = new InsertListener(boldTag, this.tab);
+		ActionListener boldListener = new InsertListener(boldTag, this.tab, 
+				this);
 		bold.addActionListener(boldListener);
 		font.add(bold);
 		
 		JMenuItem italic = new JMenuItem("Italic");
 		HTMLConstruct italicTag = new Italic();
-		ActionListener italicListener = new InsertListener(italicTag, this.tab);
+		ActionListener italicListener = new InsertListener(italicTag, this.tab,
+				this);
 		italic.addActionListener(italicListener);
 		font.add(italic);
 		
-		
+		/*
 		//List Menus
 		JMenu list = new JMenu("List Tags");
 		
 		JMenuItem bulletList = new JMenuItem("Bulleted List Tag");
 		HTMLConstruct bulletTag = new BulletList();
-		ActionListener bulletListener = new InsertListListener(this, bulletTag, this.tab);
+		ActionListener bulletListener = new InsertListListener(bulletTag, this.tab, 
+				this);
 		bulletList.addActionListener(bulletListener);
+		bulletList.setActionCommand("List");
 		list.add(bulletList);
 		
 		JMenuItem defineList = new JMenuItem("Defined List Tag");
 		HTMLConstruct defineTag = new DefineList();
-		ActionListener defineListener = new InsertListListener(this, defineTag, this.tab);
+		ActionListener defineListener = new InsertListListener(defineTag, this.tab,
+				this);
 		defineList.addActionListener(defineListener);
+		defineList.setActionCommand("List");
 		list.add(defineList);
 		
 		JMenuItem numberList = new JMenuItem("Numbered List Tag");
 		HTMLConstruct numberTag = new NumberList();
-		ActionListener numberListener = new InsertListListener(this, numberTag, this.tab);
+		ActionListener numberListener = new InsertListListener(numberTag, this.tab,
+				this);
 		numberList.addActionListener(numberListener);
+		numberList.setActionCommand("List");
 		list.add(numberList);
 		
 		//Table Menu
@@ -162,6 +170,7 @@ public class EditorGUI extends JFrame {
 		ActionListener tableListener = new InsertTableListener(this, tableTag, this.tab);
 		table.addActionListener(tableListener);
 		//End tag menus
+		 */
 		
 		//Add Menus to GUI
 		file.add(newFile);
@@ -176,9 +185,9 @@ public class EditorGUI extends JFrame {
 		insert.add(font);
 		insert.add(header);
 		insert.add(html);
-		insert.add(list);
+		//insert.add(list);
 		insert.add(paragraph);
-		insert.add(table);
+		//insert.add(table);
 		insert.add(title);
 		
 		
@@ -201,47 +210,23 @@ public class EditorGUI extends JFrame {
 		
 	}
 	
-	/**
-	 * Gets the current indent level for the Auto-Indent.
-	 * @return indent    the current indent level
-	 */
-	protected String getIndent(){
-		return this.indent;
-	}
 	
 	/**
-	 * Sets the state for the Auto-Indent.
-	 * @param indentOn    boolean describing the state of the Auto-Indent
-	 */
-	protected void setAutoIndent(boolean indentOn){
-		this.autoIndent = indentOn;
-		
-	}
-	
-	/**
-	 * Sets the current indentation level for the Auto-Indent.
-	 * @param indent    the new indentation level
-	 */
-	protected void setIndent(String indent){
-		this.indent = indent;
-		
-	}
-	
-	/**
-	 * Gets the state of the Auto-Indent
-	 * @return autoIndent    boolean describing the state of the Auto-Indent
-	 */
-	protected boolean getAutoIndent(){
-		return this.autoIndent;
-	}
-	
-	/**
-	 * Gets the New Tab ActionListener.  Used to open tabs with files passed
+	 * Gets the JTabbedPane.  Used to open tabs with files passed
 	 * in as command line arguments.
-	 * @return newTab    ActionListener for creating new tabs
+	 * @return tab    JTabbedPane tracking different text buffers
 	 */
-	public ActionListener getNewTabListener(){
-		return this.newTab;
+	public JTabbedPane getTab(){
+		return this.tab;
+	}
+	
+	/**
+	 * Gets the insert menu which will be disabled/enabled.
+	 * 
+	 * @return insert    JMenu for inserting tags
+	 */
+	public JMenu getInsertMenu() {
+		return this.insert;
 	}
 	
 }

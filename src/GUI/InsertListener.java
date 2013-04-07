@@ -7,11 +7,14 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
+import Command.Command;
+import Command.InsertCommand;
 import HTMLConstructs.HTMLConstruct;
 
 /**
@@ -21,11 +24,13 @@ import HTMLConstructs.HTMLConstruct;
  */
 public class InsertListener implements ActionListener {
 	
-	/** HTML construct to insert */
-	private HTMLConstruct tag;
+	/** Integer representing the current number of tabs open */
+	private int numTabs;
 	
-	/** Reference to the JTabbedPane */
-	private JTabbedPane tab;
+	/** Concrete Command object that will insert the tag when called */
+	private Command insert;
+
+	private JFrame frame;
 	
 	/**
 	 * Constructor for an InsertListener, which inserts an HTML construct.
@@ -34,30 +39,31 @@ public class InsertListener implements ActionListener {
 	 * @param tag    HTMLConstruct represents a tag
 	 * @param tab    JTabbedPane reference
 	 */
-	protected InsertListener(HTMLConstruct tag, JTabbedPane tab) {
-		this.tag = tag;
-		this.tab = tab;
+	protected InsertListener(HTMLConstruct tag, JTabbedPane tab, JFrame frame) {
+		this.numTabs = tab.getComponentCount();
+		this.insert = new InsertCommand(tag, tab);
+		this.frame = frame;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed
-	 * (java.awt.event.ActionEvent)
-	 * 
+	/**
 	 * Specified by ActionListener, actionPerformed uses the JTabbedPane to
 	 * obtain the current tab and then inserts the HTML tag at the current
 	 * position.
+	 * 
+	 * @param arg0    ActionEvent describing the object calling this listener
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			String insertTag = this.tag.insert();
-			int position = text.getCaretPosition();
-			text.insert(insertTag, position);
+		if (this.numTabs != 0){
+			if (arg0.getActionCommand().equals("List")){
+				
+			} else if (arg0.getActionCommand().equals("Table")){
+				
+			} else {
+				this.insert.execute();
+			}
+			
 		}
-
 	}
 
 }

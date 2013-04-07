@@ -7,6 +7,7 @@ package GUI;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -14,8 +15,11 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
 
 import HTMLConstructs.HTMLConstruct;
 
@@ -25,7 +29,7 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class ObtainSizeDialog{
+public class ObtainSizeDialog implements ActionListener{
 
 	/** JPanel to hold the dialog's components */
 	private JPanel panel;
@@ -41,6 +45,8 @@ public class ObtainSizeDialog{
 	
 	/** JDialog that will be created upon instantiation */
 	private JDialog dialog;
+	
+	private EditorGUI gui;
 		
 	/**
 	 * Constructor for ObtainSizeDialog, which will display the dialog
@@ -60,6 +66,7 @@ public class ObtainSizeDialog{
 		this.tab = tab;
 		this.construct = construct;
 		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.gui = frame;
 		
 
 		//New panel to organize the dialog
@@ -71,9 +78,7 @@ public class ObtainSizeDialog{
 		//Button panel for "OK" and "Cancel" Buttons
 		JPanel buttonPanel = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("Ok");
-		ActionListener okListener = new OKListSizeListener(this, this.dialog, 
-				this.userNumber, frame);
-		ok.addActionListener(okListener);
+		ok.addActionListener(this);
 		
 		JButton cancel = new JButton("Cancel");
 		ActionListener cancelListener = new CancelListener(this.dialog);
@@ -95,27 +100,60 @@ public class ObtainSizeDialog{
 	}
 	
 	/**
-	 * Gets the dialog.
-	 * @return dialog    JDialog instance
+	 * 
+	 * @param e
 	 */
-	protected JDialog getDialog(){
-		return this.dialog;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
+		if (scroll != null){
+			JViewport view = (JViewport) scroll.getComponent(0);
+			JTextArea text = (JTextArea) view.getComponent(0);
+			String sizeString = this.userNumber.getText();
+			if (sizeString.matches("\\d+")){
+				int size = Integer.parseInt(sizeString);
+				String insertTag = this.construct.insertList(size);
+				int position = text.getCaretPosition();
+				if(this.gui.getAutoIndent()){
+					String temp = "";
+					String indent = this.gui.getIndent();
+					String[] lines = insertTag.split("/n");
+					for(String line : lines){
+						if (matchListEntry(line)) {
+							temp += (indent + line + "\n");
+						} else if (matchListEntryDef(line)){
+							temp += (indent + indent + line + "\n");
+						} else {
+							temp += line + "\n";
+						}
+					}
+					insertTag = temp;
+				}
+				text.insert(insertTag, position);
+				this.dialog.dispose();
+			}
+		}
 	}
 	
-	/**
-	 * Gets the HTMLConstruct
-	 * @return construct    HTMLConstruct being stored
+	/*
+	 * Matches a line with a list entry tag
 	 */
-	protected HTMLConstruct getConstruct(){
-		return this.construct;
+	private boolean matchListEntry(String line){
+		if (line.startsWith("<li>") || line.startsWith("</li>") || 
+				line.startsWith("<dt>") || line.startsWith("</dt>")){
+			return true;
+		}
+		return false;
 	}
-	
-	/**
-	 * Gets the JTabbedPane.
-	 * @return tab    JTabbedPane used in the GUI
+
+	/*
+	 * Matches a line with the list def tag
 	 */
-	protected JTabbedPane getTabs(){
-		return this.tab;
+	private boolean matchListEntryDef(String line) {
+		if (line.startsWith("<dd>") || line.startsWith("</dd>")){
+			return true;
+		}
+		return false;
 	}
 	
 }

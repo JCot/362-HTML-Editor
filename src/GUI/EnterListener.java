@@ -10,6 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
+import javax.swing.text.BadLocationException;
+
+import Editor.AutoIndent;
 
 /**
  * KeyListener that listens for when newlines characters are typed, and
@@ -27,13 +30,12 @@ public class EnterListener implements KeyListener {
 	
 	/**
 	 * Constructor for an EnterListener, which handles auto-indenting on 
-	 * newline characters.  Protected to ensure that only the
-	 * GUI Package can construct one.
+	 * newline characters. 
 	 * 
 	 * @param gui    EditorGUI reference
 	 * @param tab    JTabbedPane reference
 	 */
-	protected EnterListener(EditorGUI gui, JTabbedPane tab){
+	public EnterListener(EditorGUI gui, JTabbedPane tab){
 		this.gui = gui;
 		this.tab = tab;
 	}
@@ -65,13 +67,20 @@ public class EnterListener implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		if(arg0.getKeyChar() == '\n'){
-			if (this.gui.getAutoIndent()){
+			if (AutoIndent.isOn){
 				JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
 				if (scroll != null){
 					JViewport view = (JViewport) scroll.getComponent(0);
 					JTextArea text = (JTextArea) view.getComponent(0);
 					int position = text.getCaretPosition();
-					String indent = this.gui.getIndent();
+					int lineNum = 0;
+					try {
+						lineNum = text.getLineOfOffset(position);
+					} catch (BadLocationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String indent = AutoIndent.indent(text.getText(), lineNum);
 					text.insert(indent, position);
 				}
 			}

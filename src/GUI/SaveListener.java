@@ -17,6 +17,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
+import Command.Command;
+import Command.SaveCommand;
 import Editor.HtmlEditor;
 
 /**
@@ -35,7 +37,7 @@ public class SaveListener implements ActionListener {
 	private JMenu menu;
 	
 	/** Reference to the JFrame from EditorGUI */
-	private JFrame frame;
+	private EditorGUI frame;
 	
 	/** Reference to the JTabbedPane */
 	private JTabbedPane tab;
@@ -49,7 +51,7 @@ public class SaveListener implements ActionListener {
 	 * @param menu
 	 * @param tab
 	 */
-	protected SaveListener(JFrame frame, JFileChooser fileChooser, JMenu menu, 
+	protected SaveListener(EditorGUI frame, JFileChooser fileChooser, JMenu menu, 
 			JTabbedPane tab) {
 		this.frame = frame;
 		this.fileChooser = fileChooser;
@@ -77,27 +79,8 @@ public class SaveListener implements ActionListener {
 			
 			if (userReturn == JFileChooser.APPROVE_OPTION) {
 				File file = this.fileChooser.getSelectedFile();
-				boolean fileExists = HtmlEditor.fileExists(file);
-				if (!fileExists) {
-					String wellFormedSave = HtmlEditor.saveAs(file, saveString);
-					if(wellFormedSave.equals("Warning: This document is not " +
-							"well formed.")){
-						WellFormedSaveDialog save = new WellFormedSaveDialog
-								(frame, file, saveString);
-						this.menu.setEnabled(false);
-					}
-					
-				} else {
-					String wellFormedSave = HtmlEditor.save(file, saveString);
-					if(wellFormedSave.equals("Warning: This document is not " +
-							"well formed.")){
-						WellFormedSaveDialog save = new WellFormedSaveDialog
-								(frame, file, saveString);	
-						this.menu.setEnabled(false);
-					} else {
-						this.menu.setEnabled(true);//Enable insert functionality
-					}
-				}
+				Command save = new SaveCommand(file, saveString, this.frame);
+				save.execute();
 				
 				this.tab.setTitleAt(currentIndex, file.getName());
 				

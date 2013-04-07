@@ -15,6 +15,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
+import Command.AutoWrapCommand;
+import Command.Command;
+
 /**
  * ActionListener for toggling the Auto-Wrap
  *
@@ -49,14 +52,9 @@ public class WrapListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		boolean state = this.check.getState();
-		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			text.setWrapStyleWord(true);
-			text.setLineWrap(state);
-		}
+		Command wrap = new AutoWrapCommand(this.tab, this.check);
+		wrap.execute();
+		
 
 	}
 

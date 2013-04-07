@@ -5,15 +5,13 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-
+import Command.Command;
+import Command.NewCommand;
+import Command.OpenCommand;
 import Editor.HtmlEditor;
 
 /**
@@ -71,26 +69,21 @@ public class NewTabListener implements ActionListener {
 			this.tab.setVisible(true);
 		}
 		
+		//If a new tab is requested
 		if (arg0.getActionCommand().equals("New")){
-			JTextArea text = new JTextArea();
-			KeyListener enter = new EnterListener(this.frame, this.tab);
-			text.addKeyListener(enter);
-			JScrollPane scroll = new JScrollPane(text, 
-					JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			this.tab.add("Untitled", scroll);
-			File file = new File("Untitled");
-			HtmlEditor.openFile(file);
-		
+			Command newTab = new NewCommand(this.frame, this.tab);
+			newTab.execute();
+			
+		//If a file is being opened
 		} else {
-			
+		
 			int userReturn = this.fileChooser.showOpenDialog(menu);
-			
 			if (userReturn == JFileChooser.APPROVE_OPTION) {
 				File file = this.fileChooser.getSelectedFile();
 				boolean fileExists = HtmlEditor.fileExists(file);
 				if (!fileExists){
-					displayOpenedFile(file);
+					Command open = new OpenCommand(this.frame, file, this.menu);
+					open.execute();
 				}
 			} else {
 				System.out.println("Cancelled");
@@ -99,37 +92,5 @@ public class NewTabListener implements ActionListener {
 		}
 	}
 
-	/**
-	 * Takes in a file object and then opens the file so that it can be displayed
-	 * in the editor.
-	 * 
-	 * @param file    File object
-	 */
-	public void displayOpenedFile(File file){
-		JTextArea text = new JTextArea();
-		KeyListener enter = new EnterListener(this.frame, this.tab);
-		text.addKeyListener(enter);
-		boolean check = HtmlEditor.wellFormedCheck(file);
-		
-		if (check){
-			String openedFile = HtmlEditor.openFile(file);
-			text.setText(openedFile);
-			JScrollPane scroll = new JScrollPane(text, 
-					JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			this.tab.add(file.getName(), scroll);
-			
-		} else {
-			
-			WellFormedOpenDialog open = new WellFormedOpenDialog
-					(this.frame, this.menu);
-			String openedFile = HtmlEditor.openFile(file);
-			text.setText(openedFile);
-			JScrollPane scroll = new JScrollPane(text, 
-					JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			this.tab.add(file.getName(), scroll);
-		}
-		this.tab.setVisible(true);
-	}
+	
 }

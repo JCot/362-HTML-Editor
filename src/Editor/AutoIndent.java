@@ -11,6 +11,14 @@ package Editor;
  */
 public class AutoIndent {
 
+	public static int indentSize;
+	
+	/** String representing the current indentation to insert for Auto-Indent */
+	public static String indent = "";
+	
+	/** Boolean value denoting user's preference for auto-wrap */
+	public static boolean isOn = false;
+	
 	public static String indent(int indentLength){
 		String temp = "";
 		for(int i = 1; i <= indentLength; i++){
@@ -18,8 +26,6 @@ public class AutoIndent {
 		}
 		return temp;
 	}
-	
-	public static int indentSize;
 	
 	/**
 	 * Provides the indentation for the current line by
@@ -45,7 +51,7 @@ public class AutoIndent {
 		int numWhiteSpace = 0;
 		char tempChar;
 		String[] tempText = text.split("\n");
-		String prevLine = tempText[line];
+		String prevLine = tempText[line-1];
 		
 		for(int i = 1; i <= indentSize; i++){
 			oneLevel += " ";

@@ -43,11 +43,12 @@ public class InsertListListener implements ActionListener {
 	 * @param tag    HTMLConstruct that is a list
 	 * @param tab    JTabbedPane reference
 	 */
-	protected InsertListListener(EditorGUI frame, HTMLConstruct tag, 
-			JTabbedPane tab){
+	protected InsertListListener(HTMLConstruct tag, JTabbedPane tab, EditorGUI frame){
 		this.tab = tab;
-		this.tag = tag;		
+		this.tag = tag;
 		this.parent = frame;
+		
+		
 	}
 	
 	
@@ -61,6 +62,7 @@ public class InsertListListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ((this.tab.getComponentCount()) != 0){
+			
 			ObtainSizeDialog dialog = new ObtainSizeDialog(this.parent, this.tab, this.tag);
 		}
 		

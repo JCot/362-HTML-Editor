@@ -6,6 +6,7 @@ package GUI;
 
 import java.awt.GridLayout;
 import java.awt.Dialog.ModalityType;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -13,8 +14,11 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
 
 import HTMLConstructs.HTMLConstruct;
 
@@ -24,7 +28,7 @@ import HTMLConstructs.HTMLConstruct;
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class ObtainTableDialog {
+public class ObtainTableDialog implements ActionListener {
 	
 	/** JPanel to hold the dialog's components */
 	private JPanel panel;
@@ -44,6 +48,8 @@ public class ObtainTableDialog {
 	/** JDialog that will be created upon instantiation */
 	private JDialog dialog;
 	
+	private EditorGUI gui;
+	
 	/**
 	 * Constructor for ObtainTableDialog, which will display the dialog
 	 * asking for the number of table rows/columns to insert into the buffer.
@@ -62,6 +68,7 @@ public class ObtainTableDialog {
 		this.tab = tab;
 		this.construct = construct;
 		this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.gui = frame;
 		
 		//Display for entering table dimensions
 		this.panel = new JPanel(new GridLayout(5,0));
@@ -77,9 +84,7 @@ public class ObtainTableDialog {
 		//Buttons for display
 		JPanel buttons = new JPanel(new GridLayout(0,2));
 		JButton ok = new JButton("OK");
-		ActionListener okListener = new OKTableListener(this, this.userRows, 
-				frame, this.userColumns);
-		ok.addActionListener(okListener);
+		ok.addActionListener(this);
 		
 		JButton cancel = new JButton("Cancel");
 		ActionListener cancelListener = new CancelListener(this.dialog);
@@ -119,6 +124,74 @@ public class ObtainTableDialog {
 	 */
 	protected JTabbedPane getTabs(){
 		return this.tab;
+	}
+
+	/**
+	 * @param e
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		HTMLConstruct tag = this.construct;
+		JTabbedPane tab = this.tab;
+		JScrollPane scroll = (JScrollPane) tab.getSelectedComponent();
+		if (scroll != null){
+			JViewport view = (JViewport) scroll.getComponent(0);
+			JTextArea text = (JTextArea) view.getComponent(0);
+			String rowString = this.userRows.getText();
+			String colString = this.userColumns.getText();
+			if (rowString.matches("\\d+") && colString.matches("\\d+")){
+				int row = Integer.parseInt(rowString);
+				int col = Integer.parseInt(colString);
+				String insertTag = tag.insertTable(row, col);
+				if (this.gui.getAutoIndent()){
+					String indent = this.gui.getIndent();
+					insertTag = indentTableComponents(insertTag, indent);
+				}
+				int position = text.getCaretPosition();
+				text.insert(insertTag, position);
+				this.dialog.dispose();
+			}
+		}
+
+	}
+	
+	/*
+	 * Given the insert string, will indent each line in the string to the
+	 * proper nested format. 
+	 */
+	private String indentTableComponents(String insert, String indent){
+		String temp = "";
+		String[] lines = insert.split("\n");
+		for(String line : lines){
+			if(matchTableRowTag(line)){
+				temp += (indent + line + "\n"); 
+			} else if(matchTableColTag(line)){
+				temp += (indent + indent + line + "\n");
+			} else {
+				temp += line + "\n";
+			}
+		}
+		return temp;
+	}
+	
+	/*
+	 * Matches lines that start with a column tag.
+	 */
+	private boolean matchTableColTag(String line){
+		if(line.startsWith("<td>") || line.startsWith("</td>")){
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * Matches lines that start with a row tag.
+	 */
+	private boolean matchTableRowTag(String line){
+		if(line.startsWith("<tr>") || line.startsWith("</tr>")){
+			return true;
+		}
+		return false;
 	}
 
 }

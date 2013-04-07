@@ -39,10 +39,10 @@ public class WellFormedOpenDialog {
 	 * @param frame
 	 * @param insert
 	 */
-	protected WellFormedOpenDialog(JFrame frame, JMenu insert){
+	public WellFormedOpenDialog(EditorGUI frame){
 		
 		//Initialize instance variables
-		this.item = insert;
+		this.item = frame.getInsertMenu();
 		this.frame = frame;
 		this.dialog = new JDialog(frame, "File Not Well Formed", 
 				ModalityType.APPLICATION_MODAL);
