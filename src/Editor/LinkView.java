@@ -25,10 +25,19 @@ public class LinkView {
 		String[] temp = text.split(" ");
 		
 		for(String s: temp){
-			if(s.matches("^((https?|ftp)://|(www|ftp)\\.)[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$")){
-				links.add(s);
-				alphabeticalOrder.add(s);
+			String noQuotes = "";
+			if(s.contains("\"")){
+				noQuotes = s.replaceAll("\"", "");
 			}
+			
+			if(noQuotes.matches("^((https?|ftp)://|(www|ftp)\\.)[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$")){
+				links.add(noQuotes);
+				alphabeticalOrder.add(noQuotes);
+			}
+		}
+		
+		for(String p: links){
+			System.out.println(p);
 		}
 	}
 	

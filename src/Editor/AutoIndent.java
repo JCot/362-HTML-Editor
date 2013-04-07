@@ -45,7 +45,6 @@ public class AutoIndent {
 	 * on a line for the proper indentation level.
 	 */
 	public static String indent(String text, int line){
-		String indentLen = "";
 		String temp;
 		String oneLevel = "";
 		int numWhiteSpace = 0;
@@ -68,10 +67,10 @@ public class AutoIndent {
 
 			else{
 				if(temp.equals("\t")){
-					indentLen += "\t";
+					indent += "\t";
 				}
 				else{
-					indentLen += " ";
+					indent += " ";
 				}
 
 				numWhiteSpace += 1;
@@ -81,19 +80,19 @@ public class AutoIndent {
 		if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
 
 			if(!prevLine.contains("/")){
-				indentLen += oneLevel;
+				indent += oneLevel;
 			}
 			
 			else{
-				indentLen = "";
+				indent = "";
 				
 				for(int j = 1; j <= numWhiteSpace - indentSize; j++){
-					indentLen += " ";
+					indent += " ";
 				}
 			}
 		}
 				
-		return indentLen;
+		return indent;
 	}
 
 }
