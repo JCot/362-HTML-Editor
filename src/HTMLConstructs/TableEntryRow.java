@@ -10,6 +10,12 @@ package HTMLConstructs;
 public class TableEntryRow extends HTMLConstruct{
 	private int cols;
 	
+	public TableEntryRow() {
+		cols = 1;
+		super.startTag = "<tr>";
+		super.endTag = "</tr>";
+	}
+	
 	public TableEntryRow( int cols ) {
 		this.cols = cols;
 		super.startTag = "<tr>";

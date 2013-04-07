@@ -10,6 +10,12 @@ package HTMLConstructs;
 public class DefineList extends HTMLConstruct{
 	private int size;
 	
+	public DefineList(){
+		size = 1;
+		super.startTag = "<dl>";
+		super.endTag = "</dl>";
+	}
+	
 	public DefineList( int size ){
 		this.size = size;
 		super.startTag = "<dl>";

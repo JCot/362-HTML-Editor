@@ -11,6 +11,13 @@ public class Table extends HTMLConstruct{
 	private int rows;
 	private int cols;
 	
+	public Table() {
+		rows = 1;
+		cols = 1;
+		super.startTag = "<table>";
+		super.endTag = "</table>";
+	}
+	
 	public Table( int rows, int cols ) {
 		this.rows = rows;
 		this.cols = cols;

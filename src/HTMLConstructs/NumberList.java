@@ -10,6 +10,12 @@ package HTMLConstructs;
 public class NumberList extends HTMLConstruct{
 	private int size;
 	
+	public NumberList() {
+		size = 1;
+		super.startTag = "<ol>";
+		super.endTag = "</ol>";
+	}
+	
 	public NumberList( int size ) {
 		this.size = size;
 		super.startTag = "<ol>";
