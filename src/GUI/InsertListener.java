@@ -15,6 +15,8 @@ import javax.swing.JViewport;
 
 import Command.Command;
 import Command.InsertCommand;
+import Command.InsertListCommand;
+import Command.InsertTableCommand;
 import HTMLConstructs.HTMLConstruct;
 
 /**
@@ -23,14 +25,15 @@ import HTMLConstructs.HTMLConstruct;
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class InsertListener implements ActionListener {
-	
-	/** Integer representing the current number of tabs open */
-	private int numTabs;
+	/** Reference to the JTabbedPane */
+	private JTabbedPane tab;
 	
 	/** Concrete Command object that will insert the tag when called */
 	private Command insert;
 
-	private JFrame frame;
+	private EditorGUI frame;
+
+	private HTMLConstruct tag;
 	
 	/**
 	 * Constructor for an InsertListener, which inserts an HTML construct.
@@ -39,9 +42,9 @@ public class InsertListener implements ActionListener {
 	 * @param tag    HTMLConstruct represents a tag
 	 * @param tab    JTabbedPane reference
 	 */
-	protected InsertListener(HTMLConstruct tag, JTabbedPane tab, JFrame frame) {
-		this.numTabs = tab.getComponentCount();
-		this.insert = new InsertCommand(tag, tab);
+	protected InsertListener(HTMLConstruct tag, JTabbedPane tab, EditorGUI frame) {
+		this.tab = tab;
+		this.tag = tag;
 		this.frame = frame;
 	}
 
@@ -54,13 +57,20 @@ public class InsertListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (this.numTabs != 0){
+		
+		if (this.tab.getTabCount() != 0){
+		
 			if (arg0.getActionCommand().equals("List")){
-				
+				Command insert = new InsertListCommand(this.tag, this.tab,
+						this.frame);
+				insert.execute();
 			} else if (arg0.getActionCommand().equals("Table")){
-				
+				Command insert = new InsertTableCommand(this.tag, this.tab,
+						this.frame);
+				insert.execute();
 			} else {
-				this.insert.execute();
+				Command insert = new InsertCommand(tag, tab);
+				insert.execute();
 			}
 			
 		}

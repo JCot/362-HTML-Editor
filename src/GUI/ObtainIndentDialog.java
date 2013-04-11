@@ -82,7 +82,7 @@ public class ObtainIndentDialog implements ActionListener{
 		this.dialog.setVisible(true);
 	}
 
-	/**
+    /**
 	 * @param arg0
 	 */
 	@Override

@@ -20,7 +20,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 
+import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
+import HTMLConstructs.Table;
 
 /**
  * A Dialog for obtaining the user's desired insertion of table rows and columns
@@ -53,13 +55,12 @@ public class ObtainTableDialog implements ActionListener {
 	/**
 	 * Constructor for ObtainTableDialog, which will display the dialog
 	 * asking for the number of table rows/columns to insert into the buffer.
-	 * Protected to ensure that only the GUI Package can construct one.
 	 * 
 	 * @param frame    EditorGUI reference
 	 * @param tab    JTabbedPane reference
 	 * @param construct    Stores the HTMLConstruct
 	 */
-	protected ObtainTableDialog(EditorGUI frame, JTabbedPane tab, 
+	public ObtainTableDialog(EditorGUI frame, JTabbedPane tab, 
 			HTMLConstruct construct){
 		
 		//Create the dialog
@@ -131,7 +132,6 @@ public class ObtainTableDialog implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		HTMLConstruct tag = this.construct;
 		JTabbedPane tab = this.tab;
 		JScrollPane scroll = (JScrollPane) tab.getSelectedComponent();
 		if (scroll != null){
@@ -142,9 +142,10 @@ public class ObtainTableDialog implements ActionListener {
 			if (rowString.matches("\\d+") && colString.matches("\\d+")){
 				int row = Integer.parseInt(rowString);
 				int col = Integer.parseInt(colString);
-				String insertTag = tag.insertTable(row, col);
-				if (this.gui.getAutoIndent()){
-					String indent = this.gui.getIndent();
+				this.construct = new Table(row, col);
+				String insertTag = this.construct.insert();
+				if (AutoIndent.isOn){
+					String indent = AutoIndent.indent;
 					insertTag = indentTableComponents(insertTag, indent);
 				}
 				int position = text.getCaretPosition();

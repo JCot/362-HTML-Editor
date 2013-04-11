@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 
+import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
 
 /**
@@ -51,13 +52,12 @@ public class ObtainSizeDialog implements ActionListener{
 	/**
 	 * Constructor for ObtainSizeDialog, which will display the dialog
 	 * asking for the number of list entries to insert into the buffer.
-	 * Protected to ensure that only the GUI Package can construct one.
 	 * 
 	 * @param frame    EditorGUI reference
 	 * @param tab    JTabbedPane reference
 	 * @param construct    Stores the HTMLConstruct
 	 */
-	protected ObtainSizeDialog(EditorGUI frame, JTabbedPane tab, 
+	public ObtainSizeDialog(EditorGUI frame, JTabbedPane tab, 
 			HTMLConstruct construct){
 		
 		//Initialize fields and dialog frame
@@ -112,11 +112,12 @@ public class ObtainSizeDialog implements ActionListener{
 			String sizeString = this.userNumber.getText();
 			if (sizeString.matches("\\d+")){
 				int size = Integer.parseInt(sizeString);
-				String insertTag = this.construct.insertList(size);
+				this.construct.setSize(size);
+				String insertTag = this.construct.insert();
 				int position = text.getCaretPosition();
-				if(this.gui.getAutoIndent()){
+				if(AutoIndent.isOn){
 					String temp = "";
-					String indent = this.gui.getIndent();
+					String indent = AutoIndent.indent;
 					String[] lines = insertTag.split("/n");
 					for(String line : lines){
 						if (matchListEntry(line)) {

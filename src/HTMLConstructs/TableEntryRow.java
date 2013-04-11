@@ -25,11 +25,13 @@ public class TableEntryRow extends HTMLConstruct{
 	public String insert(){
 		TableEntryCol td = new TableEntryCol();
 		String temp = super.startTag;
-		while( cols > 0 ){
+		int current = this.cols;
+		while( current > 0 ){
 			temp += "\n" + td.insert();
-			cols--;
+			current--;
 		}
 		temp += "\n" + super.endTag;
+		
 		return temp;
 	}
 

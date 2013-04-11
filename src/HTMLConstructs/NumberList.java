@@ -32,4 +32,9 @@ public class NumberList extends HTMLConstruct{
 		temp += "\n" + super.endTag;
 		return temp;
 	}
+	
+	@Override
+	public void setSize(int size){
+		this.size = size;
+	}
 }

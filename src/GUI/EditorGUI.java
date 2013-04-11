@@ -135,12 +135,11 @@ public class EditorGUI extends JFrame {
 		
 		
 		//List Menus
-		/*
 		JMenu list = new JMenu("List Tags");
 		
 		JMenuItem bulletList = new JMenuItem("Bulleted List Tag");
 		HTMLConstruct bulletTag = new BulletList();
-		ActionListener bulletListener = new InsertListListener(bulletTag, this.tab, 
+		ActionListener bulletListener = new InsertListener(bulletTag, this.tab, 
 				this);
 		bulletList.addActionListener(bulletListener);
 		bulletList.setActionCommand("List");
@@ -148,7 +147,7 @@ public class EditorGUI extends JFrame {
 		
 		JMenuItem defineList = new JMenuItem("Defined List Tag");
 		HTMLConstruct defineTag = new DefineList();
-		ActionListener defineListener = new InsertListListener(defineTag, this.tab,
+		ActionListener defineListener = new InsertListener(defineTag, this.tab,
 				this);
 		defineList.addActionListener(defineListener);
 		defineList.setActionCommand("List");
@@ -156,7 +155,7 @@ public class EditorGUI extends JFrame {
 		
 		JMenuItem numberList = new JMenuItem("Numbered List Tag");
 		HTMLConstruct numberTag = new NumberList();
-		ActionListener numberListener = new InsertListListener(numberTag, this.tab,
+		ActionListener numberListener = new InsertListener(numberTag, this.tab,
 				this);
 		numberList.addActionListener(numberListener);
 		numberList.setActionCommand("List");
@@ -165,10 +164,11 @@ public class EditorGUI extends JFrame {
 		//Table Menu
 		JMenuItem table = new JMenuItem("Table Tag");
 		HTMLConstruct tableTag = new Table();
-		ActionListener tableListener = new InsertTableListener(this, tableTag, this.tab);
+		ActionListener tableListener = new InsertListener(tableTag, this.tab, this);
+		table.setActionCommand("Table");
 		table.addActionListener(tableListener);
 		//End tag menus
-		 */
+		 
 		
 		//Add Menus to GUI
 		file.add(newFile);
@@ -183,9 +183,9 @@ public class EditorGUI extends JFrame {
 		insert.add(font);
 		insert.add(header);
 		insert.add(html);
-		//insert.add(list);
+		insert.add(list);
 		insert.add(paragraph);
-		//insert.add(table);
+		insert.add(table);
 		insert.add(title);
 		
 		

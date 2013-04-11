@@ -32,4 +32,9 @@ public class DefineList extends HTMLConstruct{
 		temp += "\n" + endTag;
 		return temp;
 	}
+	
+	@Override
+	public void setSize(int size) {
+		this.size = size;
+	}
 }

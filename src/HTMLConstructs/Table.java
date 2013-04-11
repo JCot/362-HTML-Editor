@@ -29,9 +29,10 @@ public class Table extends HTMLConstruct{
 	public String insert(){
 		TableEntryRow tr = new TableEntryRow( cols );
 		String temp = super.startTag;
-		while( rows > 0 ){
+		int current = this.rows;
+		while( current > 0 ){
 			temp += "\n" + tr.insert();
-			rows--;
+			current--;
 		}
 		temp += "\n" + super.endTag;
 		return temp;

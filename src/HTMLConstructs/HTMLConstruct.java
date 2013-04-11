@@ -23,6 +23,14 @@ public abstract class HTMLConstruct {
 		return startTag;
 	}
 	
+	public void setSize(int size){
+		
+	}
+	
+	public void setTableSize(int row, int col){
+		
+	}
+	
 	/**public String insertList(int size){
 		return "";
 	}
