@@ -167,7 +167,63 @@ public class EditorGUI extends JFrame {
 		ActionListener tableListener = new InsertListener(tableTag, this.tab, this);
 		table.setActionCommand("Table");
 		table.addActionListener(tableListener);
+		
+		//Header Menus
+		
+		JMenu hTags = new JMenu("H Tags");
+		
+		JMenuItem h1 = new JMenuItem("H1 Tag");
+		HTMLConstruct h1Tag = new Heading1();
+		ActionListener h1Listener = new InsertListener(h1Tag, this.tab, this);
+		h1.addActionListener(h1Listener);
+		hTags.add(h1);
+		
+		JMenuItem h2 = new JMenuItem("H2 Tag");
+		HTMLConstruct h2Tag = new Heading2();
+		ActionListener h2Listener = new InsertListener(h2Tag, this.tab, this);
+		h2.addActionListener(h2Listener);
+		hTags.add(h2);
+		
+		JMenuItem h3 = new JMenuItem("H3 Tag");
+		HTMLConstruct h3Tag = new Heading3();
+		ActionListener h3Listener = new InsertListener(h3Tag, this.tab, this);
+		h3.addActionListener(h3Listener);
+		hTags.add(h3);
+		
+		JMenuItem h4 = new JMenuItem("H4 Tag");
+		HTMLConstruct h4Tag = new Heading4();
+		ActionListener h4Listener = new InsertListener(h4Tag, this.tab, this);
+		h4.addActionListener(h4Listener);
+		hTags.add(h4);
+		
+		JMenuItem h5 = new JMenuItem("H5 Tag");
+		HTMLConstruct h5Tag = new Heading5();
+		ActionListener h5Listener = new InsertListener(h5Tag, this.tab, this);
+		h5.addActionListener(h5Listener);
+		hTags.add(h5);
+		
+		JMenuItem h6 = new JMenuItem("H6 Tag");
+		HTMLConstruct h6Tag = new Heading6();
+		ActionListener h6Listener = new InsertListener(h6Tag, this.tab, this);
+		h6.addActionListener(h6Listener);
+		hTags.add(h6);
+		
+		//IMG tag
+		JMenuItem img = new JMenuItem ("Img Tag");
+		HTMLConstruct imgTag = new Image();
+		ActionListener imgListener = new InsertListener(imgTag, this.tab, this);
+		img.setActionCommand("Img");
+		img.addActionListener(imgListener);
+		
+		//'a' tag
+		JMenuItem link = new JMenuItem ("'A' Tag");
+		HTMLConstruct aTag = new Link();
+		ActionListener aListener = new InsertListener(aTag, this.tab, this);
+		link.setActionCommand("A");
+		link.addActionListener(aListener);
 		//End tag menus
+		
+		
 		 
 		
 		//Add Menus to GUI
@@ -178,11 +234,14 @@ public class EditorGUI extends JFrame {
 		options.add(autoIndent);
 		options.add(indent);
 		
+		insert.add(link);
 		insert.add(body);
 		insert.add(div);
 		insert.add(font);
+		insert.add(hTags);
 		insert.add(header);
 		insert.add(html);
+		insert.add(img);
 		insert.add(list);
 		insert.add(paragraph);
 		insert.add(table);

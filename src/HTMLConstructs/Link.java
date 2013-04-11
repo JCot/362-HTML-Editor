@@ -10,6 +10,7 @@ package HTMLConstructs;
 public class Link extends HTMLConstruct{
 	private String url;
 	private String fill;
+	private String text;
 	
 	public Link(){
 		url = "http://www.google.com";
@@ -18,16 +19,17 @@ public class Link extends HTMLConstruct{
 		super.endTag = "</a>";
 	}
 	
-	public Link( String url ){
+	public Link( String url, String text ){
 		this.url = url;
 		fill = "href = \"" + url + "\"";
+		this.text = text;
 		super.startTag = "<a " + fill + " >";
 		super.endTag = "</a>";
 	}
 	
 	public String insert(){
 		String temp = startTag;
-		temp += "\n\n" + endTag;
+		temp += text + "\n\n" + endTag;
 		return temp;
 	}
 	

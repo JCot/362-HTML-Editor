@@ -15,8 +15,7 @@ import javax.swing.JViewport;
 
 import Command.Command;
 import Command.InsertCommand;
-import Command.InsertListCommand;
-import Command.InsertTableCommand;
+import Command.InsertWithDialogCommand;
 import HTMLConstructs.HTMLConstruct;
 
 /**
@@ -61,12 +60,20 @@ public class InsertListener implements ActionListener {
 		if (this.tab.getTabCount() != 0){
 		
 			if (arg0.getActionCommand().equals("List")){
-				Command insert = new InsertListCommand(this.tag, this.tab,
-						this.frame);
+				Command insert = new InsertWithDialogCommand(this.tag, this.tab,
+						this.frame, "List");
 				insert.execute();
 			} else if (arg0.getActionCommand().equals("Table")){
-				Command insert = new InsertTableCommand(this.tag, this.tab,
-						this.frame);
+				Command insert = new InsertWithDialogCommand(this.tag, this.tab,
+						this.frame, "Table");
+				insert.execute();
+			} else if (arg0.getActionCommand().equals("Img")) {
+				Command insert = new InsertWithDialogCommand(this.tag, this.tab,
+						this.frame, "Img");
+				insert.execute();
+			} else if (arg0.getActionCommand().equals("A")){
+				Command insert = new InsertWithDialogCommand(this.tag, this.tab,
+						this.frame, "A");
 				insert.execute();
 			} else {
 				Command insert = new InsertCommand(tag, tab);

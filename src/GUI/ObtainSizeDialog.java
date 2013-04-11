@@ -118,11 +118,13 @@ public class ObtainSizeDialog implements ActionListener{
 				if(AutoIndent.isOn){
 					String temp = "";
 					String indent = AutoIndent.indent;
-					String[] lines = insertTag.split("/n");
+					String[] lines = insertTag.split("\n");
 					for(String line : lines){
-						if (matchListEntry(line)) {
+						
+						if (this.matchListEntry(line)) {
+							
 							temp += (indent + line + "\n");
-						} else if (matchListEntryDef(line)){
+						} else if (this.matchListEntryDef(line)){
 							temp += (indent + indent + line + "\n");
 						} else {
 							temp += line + "\n";
