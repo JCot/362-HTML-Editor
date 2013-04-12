@@ -117,7 +117,7 @@ public class ObtainSizeDialog implements ActionListener{
 				int position = text.getCaretPosition();
 				if(AutoIndent.isOn){
 					String temp = "";
-					String indent = AutoIndent.indent;
+					String indent = AutoIndent.oneLevel;
 					String[] lines = insertTag.split("\n");
 					for(String line : lines){
 						

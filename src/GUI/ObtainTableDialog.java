@@ -145,7 +145,7 @@ public class ObtainTableDialog implements ActionListener {
 				this.construct = new Table(row, col);
 				String insertTag = this.construct.insert();
 				if (AutoIndent.isOn){
-					String indent = AutoIndent.indent;
+					String indent = AutoIndent.oneLevel;
 					insertTag = indentTableComponents(insertTag, indent);
 				}
 				int position = text.getCaretPosition();

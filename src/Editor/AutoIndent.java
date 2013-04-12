@@ -14,7 +14,7 @@ public class AutoIndent {
 	public static int indentSize;
 	
 	/** String representing the current indentation to insert for Auto-Indent */
-	public static String indent = "";
+	public static String oneLevel;
 	
 	/** Boolean value denoting user's preference for auto-wrap */
 	public static boolean isOn = false;
@@ -46,38 +46,40 @@ public class AutoIndent {
 	 */
 	public static String indent(String text, int line){
 		String temp;
-		String oneLevel = "";
+		oneLevel = "";
+		String indent = "";
 		int numWhiteSpace = 0;
 		char tempChar;
 		String[] tempText = text.split("\n");
-		String prevLine = tempText[line-1];
+		String prevLine = tempText[line - 1];
 		
 		for(int i = 1; i <= indentSize; i++){
 			oneLevel += " ";
 		}
 
 		for(int i = 0; i <= prevLine.length() - 1; i++){
+			System.out.println(i);
 
 			tempChar = prevLine.charAt(i);
 			temp = Character.toString(tempChar);
 
-			if(temp.matches("[\\S]")){
+			if(temp.matches("\\S")){
 				break;
 			}
 
 			else{
-				if(temp.equals("\t")){
-					indent += "\t";
-				}
-				else{
-					indent += " ";
-				}
+				indent += " ";
 
 				numWhiteSpace += 1;
 			}
 		}
+		
+		System.out.println(prevLine);
+		System.out.println(oneLevel + "b");
+		System.out.println(indent + "a");
 
 		if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
+			System.out.println("Hi");
 
 			if(!prevLine.contains("/")){
 				indent += oneLevel;

@@ -11,30 +11,30 @@ public class AutoIndentTest extends TestCase {
 		auto = new AutoIndent();
 	}
 	
-	public void testNormaLine(){
+	public void testNormalLine(){
 		auto.indentSize = 4;
-		String result = auto.indent("    Code", 0);
-		assertEquals(result.length(), 4);
+		String result = auto.indent("    Code", 1);
+		assertEquals(4, result.length());
 		assertEquals("    ", result);
 	}
 	
 	public void testStartTag(){
 		auto.indentSize = 4;
-		String result = auto.indent("    <head>", 0);
+		String result = auto.indent("    <head>", 1);
 		assertEquals(8, result.length());
 		assertEquals("        ", result);
 	}
 	
 	public void testEndTag(){
 		auto.indentSize = 4;
-		String result = auto.indent("        </head>", 0);
+		String result = auto.indent("        </head>", 1);
 		assertEquals(4, result.length());
 		assertEquals("    ", result);
 	}
 	
 	public void testOddIndentEndTag(){
 		auto.indentSize = 4;
-		String result = auto.indent("       </head>", 0);
+		String result = auto.indent("       </head>", 1);
 		assertEquals(3, result.length());
 		assertEquals("   ", result);
 	}
