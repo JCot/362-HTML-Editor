@@ -16,8 +16,9 @@ public class DefineList extends HTMLConstruct{
 		super.endTag = "</dl>";
 	}
 	
-	public DefineList( int size ){
+	public DefineList( HTMLConstruct parent, int size ){
 		this.size = size;
+		super.parent = parent;
 		super.startTag = "<dl>";
 		super.endTag = "</dl>";
 	}

@@ -8,23 +8,27 @@ import java.util.ArrayList;
  * @author Isaac Kunkel
  * This is a general Composite class for nestin tags inside one another.
  */
-public class HTMLSubConstruct extends HTMLConstruct{
-	ArrayList<HTMLConstruct> list = new ArrayList<HTMLConstruct>();
+public class HTMLComposite extends HTMLConstruct{
+	public ArrayList<HTMLConstruct> children = new ArrayList<HTMLConstruct>();
+	
+	public HTMLComposite(){
+		
+	}
 	
 	public String insert(){
 		String temp = "";
-		for( int i = 0 ; i < list.size() ; i++ ){
-			HTMLConstruct c = list.get(i);
+		for( int i = 0 ; i < children.size() ; i++ ){
+			HTMLConstruct c = children.get(i);
 			temp += c.insert() + "\n";
 		}
 		return temp;
 	}
 	
 	public void add( HTMLConstruct c ){
-		list.add( c );
+		children.add( c );
 	}
 	
 	public void remove( HTMLConstruct c ){
-		list.remove( c );
+		children.remove( c );
 	}
 }
