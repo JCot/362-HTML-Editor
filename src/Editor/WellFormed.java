@@ -13,9 +13,6 @@ import java.util.*;
  */
 public class WellFormed {
 	
-	int numOpenTags = 0;
-	int numCloseTags = 0;
-	
 	public WellFormed(){}
 	
 	/**

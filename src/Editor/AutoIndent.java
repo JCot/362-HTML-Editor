@@ -19,14 +19,6 @@ public class AutoIndent {
 	/** Boolean value denoting user's preference for auto-wrap */
 	public static boolean isOn = false;
 	
-	public static String indent(int indentLength){
-		String temp = "";
-		for(int i = 1; i <= indentLength; i++){
-			temp = temp + " ";
-		}
-		return temp;
-	}
-	
 	/**
 	 * Provides the indentation for the current line by
 	 * taking the previous line and counting the leading white

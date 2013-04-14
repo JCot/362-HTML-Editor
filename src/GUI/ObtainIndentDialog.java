@@ -91,7 +91,6 @@ public class ObtainIndentDialog implements ActionListener{
 		if (sizeString.matches("\\d+")){
 			int spaces = Integer.parseInt(sizeString);
 			AutoIndent.indentSize = spaces;
-			AutoIndent.oneLevel = AutoIndent.indent(spaces);
 			this.dialog.dispose();
 		}
 		
