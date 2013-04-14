@@ -1,10 +1,8 @@
-/**
- * 
- */
 package HTMLConstructs;
 
 /**
  * @author Isaac Kunkel
+ * @author Matthew Waite
  * Holds a string of text which can be inside any tag.
  */
 public class Text extends HTMLConstruct{
