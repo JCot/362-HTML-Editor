@@ -35,7 +35,7 @@ public class IndentCommand implements Command{
 		String selection = text.getSelectedText();
 		int position = text.getCaretPosition();
 		text.cut();
-		String indent = AutoIndent.indent;
+		String indent = AutoIndent.oneLevel;
 		if (selection != null){
 			String indented = indentSelection(selection, indent);
 			text.insert(indented, position);

@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
+
+import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
 
 /**
@@ -50,4 +52,5 @@ public class InsertCommand implements Command {
 			text.insert(insertTag, position);
 		}
 	}
+	
 }
