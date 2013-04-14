@@ -14,4 +14,10 @@ public class DefineListDef extends HTMLConstruct{
 		super.endTag = "</dd>";
 	}
 	
+	public DefineListDef( HTMLConstruct parent ){
+		super.parent = parent;
+		super.startTag = "<dd>";
+		super.endTag = "</dd>";
+	}
+	
 }

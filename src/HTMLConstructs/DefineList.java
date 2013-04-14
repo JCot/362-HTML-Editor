@@ -24,10 +24,11 @@ public class DefineList extends HTMLConstruct{
 	}
 	
 	public String insert(){
-		DefineListEntry dt = new DefineListEntry();
+		DefineListEntry dt = new DefineListEntry( this );
 		String temp = startTag;
 		while( size > 0 ){
 			temp += "\n" + dt.insert();
+			children.add( dt );
 			size--;
 		}
 		temp += "\n" + endTag;

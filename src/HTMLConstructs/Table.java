@@ -18,16 +18,17 @@ public class Table extends HTMLConstruct{
 		super.endTag = "</table>";
 	}
 	
-	public Table( int rows, int cols ) {
+	public Table( HTMLConstruct parent, int rows, int cols ) {
 		this.rows = rows;
 		this.cols = cols;
+		super.parent = parent;
 		super.startTag = "<table>";
 		super.endTag = "</table>";
 	}
 	
 	@Override
 	public String insert(){
-		TableEntryRow tr = new TableEntryRow( cols );
+		TableEntryRow tr = new TableEntryRow( this, cols );
 		String temp = super.startTag;
 		int current = this.rows;
 		while( current > 0 ){

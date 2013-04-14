@@ -13,7 +13,7 @@ public class Image extends HTMLConstruct{
 	
 	public Image() {
 		url = "http://www.google.com";
-		String alt = "There is no spoon";
+		String alt = "There is no spoon.";
 		int height = 100;
 		int width = 100;
 		fill = "src = \"" + url + "\" alt = \"" + alt + "\" height = \"" + height + "\" width = \"" + width + "\"";
@@ -21,14 +21,16 @@ public class Image extends HTMLConstruct{
 		super.endTag = "<img>";
 	}
 	
-	public Image( String url ){
+	public Image( HTMLConstruct parent, String url ){
+		super.parent = parent;
 		this.url = url;
-		fill = "src = \"" + url + "\"" + ">";
-		super.startTag = "<img " + fill;
+		fill = "src = \"" + url + "\"" + " alt = \"This picture is unavailable.\"";
+		super.startTag = "<img " + fill + " >";
 		super.endTag = "<img>";
 	}
 	
-	public Image( String url, String alt, int height, int width ) {
+	public Image( HTMLConstruct parent, String url, String alt, int height, int width ){
+		super.parent = parent;
 		this.url = url;
 		fill = "src = \"" + url + "\" alt = \"" + alt + "\" height = \"" + height + "\" width = \"" + width + "\"";
 		super.startTag = "<img " + fill + " >";

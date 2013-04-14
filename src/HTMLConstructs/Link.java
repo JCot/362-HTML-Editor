@@ -19,7 +19,8 @@ public class Link extends HTMLConstruct{
 		super.endTag = "</a>";
 	}
 	
-	public Link( String url, String text ){
+	public Link( HTMLConstruct parent, String url, String text ){
+		super.parent = parent;
 		this.url = url;
 		fill = "href = \"" + url + "\"";
 		this.text = text;

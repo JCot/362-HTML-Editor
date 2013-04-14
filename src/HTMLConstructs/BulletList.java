@@ -16,8 +16,9 @@ public class BulletList extends HTMLConstruct{
 		super.endTag = "</ul>";
 	}
 	
-	public BulletList( int size ) {
+	public BulletList( HTMLConstruct parent, int size ){
 		this.size = size;
+		super.parent = parent;
 		super.startTag = "<ul>";
 		super.endTag = "</ul>";
 	}
