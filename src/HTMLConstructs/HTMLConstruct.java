@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * This is the Component abstract superclass for all HTML tags.
  */
 public abstract class HTMLConstruct {
-	protected boolean expand = true;
+	public boolean expand = true;
 	protected String startTag;
 	protected String endTag;
-	public ArrayList<HTMLConstruct> children = new ArrayList<HTMLConstruct>();
+	protected ArrayList<HTMLConstruct> children = new ArrayList<HTMLConstruct>();
 	protected HTMLConstruct parent;
 	
 	public HTMLConstruct(){}
@@ -26,6 +26,10 @@ public abstract class HTMLConstruct {
 		String temp = "";
 		temp += startTag + "\n\n" + endTag;
 		return temp;
+	}
+	
+	public void expand(){
+		expand = true;
 	}
 	
 	public String collapse(){

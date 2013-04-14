@@ -16,8 +16,9 @@ public class NumberList extends HTMLConstruct{
 		super.endTag = "</ol>";
 	}
 	
-	public NumberList( int size ) {
+	public NumberList( HTMLConstruct parent, int size ) {
 		this.size = size;
+		super.parent = parent;
 		super.startTag = "<ol>";
 		super.endTag = "</ol>";
 	}
@@ -36,5 +37,12 @@ public class NumberList extends HTMLConstruct{
 	@Override
 	public void setSize(int size){
 		this.size = size;
+	}
+	
+	public boolean equals( HTMLConstruct c ){
+		if( size == c.size && super.equals( c ) ){
+			return true;
+		}
+		return false;
 	}
 }

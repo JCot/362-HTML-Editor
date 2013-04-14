@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * @author Isaac Kunkel
- * This is a general Composite class for nestin tags inside one another.
+ * This is a general Composite class for nesting tags inside one another.
  */
 public class HTMLComposite extends HTMLConstruct{
 	public ArrayList<HTMLConstruct> children = new ArrayList<HTMLConstruct>();

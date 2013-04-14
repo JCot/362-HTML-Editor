@@ -16,8 +16,9 @@ public class TableEntryRow extends HTMLConstruct{
 		super.endTag = "</tr>";
 	}
 	
-	public TableEntryRow( int cols ) {
+	public TableEntryRow( HTMLConstruct parent, int cols ) {
 		this.cols = cols;
+		super.parent = parent;
 		super.startTag = "<tr>";
 		super.endTag = "</tr>";
 	}
