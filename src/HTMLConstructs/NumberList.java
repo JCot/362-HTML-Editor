@@ -5,6 +5,7 @@ package HTMLConstructs;
 
 /**
  * @author Isaac Kunkel
+ * @author Matthew Waite
  * Holds the tags and structure for a numbered list.
  */
 public class NumberList extends HTMLConstruct{
@@ -40,9 +41,21 @@ public class NumberList extends HTMLConstruct{
 	}
 	
 	public boolean equals( HTMLConstruct c ){
-		if( size == c.size && super.equals( c ) ){
+		try{
+			 NumberList nli = (NumberList) c;
+			 if( size == nli.size && super.equals(nli)){
+				 return true;
+			 } else {
+				 return false;
+			 }
+		}
+		catch(ClassCastException exc){
+			return false;
+		}
+		
+        /*if( size == c.size && super.equals( c ) ){
 			return true;
 		}
-		return false;
+		return false;*/
 	}
 }

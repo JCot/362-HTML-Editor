@@ -1,10 +1,8 @@
-/**
- * 
- */
 package HTMLConstructs;
 
 /**
  * @author Isaac Kunkel
+ * @author Matthew Waite
  * Holds a string of text which can be inside any tag.
  */
 public class Text extends HTMLConstruct{
@@ -24,12 +22,23 @@ public class Text extends HTMLConstruct{
 	}
 	
 	public boolean equals( HTMLConstruct c ){
-		if( startTag.equals( c.startTag ) && endTag.equals( c.endTag ) ){
+		try{
+			Text t = (Text)c;
+			if( text.equals( t.text )){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		catch(ClassCastException exc){
+			return false;
+		}
+		/*if( startTag.equals( c.startTag ) && endTag.equals( c.endTag ) ){
 			if( text.equals( c.text ) ){
 				return true;
 			}
 		}
-		return false;
+		return false;*/
 	}
 
 }
