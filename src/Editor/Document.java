@@ -16,7 +16,6 @@ public class Document {
 	private String text = "";
 	private File file;
 	private WellFormed checker = new WellFormed();
-	private LinkView links = new LinkView();
 	
 	/*
 	 * Constructor for opening an existing HTML document.
@@ -44,16 +43,6 @@ public class Document {
 	
 	public String getFileName(){
 		return fileName;
-	}
-	
-	public String getOrderOfAppearanceLinks(String text){
-		links.findLinks(text);
-		return links.returnOrderofAppearance();
-	}
-	
-	public String getOrderedLinks(String text){
-		links.findLinks(text);
-		return links.returnOrdered();
 	}
 	
 	/**

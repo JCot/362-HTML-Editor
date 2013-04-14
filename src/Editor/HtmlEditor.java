@@ -7,6 +7,7 @@ import javax.swing.*;
 
 
 public class HtmlEditor {
+	private LinkViewModel links = new LinkViewModel();
 	
 	private static ArrayList<Document> docs = new ArrayList<Document>();
 	
@@ -165,36 +166,27 @@ public class HtmlEditor {
 		}
 	}
 	
-	public static String getOrderOfAppearanceLinks(File file, String text){
-		Document tempDoc = null;
-		String links = "";
-		
-		for(int i = 0; i < docs.size(); i++){
-			if(docs.get(i).getFileName().equals(file.getName())){
-				tempDoc = docs.get(i);
-				break;
-			}
-		}
-		
-		links = tempDoc.getOrderOfAppearanceLinks(text);
-		
-		return links;
+	/**
+	 * Looks through a String to find all the URL links and 
+	 * returns them in the order of appearance.
+	 * 
+	 * @param String text - the text to look through for the links
+	 * @return String links - the links found in the text
+	 */
+	public String getOrderOfAppearanceLinks(String text){
+		return links.returnOrderofAppearance(text);
 	}
 	
-	public static String getOrderedLinks(File file, String text){
-		Document tempDoc = null;
-		String links = "";
-		
-		for(int i = 0; i < docs.size(); i++){
-			if(docs.get(i).getFileName().equals(file.getName())){
-				tempDoc = docs.get(i);
-				break;
-			}
-		}
-		
-		links = tempDoc.getOrderedLinks(text);
-		
-		return links;
+	/**
+	 * Looks through a String to find all the URL links and 
+	 * returns them in alphabetical order.  Duplicates are 
+	 * not repeated.
+	 * 
+	 * @param String text - the text to look through for the links
+	 * @return String links - the links found in the text
+	 */
+	public String getOrderedLinks(String text){
+		return links.returnOrdered(text);
 	}
 
 	/**

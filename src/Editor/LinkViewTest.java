@@ -13,13 +13,12 @@ public class LinkViewTest extends TestCase{
 	
 	private String testString = "\"http://www.google.com\" asdasod aosd " +
 			"\"www.aol.com\" aosudiosjad aosijd \"https://reddit.com\"";
-	private LinkView view = new LinkView();
+	private LinkViewModel view = new LinkViewModel();
 	
 	public void testreturnOrderOfAppearance(){
 		String testString = "\"http://www.google.com\" asdasod aosd " +
 				"\"www.aol.com\" aosudiosjad aosijd \"https://reddit.com\"";
-		view.findLinks(testString);
-		String temp = view.returnOrderofAppearance();
+		String temp = view.returnOrderofAppearance(testString);
 		assertEquals("http://www.google.com\nwww.aol.com\n" +
 				"https://reddit.com\n", temp);
 	}
@@ -27,8 +26,7 @@ public class LinkViewTest extends TestCase{
 	public void testReturnOrdered(){
 		String testString = "\"http://www.google.com\" asdasod aosd " +
 				"\"www.aol.com\" aosudiosjad aosijd \"https://reddit.com\"";
-		view.findLinks(testString);
-		String temp = view.returnOrdered();
+		String temp = view.returnOrdered(testString);
 		assertEquals("http://www.google.com: 1\nhttps://reddit.com: 1" +
 				"\nwww.aol.com: 1\n",
 				temp);
@@ -36,8 +34,7 @@ public class LinkViewTest extends TestCase{
 	
 	public void testDuplicatesOrdered(){
 		testString += " \"www.aol.com\"";
-		view.findLinks(testString);
-		String temp = view.returnOrdered();
+		String temp = view.returnOrdered(testString);
 		assertEquals("http://www.google.com: 1\nhttps://reddit.com: 1" +
 				"\nwww.aol.com: 2\n", temp);
 	}
