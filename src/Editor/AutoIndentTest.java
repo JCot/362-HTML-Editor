@@ -25,17 +25,4 @@ public class AutoIndentTest extends TestCase {
 		assertEquals("        ", result);
 	}
 	
-	public void testEndTag(){
-		auto.indentSize = 4;
-		String result = auto.indent("        </head>", 1);
-		assertEquals(4, result.length());
-		assertEquals("    ", result);
-	}
-	
-	public void testOddIndentEndTag(){
-		auto.indentSize = 4;
-		String result = auto.indent("       </head>", 1);
-		assertEquals(3, result.length());
-		assertEquals("   ", result);
-	}
 }

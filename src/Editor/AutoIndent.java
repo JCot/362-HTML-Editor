@@ -43,14 +43,21 @@ public class AutoIndent {
 		int numWhiteSpace = 0;
 		char tempChar;
 		String[] tempText = text.split("\n");
-		String prevLine = tempText[line - 1];
+		String prevLine;
+		
+		if(line == 0){
+			prevLine = tempText[0];
+		}
+		
+		else{
+			prevLine = tempText[line - 1];
+		}
 		
 		for(int i = 1; i <= indentSize; i++){
 			oneLevel += " ";
 		}
 
 		for(int i = 0; i <= prevLine.length() - 1; i++){
-			System.out.println(i);
 
 			tempChar = prevLine.charAt(i);
 			temp = Character.toString(tempChar);
@@ -65,26 +72,14 @@ public class AutoIndent {
 				numWhiteSpace += 1;
 			}
 		}
-		
-		System.out.println(prevLine);
-		System.out.println(oneLevel + "b");
-		System.out.println(indent + "a");
 
 		if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
-			System.out.println("Hi");
 
 			if(!prevLine.contains("/")){
 				indent += oneLevel;
 			}
-			
-			else{
-				indent = "";
-				
-				for(int j = 1; j <= numWhiteSpace - indentSize; j++){
-					indent += " ";
-				}
-			}
 		}
+			
 				
 		return indent;
 	}
