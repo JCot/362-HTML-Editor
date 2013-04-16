@@ -45,6 +45,7 @@ public class IndentCommand implements Command{
 
 	}
 
+	public void undo(){}
 
 	/*
 	 * Used to indent a given selection based on the given indent.

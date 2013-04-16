@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 import Editor.AutoIndent;
+import Editor.UndoListener;
 import HTMLConstructs.*;
 
 /**
@@ -26,6 +27,8 @@ public class EditorGUI extends JFrame {
 	/** Reference to the insert menu which may be disabled */
 	private JMenu insert;
 	
+	private LinkViewGUI linkView;
+	
 	/**
 	 * Constructor for an EditorGUI object.  Creates the main GUI. 
 	 */
@@ -35,7 +38,7 @@ public class EditorGUI extends JFrame {
 		JTabbedPane tab = new JTabbedPane();
 		this.tab = tab;
 		final JFileChooser fileChooser = new JFileChooser();
-		
+		this.linkView = new LinkViewGUI(this);
 		
 		//Menu Initialization
 		JMenuBar menuBar = new JMenuBar();
@@ -223,8 +226,24 @@ public class EditorGUI extends JFrame {
 		link.addActionListener(aListener);
 		//End tag menus
 		
+		//View Mwnu
+		JMenu view = new JMenu("View");
+		JCheckBoxMenuItem linked = new JCheckBoxMenuItem("Link View");
+		ActionListener linkedListener = new LinkViewListener(linked, this);
+		linked.addActionListener(linkedListener);
 		
-		 
+		view.add(linked); 
+		
+		
+		
+		//Edit Menu
+		JMenu edit = new JMenu("Edit");
+		JMenuItem undo = new JMenuItem("Undo");
+		ActionListener undoListener = new UndoListener(this);
+		undo.addActionListener(undoListener);
+		edit.add(undo);
+		
+		
 		
 		//Add Menus to GUI
 		file.add(newFile);
@@ -250,8 +269,10 @@ public class EditorGUI extends JFrame {
 		
 		//End add tag menus
 		menuBar.add(file);
+		menuBar.add(edit);
 		menuBar.add(options);
 		menuBar.add(insert);
+		menuBar.add(view);
 		
 		;
 		
@@ -283,6 +304,10 @@ public class EditorGUI extends JFrame {
 	 */
 	public JMenu getInsertMenu() {
 		return this.insert;
+	}
+	
+	public LinkViewGUI getLinkView(){
+		return this.linkView;
 	}
 	
 }

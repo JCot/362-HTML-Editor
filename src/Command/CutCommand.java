@@ -1,24 +1,22 @@
-package Command;
-
 /*
- * InsertCommand.java
+ * CutCommand.java
  * 
  */
+package Command;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
-import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
 
 /**
- * Concrete command for inserting a basic HTML tag.
+ * Enter description here.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class InsertCommand implements Command {
+public class CutCommand implements Command {
 
 	/** HTMLConstruct to insert into the JTextArea */
 	private HTMLConstruct tag;
@@ -30,6 +28,7 @@ public class InsertCommand implements Command {
 	
 	private int prevCursor;
 	
+	
 	/**
 	 * Constructor for an InsertCommand.  It requires the tag to be inserted 
 	 * and the current tab where the text buffer is located, and when executed
@@ -38,42 +37,32 @@ public class InsertCommand implements Command {
 	 * @param tag    HTMLConstruct representing the HTML tag
 	 * @param tab    JTabbedPane containing the current text buffer
 	 */
-	public InsertCommand(HTMLConstruct tag, JTabbedPane tab) {
+	public CutCommand(HTMLConstruct tag, JTabbedPane tab, String prevString) {
 		this.tag = tag;
 		this.tab = tab;
 	}
 	
 	/**
-	 * Inserts the HTML tag into the text buffer.
+	 * 
 	 */
+	@Override
 	public void execute() {
 		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
 		if (scroll != null){
 			JViewport view = (JViewport) scroll.getComponent(0);
 			JTextArea text = (JTextArea) view.getComponent(0);
-			String insertTag = this.tag.insert();
-			this.prevText = text.getText();
-			int position = text.getCaretPosition();
-			this.prevCursor = position;
-			text.insert(insertTag, position);
 		}
 	}
+
+
 
 	/**
 	 * 
 	 */
 	@Override
 	public void undo() {
-		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			String replace = this.prevText;
-			int prevPosition = this.prevCursor;
-			text.setText(null);
-			text.insert(replace, 0);
-			text.setCaretPosition(prevPosition);
-		}
+		// TODO Auto-generated method stub
+		
 	}
-	
+
 }

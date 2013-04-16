@@ -44,7 +44,6 @@ public class NewCommand implements Command{
 	 */
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
 		JTextArea text = new JTextArea();
 		KeyListener enter = new EnterListener(this.frame, this.tab);
 		text.addKeyListener(enter);
@@ -52,8 +51,19 @@ public class NewCommand implements Command{
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		this.tab.add("Untitled", scroll);
+		UndoManager manager = UndoManager.getInstance();
+		manager.addNewBuffer();
 		File file = new File("Untitled");
 		HtmlEditor.openFile(file);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

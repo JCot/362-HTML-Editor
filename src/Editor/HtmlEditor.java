@@ -7,7 +7,8 @@ import javax.swing.*;
 
 
 public class HtmlEditor {
-	private LinkViewModel links = new LinkViewModel();
+	
+	private static LinkViewModel links = new LinkViewModel();
 	
 	private static ArrayList<Document> docs = new ArrayList<Document>();
 	
@@ -173,7 +174,7 @@ public class HtmlEditor {
 	 * @param String text - the text to look through for the links
 	 * @return String links - the links found in the text
 	 */
-	public String getOrderOfAppearanceLinks(String text){
+	public static String getOrderOfAppearanceLinks(String text){
 		return links.returnOrderofAppearance(text);
 	}
 	
@@ -185,7 +186,7 @@ public class HtmlEditor {
 	 * @param String text - the text to look through for the links
 	 * @return String links - the links found in the text
 	 */
-	public String getOrderedLinks(String text){
+	public static String getOrderedLinks(String text){
 		return links.returnOrdered(text);
 	}
 

@@ -71,6 +71,15 @@ public class OpenCommand implements Command {
 		}
 		this.tab.setVisible(true);
 	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

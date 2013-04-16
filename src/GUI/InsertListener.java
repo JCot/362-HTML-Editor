@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
+import Command.UndoManager;
 
 import Command.Command;
 import Command.InsertCommand;
@@ -58,7 +59,8 @@ public class InsertListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		if (this.tab.getTabCount() != 0){
-		
+			UndoManager manager = UndoManager.getInstance();
+			int index = this.tab.getSelectedIndex();
 			if (arg0.getActionCommand().equals("List")){
 				Command insert = new InsertWithDialogCommand(this.tag, this.tab,
 						this.frame, "List");
@@ -78,6 +80,8 @@ public class InsertListener implements ActionListener {
 			} else {
 				Command insert = new InsertCommand(tag, tab);
 				insert.execute();
+				manager.addCommand(index, insert);
+				
 			}
 			
 		}

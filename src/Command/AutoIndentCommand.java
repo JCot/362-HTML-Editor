@@ -40,6 +40,8 @@ public class AutoIndentCommand implements Command{
 		}
 		
 	}
+	
+	public void undo() {}
 
 	
 }

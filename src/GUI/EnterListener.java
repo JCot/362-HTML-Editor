@@ -48,7 +48,6 @@ public class EnterListener implements KeyListener {
 	 */
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		
 	}
 
 	/* (non-Javadoc)
