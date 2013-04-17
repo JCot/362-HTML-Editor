@@ -115,26 +115,12 @@ public class ObtainSizeDialog implements ActionListener{
 				this.construct.setSize(size);
 				String insertTag = this.construct.insert();
 				int position = text.getCaretPosition();
+				
 				if(AutoIndent.isOn){
-					String temp = "";
-					String indent = AutoIndent.oneLevel;
-					String[] lines = insertTag.split("\n");
-					
-					temp += lines[0] + "\n";
-					
-					for(int i = 1; i < lines.length; i++){
-						String tempTwo = lines[i - 1] + "\n" + lines[i];
-						lines[i] = AutoIndent.indent(tempTwo, 1) + lines[i];
-						
-						if(lines[i].contains("/") && lines[i].contains(AutoIndent.oneLevel)){
-							lines[i] = lines[i].substring(AutoIndent.indentSize);
-						}
-						
-						temp += lines[i] + "\n";
-					}
-					
-					insertTag = temp;
+					insertTag = AutoIndent.indent + insertTag;
+					insertTag = AutoIndent.indentTags(insertTag);
 				}
+				
 				text.insert(insertTag, position);
 				this.dialog.dispose();
 			}

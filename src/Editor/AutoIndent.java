@@ -19,6 +19,8 @@ public class AutoIndent {
 	/** Boolean value denoting user's preference for auto-wrap */
 	public static boolean isOn = false;
 	
+	public static String indent;
+	
 	/**
 	 * Provides the indentation for the current line by
 	 * taking the previous line and counting the leading white
@@ -39,7 +41,7 @@ public class AutoIndent {
 	public static String indent(String text, int line){
 		String temp;
 		oneLevel = "";
-		String indent = "";
+		indent = "";
 		int numWhiteSpace = 0;
 		char tempChar;
 		String[] tempText = text.split("\n");
@@ -82,6 +84,26 @@ public class AutoIndent {
 			
 				
 		return indent;
+	}
+	
+	public static String indentTags(String text){
+		String temp = "";
+		String[] lines = text.split("\n");
+		
+		for(int i = 1; i < lines.length; i++){
+			String tempTwo = lines[i - 1] + "\n" + lines[i];
+			lines[i] = AutoIndent.indent(tempTwo, 1) + lines[i];
+			
+			if(lines[i].contains("/") && lines[i].contains(AutoIndent.oneLevel)){
+				lines[i] = lines[i].substring(AutoIndent.indentSize);
+			}
+			
+			temp += lines[i] + "\n";
+		}
+		
+		temp = lines[0].trim() + "\n" + temp;
+		
+		return temp;
 	}
 
 }

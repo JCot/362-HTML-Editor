@@ -23,6 +23,8 @@ public class LinkViewModel {
 	 */
 	private void findLinks(String text){
 		String[] temp = text.split(" ");
+		links.removeAll(links);
+		alphabeticalOrder.removeAll(alphabeticalOrder);
 		
 		for(String s: temp){
 			String noQuotes = "";
