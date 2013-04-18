@@ -46,7 +46,7 @@ public class SaveCommand implements Command {
 					"well formed.")){
 				WellFormedSaveDialog save = new WellFormedSaveDialog
 						(frame, file, saveString);
-				this.menu.setEnabled(false);
+				
 			}
 			
 		} else {
@@ -55,7 +55,7 @@ public class SaveCommand implements Command {
 					"well formed.")){
 				WellFormedSaveDialog save = new WellFormedSaveDialog
 						(frame, file, saveString);	
-				this.menu.setEnabled(false);
+				
 			} else {
 				this.menu.setEnabled(true);//Enable insert functionality
 			}

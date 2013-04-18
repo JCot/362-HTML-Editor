@@ -130,7 +130,6 @@ public class LinkViewGUI implements ActionListener {
 		this.text.setText(null);
 		if (this.displayByAppearance){
 			String order = HtmlEditor.getOrderOfAppearanceLinks(string);
-			System.out.println(order + "::");
 			this.text.insert(order,0);
 		} else {
 			String order = HtmlEditor.getOrderedLinks(string);

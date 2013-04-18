@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import Editor.HtmlEditor;
@@ -38,6 +39,7 @@ public class WellFormedSaveDialog implements ActionListener {
 	/** holds the string being saved */
 	private String save;
 	
+	private EditorGUI frame;
 	/**
 	 * Constructor for the WellFormedSaveDialog.  It creates a dialog warning
 	 * the user that the current document being saved is not well formed and
@@ -47,10 +49,11 @@ public class WellFormedSaveDialog implements ActionListener {
 	 * @param file
 	 * @param save
 	 */
-	public WellFormedSaveDialog(JFrame frame, File file, String save){
+	public WellFormedSaveDialog(EditorGUI frame, File file, String save){
 		//Initialize instance variables
 		this.file = file;
 		this.save = save;
+		this.frame = frame;
 		this.dialog = new JDialog(frame, "Continue with Save?", 
 				ModalityType.APPLICATION_MODAL);
 		
@@ -85,11 +88,13 @@ public class WellFormedSaveDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		boolean fileExists = HtmlEditor.fileExists(this.file);
+		JMenu insert = this.frame.getInsertMenu();
 		if(!fileExists){
 			HtmlEditor.saveAsIllFormed(this.file, this.save);
 		} else {
 			HtmlEditor.saveIllFormed(this.file, this.save);
 		}
+		insert.setEnabled(false);
 		this.dialog.dispose();
 		
 	}

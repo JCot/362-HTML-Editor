@@ -12,6 +12,8 @@ public class HtmlEditor {
 	
 	private static ArrayList<Document> docs = new ArrayList<Document>();
 	
+	public static String clipboard = "";
+	
 	/**
 	 * Creates a document object for the given filename and then calls
 	 * open on that document object

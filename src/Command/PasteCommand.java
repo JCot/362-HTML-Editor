@@ -1,26 +1,21 @@
-package Command;
-
 /*
- * CutCommand.java
+ * PasteCommand.java
  * 
  */
+package Command;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
-import Editor.HtmlEditor;
-
-
 /**
  * Enter description here.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
-public class CutCommand implements Command {
+public class PasteCommand implements Command {
 
-	
 	/** Reference to the JTabbedPane containing the current text buffer*/
 	private JTabbedPane tab;
 	
@@ -32,7 +27,7 @@ public class CutCommand implements Command {
 	/**
 	 * @param tab    JTabbedPane containing the current text buffer
 	 */
-	public CutCommand(JTabbedPane tab) {
+	public PasteCommand(JTabbedPane tab) {
 		this.tab = tab;
 	}
 	
@@ -47,8 +42,7 @@ public class CutCommand implements Command {
 			JTextArea text = (JTextArea) view.getComponent(0);
 			this.prevText = text.getText();
 			this.prevCursor = text.getCaretPosition();
-			HtmlEditor.clipboard = text.getSelectedText();
-			text.cut();
+			text.paste();
 		}
 	}
 
@@ -68,5 +62,6 @@ public class CutCommand implements Command {
 			text.setCaretPosition(prevCursor);
 		}
 	}
+	
 
 }

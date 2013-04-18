@@ -10,7 +10,14 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
+
+import Command.Command;
+import Command.CutCommand;
+import Command.PasteCommand;
+import Command.UndoManager;
 import Editor.AutoIndent;
+import Editor.HtmlEditor;
+import Editor.OutlineGUI;
 import HTMLConstructs.*;
 
 /**
@@ -26,7 +33,7 @@ public class EditorGUI extends JFrame {
 	/** Reference to the insert menu which may be disabled */
 	private JMenu insert;
 	
-	private LinkViewGUI linkView;
+	public static LinkViewGUI linkView;
 	
 	/**
 	 * Constructor for an EditorGUI object.  Creates the main GUI. 
@@ -34,7 +41,7 @@ public class EditorGUI extends JFrame {
 	public EditorGUI() {
 		
 		//Initialize various components
-		JTabbedPane tab = new JTabbedPane();
+		final JTabbedPane tab = new JTabbedPane();
 		this.tab = tab;
 		final JFileChooser fileChooser = new JFileChooser();
 		this.linkView = new LinkViewGUI(this);
@@ -231,12 +238,51 @@ public class EditorGUI extends JFrame {
 		ActionListener linkedListener = new LinkViewListener(linked, this);
 		linked.addActionListener(linkedListener);
 		
-		view.add(linked); 
+		JMenuItem outline = new JMenuItem("Outline View");
+		outline.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				JScrollPane scroll = (JScrollPane) tab.getSelectedComponent();
+				if (scroll != null){
+					JViewport view = (JViewport) scroll.getComponent(0);
+					JTextArea text = (JTextArea) view.getComponent(0);
+					OutlineGUI gui = new OutlineGUI(tab);
+				}
+			}
+		});
 		
+		view.add(linked); 
+		view.add(outline);
 		
 		
 		//Edit Menu
 		JMenu edit = new JMenu("Edit");
+		JMenuItem cut = new JMenuItem("Cut");
+		cut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				int index = tab.getSelectedIndex();
+				Command cut = new CutCommand(tab);
+				cut.execute();
+				if(HtmlEditor.clipboard != null){
+					UndoManager.getInstance().addCommand(index, cut);
+				}
+			}
+		});
+		edit.add(cut);
+		
+		JMenuItem paste = new JMenuItem("Paste");
+		paste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				int index = tab.getSelectedIndex();
+				Command paste = new PasteCommand(tab);
+				paste.execute();
+				UndoManager.getInstance().addCommand(index, paste);
+				
+			}
+		});
+		edit.add(paste);
+		
+		
+		
 		JMenuItem undo = new JMenuItem("Undo");
 		ActionListener undoListener = new UndoListener(this);
 		undo.addActionListener(undoListener);
@@ -265,6 +311,7 @@ public class EditorGUI extends JFrame {
 		insert.add(table);
 		insert.add(title);
 		
+		this.insert = insert;
 		
 		//End add tag menus
 		menuBar.add(file);

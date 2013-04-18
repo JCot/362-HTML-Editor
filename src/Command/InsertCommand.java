@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
 import Editor.AutoIndent;
+import GUI.EditorGUI;
 import HTMLConstructs.HTMLConstruct;
 
 /**
@@ -79,6 +80,8 @@ public class InsertCommand implements Command {
 			text.setText(null);
 			text.insert(replace, 0);
 			text.setCaretPosition(prevPosition);
+			String update = text.getText();
+			EditorGUI.linkView.update(update);
 		}
 	}
 	
