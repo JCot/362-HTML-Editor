@@ -46,40 +46,43 @@ public class AutoIndent {
 		char tempChar;
 		String[] tempText = text.split("\n");
 		String prevLine;
-		
-		if(line == 0){
-			prevLine = tempText[0];
-		}
-		
-		else{
-			prevLine = tempText[line - 1];
-		}
-		
-		for(int i = 1; i <= indentSize; i++){
-			oneLevel += " ";
-		}
 
-		for(int i = 0; i <= prevLine.length() - 1; i++){
-
-			tempChar = prevLine.charAt(i);
-			temp = Character.toString(tempChar);
-
-			if(temp.matches("\\S")){
-				break;
+		if(tempText.length != 0){
+			if(line == 0){
+				prevLine = tempText[0];
 			}
 
 			else{
-				indent += " ";
-
-				numWhiteSpace += 1;
+				prevLine = tempText[line - 1];
 			}
-		}
 
-		if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
-
-			if(!prevLine.contains("/")){
-				indent += oneLevel;
+			for(int i = 1; i <= indentSize; i++){
+				oneLevel += " ";
 			}
+
+			for(int i = 0; i <= prevLine.length() - 1; i++){
+
+				tempChar = prevLine.charAt(i);
+				temp = Character.toString(tempChar);
+
+				if(temp.matches("\\S")){
+					break;
+				}
+
+				else{
+					indent += " ";
+
+					numWhiteSpace += 1;
+				}
+			}
+
+			if(prevLine.trim().matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
+
+				if(!prevLine.contains("/")){
+					indent += oneLevel;
+				}
+			}
+
 		}
 			
 				
@@ -90,13 +93,18 @@ public class AutoIndent {
 		String temp = "";
 		String[] lines = text.split("\n");
 		
+		System.out.println("Shit: " + indent.length());
+		System.out.println(lines[0]);
+		
 		for(int i = 1; i < lines.length; i++){
 			String tempTwo = lines[i - 1] + "\n" + lines[i];
 			lines[i] = AutoIndent.indent(tempTwo, 1) + lines[i];
 			
+			System.out.println(indent.length());
+			
 			if(lines[i].contains("/") && lines[i].contains(AutoIndent.oneLevel)){
+				System.out.println(i + " Fuck");
 				lines[i] = lines[i].substring(AutoIndent.indentSize);
-				AutoIndent.indent = AutoIndent.indent.substring(AutoIndent.indentSize);
 			}
 			
 			temp += lines[i] + "\n";
