@@ -52,6 +52,12 @@ public class InsertCommand implements Command {
 			JViewport view = (JViewport) scroll.getComponent(0);
 			JTextArea text = (JTextArea) view.getComponent(0);
 			String insertTag = this.tag.insert();
+			
+			if(AutoIndent.isOn){
+				insertTag = AutoIndent.indent + insertTag;
+				insertTag = AutoIndent.indentTags(insertTag);
+			}
+			
 			this.prevText = text.getText();
 			int position = text.getCaretPosition();
 			this.prevCursor = position;

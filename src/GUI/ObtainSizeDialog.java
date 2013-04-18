@@ -23,6 +23,8 @@ import javax.swing.JViewport;
 
 import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
+import Command .Command;
+import Command .InsertCommand;
 
 /**
  * A dialog for obtaining the user's desired amount of list entries to insert
@@ -105,47 +107,16 @@ public class ObtainSizeDialog implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			String sizeString = this.userNumber.getText();
-			if (sizeString.matches("\\d+")){
-				int size = Integer.parseInt(sizeString);
-				this.construct.setSize(size);
-				String insertTag = this.construct.insert();
-				int position = text.getCaretPosition();
-				
-				if(AutoIndent.isOn){
-					insertTag = AutoIndent.indent + insertTag;
-					insertTag = AutoIndent.indentTags(insertTag);
-				}
-				
-				text.insert(insertTag, position);
-				this.dialog.dispose();
-			}
-		}
-	}
-	
-	/*
-	 * Matches a line with a list entry tag
-	 */
-	private boolean matchListEntry(String line){
-		if (line.startsWith("<li>") || line.startsWith("</li>") || 
-				line.startsWith("<dt>") || line.startsWith("</dt>")){
-			return true;
-		}
-		return false;
-	}
+		String sizeString = this.userNumber.getText();
+		if (sizeString.matches("\\d+")){
+			int size = Integer.parseInt(sizeString);
+			this.construct.setSize(size);
 
-	/*
-	 * Matches a line with the list def tag
-	 */
-	private boolean matchListEntryDef(String line) {
-		if (line.startsWith("<dd>") || line.startsWith("</dd>")){
-			return true;
+			Command command = new InsertCommand(this.construct, this.tab);
+			command.execute();
+
+			this.dialog.dispose();
 		}
-		return false;
 	}
 	
 }

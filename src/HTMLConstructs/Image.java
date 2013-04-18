@@ -29,6 +29,13 @@ public class Image extends HTMLConstruct{
 		super.endTag = "<img>";
 	}
 	
+	public Image( String url ){
+		this.url = url;
+		fill = "src = \"" + url + "\"" + " alt = \"This picture is unavailable.\"";
+		super.startTag = "<img " + fill + " >";
+		super.endTag = "<img>";
+	}
+	
 	public Image( HTMLConstruct parent, String url, String alt, int height, int width ){
 		super.parent = parent;
 		this.url = url;

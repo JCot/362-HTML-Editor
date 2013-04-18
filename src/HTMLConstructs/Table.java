@@ -26,6 +26,13 @@ public class Table extends HTMLConstruct{
 		super.endTag = "</table>";
 	}
 	
+	public Table( int rows, int cols ) {
+		this.rows = rows;
+		this.cols = cols;
+		super.startTag = "<table>";
+		super.endTag = "</table>";
+	}
+	
 	@Override
 	public String insert(){
 		TableEntryRow tr = new TableEntryRow( this, cols );

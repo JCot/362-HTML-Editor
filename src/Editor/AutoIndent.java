@@ -19,7 +19,7 @@ public class AutoIndent {
 	/** Boolean value denoting user's preference for auto-wrap */
 	public static boolean isOn = false;
 	
-	public static String indent;
+	public static String indent = "";
 	
 	/**
 	 * Provides the indentation for the current line by
