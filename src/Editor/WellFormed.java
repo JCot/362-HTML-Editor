@@ -32,34 +32,33 @@ public class WellFormed {
 		boolean tagsWellFormed = false;
 		
 		for(int i = 0; i <= lines.length - 1; i++){
-			String[] words = lines[i].split(" ");
-			
-			for(int j = 0; j <= words.length - 1; j++){
-				String temp = words[j];
+			String temp = lines[i];
+
+			if(temp.matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
+				if(temp.contains("img")){}
 				
-				if(temp.matches("<(\"[^\"]*\"|'[^']*'|[^'\">])*>")){
-					if(!temp.contains("/")){
-						openTags.add(temp);
-					}
-					
-					else{
-						String newTemp = temp.replace("/", "");
-						closeTags.add(temp);
+				else if(!temp.contains("/")){
+					openTags.add(temp);
+				}
 
-						try{
-							if(openTags.peek().equals(newTemp)){
-								openTags.pop();
-								closeTags.pop();
-							}
+				else{
+					String newTemp = temp.replace("/", "");
+					newTemp = newTemp.substring(0, newTemp.length() - 1);
+					closeTags.add(temp);
 
-							else{
-								break;
-							}
+					try{
+						if(openTags.peek().contains(newTemp)){
+							openTags.pop();
+							closeTags.pop();
 						}
-						
-						catch(EmptyStackException e){
+
+						else{
 							break;
 						}
+					}
+
+					catch(EmptyStackException e){
+						break;
 					}
 				}
 			}

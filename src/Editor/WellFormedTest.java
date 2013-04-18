@@ -24,15 +24,15 @@ public class WellFormedTest extends TestCase{
 	}
 	
 	public void testMultipleUnclosedTags(){
-		assertFalse(checker.wellFormedCheck("<head> <body> </head>"));
+		assertFalse(checker.wellFormedCheck("<head>\n\n<body>\n\n</head>"));
 	}
 	
 	public void testMultipleUnopenedTags(){
-		assertFalse(checker.wellFormedCheck("<body> </body> </head>"));
+		assertFalse(checker.wellFormedCheck("<body>\n\n</body>\n\n</head>"));
 	}
 	
 	public void testOutOfOrder(){
-		assertFalse(checker.wellFormedCheck("<head> <body> </head> </body>"));
+		assertFalse(checker.wellFormedCheck("<head>\n\n<body>\n\n</head>\n\n</body>"));
 	}
 
 }
