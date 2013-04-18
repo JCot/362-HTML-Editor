@@ -20,6 +20,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 
+import Command.Command;
+import Command.InsertCommand;
+import Command.UndoManager;
 import HTMLConstructs.HTMLConstruct;
 import HTMLConstructs.Image;
 
@@ -75,17 +78,14 @@ public class ObtainImgDialog implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			String urlString = this.userText.getText();
-			this.construct = new Image(urlString);
-			String insertTag = this.construct.insert();
-			int position = text.getCaretPosition();
-			text.insert(insertTag, position);
-			this.dialog.dispose();
-		}
+		
+		String urlString = this.userText.getText();
+		this.construct = new Image(urlString);
+		Command command = new InsertCommand(this.construct, this.tab);
+		int index = this.tab.getSelectedIndex();
+		command.execute();
+		UndoManager.getInstance().addCommand(index, command);	
+		this.dialog.dispose();
 		
 	}
 

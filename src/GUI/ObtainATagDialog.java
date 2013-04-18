@@ -20,6 +20,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 
+import Command.Command;
+import Command.InsertCommand;
+import Command.UndoManager;
 import HTMLConstructs.HTMLConstruct;
 import HTMLConstructs.Link;
 
@@ -81,18 +84,15 @@ public class ObtainATagDialog implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();
-		if (scroll != null){
-			JViewport view = (JViewport) scroll.getComponent(0);
-			JTextArea text = (JTextArea) view.getComponent(0);
-			String urlString = this.userUrl.getText();
-			String textString = this.userText.getText();
-			this.construct = new Link(urlString, textString);
-			int position = text.getCaretPosition();
-			String insert = this.construct.insert();
-			text.insert(insert, position);
-			this.dialog.dispose();
-		}
+		String urlString = this.userUrl.getText();
+		String textString = this.userText.getText();
+		this.construct = new Link(urlString, textString);
+		Command command = new InsertCommand(this.construct, this.tab);
+		int index = this.tab.getSelectedIndex();
+		command.execute();
+		UndoManager.getInstance().addCommand(index, command);	
+		this.dialog.dispose();
+		
 	}
 
 }
