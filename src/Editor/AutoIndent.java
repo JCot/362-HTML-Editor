@@ -89,6 +89,17 @@ public class AutoIndent {
 		return indent;
 	}
 	
+	/**
+	 * Method for indenting tags.  Takes in a String that is the
+	 * Html Tag set to be indented.  Splits it into individual
+	 * components and performs indent on each one.  Slightly different
+	 * than indent because end tags need to be moved out to the proper
+	 * level.
+	 * 
+	 * @param String text - the Html tag set to be indented
+	 * @return String temp - the properly indented Html
+	 * 						 tag set
+	 */
 	public static String indentTags(String text){
 		String temp = "";
 		String[] lines = text.split("\n");
