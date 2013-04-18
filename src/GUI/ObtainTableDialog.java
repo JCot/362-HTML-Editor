@@ -22,6 +22,7 @@ import javax.swing.JViewport;
 
 import Command.Command;
 import Command.InsertCommand;
+import Command.UndoManager;
 import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
 import HTMLConstructs.Table;
@@ -145,11 +146,11 @@ public class ObtainTableDialog implements ActionListener {
 			if (rowString.matches("\\d+") && colString.matches("\\d+")){
 				int row = Integer.parseInt(rowString);
 				int col = Integer.parseInt(colString);
-				this.construct = new Table(row, col);
-				
+				this.construct = new Table(row, col);	
 				Command command = new InsertCommand(this.construct, this.tab);
+				int index = this.tab.getSelectedIndex();
 				command.execute();
-				
+				UndoManager.getInstance().addCommand(index, command);	
 				this.dialog.dispose();
 			}
 		}

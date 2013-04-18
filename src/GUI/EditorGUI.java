@@ -11,7 +11,6 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 import Editor.AutoIndent;
-import Editor.UndoListener;
 import HTMLConstructs.*;
 
 /**

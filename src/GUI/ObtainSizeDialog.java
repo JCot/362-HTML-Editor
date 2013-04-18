@@ -25,6 +25,7 @@ import Editor.AutoIndent;
 import HTMLConstructs.HTMLConstruct;
 import Command .Command;
 import Command .InsertCommand;
+import Command.UndoManager;
 
 /**
  * A dialog for obtaining the user's desired amount of list entries to insert
@@ -111,10 +112,10 @@ public class ObtainSizeDialog implements ActionListener{
 		if (sizeString.matches("\\d+")){
 			int size = Integer.parseInt(sizeString);
 			this.construct.setSize(size);
-
 			Command command = new InsertCommand(this.construct, this.tab);
+			int index = this.tab.getSelectedIndex();
 			command.execute();
-
+			UndoManager.getInstance().addCommand(index, command);	
 			this.dialog.dispose();
 		}
 	}
