@@ -1,6 +1,3 @@
-/**
- * 
- */
 package HTMLConstructs;
 
 import java.util.ArrayList;
@@ -10,7 +7,11 @@ import java.util.ArrayList;
  * This is the Component abstract superclass for all HTML tags.
  */
 public abstract class HTMLConstruct {
+	
+	// A boolean representing whether a particular element is collapsed or
+	// expanded - true if expanded, false if not
 	public boolean expand = true;
+	
 	protected String startTag;
 	protected String endTag;
 	protected ArrayList<HTMLConstruct> children = new ArrayList<HTMLConstruct>();
@@ -32,6 +33,13 @@ public abstract class HTMLConstruct {
 		expand = true;
 	}
 	
+	/**
+	 * This method will flag an element as collapsed and return the start tag
+	 * of the collapsed element so the GUI can dsiplay it properly
+	 * 
+	 * @return - String of the collapsed elements start tag to be displayed
+	 * in the GUI
+	 */
 	public String collapse(){
 		expand = false;
 		return startTag;
@@ -45,6 +53,13 @@ public abstract class HTMLConstruct {
 		
 	}
 	
+	/**
+	 * This method will determine whether two HTML objects are equal to 
+	 * each other by checking its tags and its children
+	 * 
+	 * @param c - HTMLConstruct to compare this object to
+	 * @return - true is equal, false if inequal
+	 */
 	public boolean equals( HTMLConstruct c ){
 		if( this.startTag.equals( c.startTag )&& this.endTag.equals( c.endTag ) ){
 			for( int i = 0 ; i < children.size(); i++ ){

@@ -24,9 +24,8 @@ public class HTMLTree {
 	 * 
 	 * @return FullTreeMemento
 	 */
- 	public FullTreeMemento createMemento(){
-		FullTreeMemento m = new FullTreeMemento();
-		m.head = this.head;
+ 	public static FullTreeMemento createFullMemento(HTMLConstruct head, int cursorPosition){
+		FullTreeMemento m = new FullTreeMemento(head, cursorPosition);
 		return m;
 	}
 	
@@ -40,8 +39,8 @@ public class HTMLTree {
  	 * @param m - A FullTreeMemento which represents the state
  	 * of the editor to be restored
  	 */
-	public void SetMemento( FullTreeMemento m ){
-		this.head = m.head;
+	public static void SetMemento( FullTreeMemento m, HTMLConstruct head ){
+		head = m.getHead();
 	}
 	
 	/**
@@ -55,12 +54,12 @@ public class HTMLTree {
 	 * @param c - HTMLConstruct
 	 * @return - CollapsedMemento
 	 */
-	public CollapsedMemento createMemento( HTMLConstruct c ){
-		CollapsedMemento m = new CollapsedMemento();
+	public static CollapsedMemento createSubMemento( HTMLConstruct head, HTMLConstruct c, int cursorPosition ){
+		CollapsedMemento m = new CollapsedMemento(c, cursorPosition);
 		while(! head.equals( c ) ){}
 		
-		m.head = c;
-		m.parent = parent;
+		m.setHead( c );
+		m.getHead().parent = c.parent;
 		return m;
 	}
 	
@@ -73,8 +72,8 @@ public class HTMLTree {
 	 * 
 	 * @param m - CollapsedMemento
 	 */
-	public void setMemento( CollapsedMemento m ){
-		c.parent = m.parent;
+	public static void setMemento( CollapsedMemento m, HTMLConstruct c ){
+		c.parent = m.getHead().parent;
 	}
 
 }
