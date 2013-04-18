@@ -96,6 +96,7 @@ public class AutoIndent {
 			
 			if(lines[i].contains("/") && lines[i].contains(AutoIndent.oneLevel)){
 				lines[i] = lines[i].substring(AutoIndent.indentSize);
+				AutoIndent.indent = AutoIndent.indent.substring(AutoIndent.indentSize);
 			}
 			
 			temp += lines[i] + "\n";
