@@ -10,7 +10,7 @@
 package Command;
 
 /**
- * Enter description here.
+ * Command Interface from which Concrete Commands inherit from.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

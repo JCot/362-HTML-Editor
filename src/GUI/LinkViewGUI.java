@@ -26,13 +26,12 @@ import Editor.LinkViewModel;
 
 
 /**
- * Enter description here.
+ * GUI view for the Link View Model.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class LinkViewGUI implements ActionListener {
 
-	private LinkViewModel model;
 	
 	private JDialog dialog;
 
@@ -45,7 +44,7 @@ public class LinkViewGUI implements ActionListener {
 	private boolean displayByAppearance = true;
 	
 	public LinkViewGUI(EditorGUI frame){
-		this.model = new LinkViewModel();
+
 		this.dialog = new JDialog(frame, "Link View");
 		this.frame = frame;
 		this.text = new JTextArea();

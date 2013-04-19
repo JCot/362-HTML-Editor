@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
 /**
- * Enter description here.
+ * Action Listener to display the Link View.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

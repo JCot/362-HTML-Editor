@@ -14,7 +14,7 @@ import GUI.WellFormedSaveDialog;
  */
 
 /**
- * Enter description here.
+ * Command for saving the current buffer to a file.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

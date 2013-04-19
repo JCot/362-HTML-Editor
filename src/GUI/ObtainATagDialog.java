@@ -27,7 +27,7 @@ import HTMLConstructs.HTMLConstruct;
 import HTMLConstructs.Link;
 
 /**
- * Enter description here.
+ * Dialog to obtain the fields for an A-tag.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

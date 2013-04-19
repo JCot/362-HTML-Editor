@@ -10,13 +10,13 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 
 /**
- * Enter description here.
+ * Command for pasting text.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
 public class PasteCommand implements Command {
 
-	/** Reference to the JTabbedPane containing the current text buffer*/
+	
 	private JTabbedPane tab;
 	
 	private String prevText;
@@ -24,16 +24,11 @@ public class PasteCommand implements Command {
 	private int prevCursor;
 	
 	
-	/**
-	 * @param tab    JTabbedPane containing the current text buffer
-	 */
 	public PasteCommand(JTabbedPane tab) {
 		this.tab = tab;
 	}
 	
-	/**
-	 * 
-	 */
+	
 	@Override
 	public void execute() {
 		JScrollPane scroll = (JScrollPane) this.tab.getSelectedComponent();

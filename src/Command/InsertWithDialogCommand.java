@@ -14,7 +14,7 @@ import GUI.ObtainTableDialog;
 import HTMLConstructs.HTMLConstruct;
 
 /**
- * Enter description here.
+ * Command for inserting an HTML tag with fields.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

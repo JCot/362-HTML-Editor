@@ -13,7 +13,7 @@ import javax.swing.JViewport;
 
 
 /**
- * Enter description here.
+ * Command Auto-Wraping a text buffer.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

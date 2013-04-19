@@ -9,7 +9,8 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
- * Enter description here.
+ * UndoManager is a singleton that handles the storage and execution of
+ * commands that implement undo.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

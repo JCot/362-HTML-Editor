@@ -17,7 +17,6 @@ import Command.PasteCommand;
 import Command.UndoManager;
 import Editor.AutoIndent;
 import Editor.HtmlEditor;
-import Editor.OutlineGUI;
 import HTMLConstructs.*;
 
 /**

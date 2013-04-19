@@ -15,7 +15,7 @@ import GUI.EditorGUI;
 import GUI.EnterListener;
 
 /**
- * Enter description here.
+ * Command for creating a new text buffer.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

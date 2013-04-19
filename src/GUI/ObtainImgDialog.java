@@ -27,7 +27,7 @@ import HTMLConstructs.HTMLConstruct;
 import HTMLConstructs.Image;
 
 /**
- * Enter description here.
+ * Dialog to obtain the fields for an img tag.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

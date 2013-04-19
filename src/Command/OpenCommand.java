@@ -17,7 +17,7 @@ import GUI.EnterListener;
 import GUI.WellFormedOpenDialog;
 
 /**
- * Enter description here.
+ * Command for opening a new file.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

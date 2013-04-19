@@ -14,7 +14,7 @@ import Editor.HtmlEditor;
 
 
 /**
- * Enter description here.
+ * Command for cutting selected text.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

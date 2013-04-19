@@ -14,7 +14,7 @@ import javax.swing.JViewport;
 import Command.UndoManager;
 
 /**
- * Enter description here.
+ * Action Listener for the undo menu item.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */

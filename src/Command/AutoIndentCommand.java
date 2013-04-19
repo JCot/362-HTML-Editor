@@ -11,7 +11,7 @@ import GUI.EditorGUI;
 import GUI.ObtainIndentDialog;
 
 /**
- * Enter description here.
+ * Command for Auto-Indent.
  *
  * @author Andrew Popovich (ajp7560@rit.edu)
  */
